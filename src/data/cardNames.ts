@@ -35,7 +35,7 @@ export const cardNames = [
   { id: 'nueve-de-bastos', name: 'Nueve de Bastos', baraja: 'tradicional' },
   { id: 'diez-de-bastos', name: 'Diez de Bastos', baraja: 'tradicional' },
   { id: 'sota-de-bastos', name: 'Sota de Bastos', baraja: 'tradicional' },
-  { id: 'caballo-de-bastos', name: 'Caballo de Bastos', baraja: 'tradicional' },
+  { id: 'caballero-de-bastos', name: 'Caballero de Bastos', baraja: 'tradicional' },
   { id: 'reina-de-bastos', name: 'Reina de Bastos', baraja: 'tradicional' },
   { id: 'rey-de-bastos', name: 'Rey de Bastos', baraja: 'tradicional' },
 
@@ -51,7 +51,7 @@ export const cardNames = [
   { id: 'nueve-de-copas', name: 'Nueve de Copas', baraja: 'tradicional' },
   { id: 'diez-de-copas', name: 'Diez de Copas', baraja: 'tradicional' },
   { id: 'sota-de-copas', name: 'Sota de Copas', baraja: 'tradicional' },
-  { id: 'caballo-de-copas', name: 'Caballo de Copas', baraja: 'tradicional' },
+  { id: 'caballero-de-copas', name: 'Caballero de Copas', baraja: 'tradicional' },
   { id: 'reina-de-copas', name: 'Reina de Copas', baraja: 'tradicional' },
   { id: 'rey-de-copas', name: 'Rey de Copas', baraja: 'tradicional' },
 
@@ -67,7 +67,7 @@ export const cardNames = [
   { id: 'nueve-de-espadas', name: 'Nueve de Espadas', baraja: 'tradicional' },
   { id: 'diez-de-espadas', name: 'Diez de Espadas', baraja: 'tradicional' },
   { id: 'sota-de-espadas', name: 'Sota de Espadas', baraja: 'tradicional' },
-  { id: 'caballo-de-espadas', name: 'Caballo de Espadas', baraja: 'tradicional' },
+  { id: 'caballero-de-espadas', name: 'Caballero de Espadas', baraja: 'tradicional' },
   { id: 'reina-de-espadas', name: 'Reina de Espadas', baraja: 'tradicional' },
   { id: 'rey-de-espadas', name: 'Rey de Espadas', baraja: 'tradicional' },
 
@@ -83,7 +83,7 @@ export const cardNames = [
   { id: 'nueve-de-oros', name: 'Nueve de Oros', baraja: 'tradicional' },
   { id: 'diez-de-oros', name: 'Diez de Oros', baraja: 'tradicional' },
   { id: 'sota-de-oros', name: 'Sota de Oros', baraja: 'tradicional' },
-  { id: 'caballo-de-oros', name: 'Caballo de Oros', baraja: 'tradicional' },
+  { id: 'caballero-de-oros', name: 'Caballero de Oros', baraja: 'tradicional' },
   { id: 'reina-de-oros', name: 'Reina de Oros', baraja: 'tradicional' },
   { id: 'rey-de-oros', name: 'Rey de Oros', baraja: 'tradicional' },
 
