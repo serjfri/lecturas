@@ -1,3 +1,5 @@
+npm run build
+
 Pasos para hacer un nuevo deploy (uno a uno):
 
 git add .
