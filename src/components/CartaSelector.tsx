@@ -146,7 +146,7 @@ const CartaSelector: React.FC<CartaSelectorProps> = ({
     if (name.includes('Nueve')) return '9';
     if (name.includes('Diez')) return '10';
     if (name.includes('Sota')) return 'Sota';
-    if (name.includes('Caballero')) return 'Caballero';
+    if (name.includes('Caballo')) return 'Caballero';
     if (name.includes('Reina')) return 'Reina';
     if (name.includes('Rey')) return 'Rey';
     return name;
@@ -170,7 +170,7 @@ const CartaSelector: React.FC<CartaSelectorProps> = ({
           if (name.includes('Nueve')) return 9;
           if (name.includes('Diez')) return 10;
           if (name.includes('Sota')) return 11;
-          if (name.includes('Caballero')) return 12;
+          if (name.includes('Caballo')) return 12;
           if (name.includes('Reina')) return 13;
           if (name.includes('Rey')) return 14;
           return 99;
