@@ -494,4 +494,206 @@ const CartaSelector: React.FC<CartaSelectorProps> = ({
                             ))}
                           </div>
                         )}
-                        {/* 
+                        {/* Fila: 6, 7, 8, 9, 10 */}
+                        {cartasPorGruposDePalo.sixToTen.length > 0 && (
+                          <div className="flex flex-wrap gap-1 justify-center">
+                            {cartasPorGruposDePalo.sixToTen.map((carta) => (
+                              <Button
+                                key={carta.id}
+                                variant="outline"
+                                className="h-10 w-12 p-0 text-center hover:bg-emerald-50 hover:border-emerald-400 text-sm"
+                                onClick={() => handleCartaSelect(carta.id)}
+                              >
+                                {getCartaMenorDisplay(carta.name)}
+                              </Button>
+                            ))}
+                          </div>
+                        )}
+                        
+                        {/* Fila: Sota, Caballero */}
+                        {cartasPorGruposDePalo.sotaCaballero.length > 0 && (
+                          <div className="flex flex-wrap gap-1 justify-center">
+                            {cartasPorGruposDePalo.sotaCaballero.map((carta) => (
+                              <Button
+                                key={carta.id}
+                                variant="outline"
+                                className="h-10 w-16 p-0 text-center hover:bg-emerald-50 hover:border-emerald-400 text-xs"
+                                onClick={() => handleCartaSelect(carta.id)}
+                              >
+                                {getCartaMenorDisplay(carta.name)}
+                              </Button>
+                            ))}
+                          </div>
+                        )}
+                        
+                        {/* Fila: Reina, Rey */}
+                        {cartasPorGruposDePalo.reinaRey.length > 0 && (
+                          <div className="flex flex-wrap gap-1 justify-center">
+                            {cartasPorGruposDePalo.reinaRey.map((carta) => (
+                              <Button
+                                key={carta.id}
+                                variant="outline"
+                                className="h-10 w-16 p-0 text-center hover:bg-emerald-50 hover:border-emerald-400 text-xs"
+                                onClick={() => handleCartaSelect(carta.id)}
+                              >
+                                {getCartaMenorDisplay(carta.name)}
+                              </Button>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    ) : (
+                      <div className="grid gap-1 grid-cols-2 sm:grid-cols-3 md:grid-cols-4">
+{(baraja === 'tradicional' 
+  ? filtrarCartasPorLetra(letraSeleccionada, baraja, categoriaSeleccionada === 'mayores' ? 'mayores' : null)
+  : filtrarCartasPorLetra(letraSeleccionada, baraja, null)
+).map((carta) => (
+                          <Button
+                            key={carta.id}
+                            variant="outline"
+                            className="h-12 p-2 text-center hover:bg-emerald-50 hover:border-emerald-400 text-sm"
+                            onClick={() => handleCartaSelect(carta.id)}
+                          >
+                            {carta.name}
+                          </Button>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                )}
+
+              {/* Botón para volver atrás cuando hay selecciones */}
+              {(categoriaSeleccionada || letraSeleccionada || paloSeleccionado) && (
+                <Button
+                  variant="outline"
+                  onClick={() => {
+                    if (paloSeleccionado) {
+                      setPaloSeleccionado('');
+                    } else if (letraSeleccionada) {
+                      setLetraSeleccionada('');
+                    } else if (categoriaSeleccionada) {
+                      setCategoriaSeleccionada(null);
+                    }
+                  }}
+                  className="w-full"
+                >
+                  <ChevronLeft className="w-4 h-4 mr-2" />
+                  Volver
+                </Button>
+              )}
+            </CardContent>
+          </Card>
+
+          {/* Cartas seleccionadas */}
+          {cartasSeleccionadas.length > 0 && (
+            <Card className="bg-white/80 backdrop-blur-sm border-emerald-200">
+              <CardHeader className="pb-4">
+                <div className="flex justify-between items-center">
+                  <CardTitle className="text-lg text-emerald-900">
+                    Cartas Seleccionadas ({cartasSeleccionadas.length})
+                  </CardTitle>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={copiarListaCartas}
+                    className="hover:bg-emerald-50"
+                  >
+                    <Copy className="w-4 h-4 mr-2" />
+                    Copiar Lista
+                  </Button>
+                </div>
+              </CardHeader>
+              <CardContent>
+                <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
+                  {cartasSeleccionadas
+                    .sort((a, b) => a.posicion - b.posicion)
+                    .map((cartaSeleccionada) => {
+                      const posicionData = modoLibre
+                        ? { nombre: `Carta ${cartaSeleccionada.posicion}`, descripcion: '' }
+                        : tirada.posiciones.find(p => p.numero === cartaSeleccionada.posicion);
+
+                      return (
+                        <div
+                          key={cartaSeleccionada.posicion}
+                          className={`p-3 rounded-lg border transition-all cursor-pointer hover:shadow-md ${
+                            cartaSeleccionada.invertida
+                              ? 'bg-red-50 border-red-200'
+                              : 'bg-emerald-50 border-emerald-200'
+                          }`}
+                          onDoubleClick={() => handleDoubleClick(cartaSeleccionada.posicion)}
+                        >
+                          <div className="flex justify-between items-start mb-1">
+                            <span className="text-xs font-medium text-emerald-900">
+                              {posicionData?.nombre || `Posición ${cartaSeleccionada.posicion}`}
+                            </span>
+                            {cartaSeleccionada.invertida && (
+                              <Badge variant="destructive" className="text-xs">
+                                Invertida
+                              </Badge>
+                            )}
+                          </div>
+                          <p className="text-sm font-medium text-emerald-900">
+                            {getCardNameById(cartaSeleccionada.carta)}
+                          </p>
+                          {baraja === 'tradicional' && (
+                            <p className="text-xs text-emerald-600 mt-1">
+                              Doble clic para {cartaSeleccionada.invertida ? 'enderezar' : 'invertir'}
+                            </p>
+                          )}
+                        </div>
+                      );
+                    })}
+                </div>
+              </CardContent>
+            </Card>
+          )}
+
+          {/* Botones de acción */}
+          <div className="flex flex-col sm:flex-row gap-3">
+            <Button
+              variant="outline"
+              onClick={onVolver}
+              className="flex-1"
+            >
+              <ChevronLeft className="w-4 h-4 mr-2" />
+              Volver a Tiradas
+            </Button>
+
+            {cartasSeleccionadas.length > 0 && (
+              <>
+                <Button
+                  variant="outline"
+                  onClick={onDeshacerUltimaCarta}
+                  className="flex-1"
+                >
+                  <Undo2 className="w-4 h-4 mr-2" />
+                  Deshacer Última
+                </Button>
+
+                <Button
+                  variant="destructive"
+                  onClick={onLimpiarCartas}
+                  className="flex-1"
+                >
+                  <Trash className="w-4 h-4 mr-2" />
+                  Limpiar Todo
+                </Button>
+              </>
+            )}
+
+            {puedeIrAInterpretacion && (
+              <Button
+                onClick={onInterpretarCartas}
+                className="flex-1 bg-emerald-600 hover:bg-emerald-700"
+              >
+                Interpretar Cartas
+              </Button>
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default CartaSelector;
