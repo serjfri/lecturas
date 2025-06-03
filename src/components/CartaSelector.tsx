@@ -413,14 +413,14 @@ const getCartaMenorDisplay = (name: string): string => {
     <label className="block text-sm font-medium text-emerald-900 mb-2">
       Primera letra
     </label>
-    <div className="space-y-2 max-w-md mx-auto">
+    <div className="space-y-2 max-w-2xl mx-auto">
       {/* Primera fila: 6 botones */}
-      <div className="flex gap-2 justify-center">
+      <div className="grid grid-cols-6 gap-2">
         {getLetrasArcanosMayores.slice(0, 6).map((letra) => (
           <Button
             key={letra}
             variant="outline"
-            className="h-12 w-12 text-center text-base flex items-center justify-center font-medium"
+            className="h-12 text-center text-base flex items-center justify-center font-medium"
             onClick={() => setLetraSeleccionada(letra)}
           >
             {letra}
@@ -428,12 +428,12 @@ const getCartaMenorDisplay = (name: string): string => {
         ))}
       </div>
       {/* Segunda fila: 5 botones centrados */}
-      <div className="flex gap-2 justify-center">
+      <div className="grid grid-cols-5 gap-2 max-w-lg mx-auto">
         {getLetrasArcanosMayores.slice(6).map((letra) => (
           <Button
             key={letra}
             variant="outline"
-            className="h-12 w-12 text-center text-base flex items-center justify-center font-medium"
+            className="h-12 text-center text-base flex items-center justify-center font-medium"
             onClick={() => setLetraSeleccionada(letra)}
           >
             {letra}
@@ -473,14 +473,14 @@ const getCartaMenorDisplay = (name: string): string => {
     <label className="block text-sm font-medium text-emerald-900 mb-2">
       Primera letra
     </label>
-    <div className="space-y-2 max-w-md mx-auto">
+    <div className="space-y-2 max-w-2xl mx-auto">
       {/* Primera fila: 6 botones */}
-      <div className="flex gap-2 justify-center">
+      <div className="grid grid-cols-6 gap-2">
         {getLetrasOsho.slice(0, 6).map((letra) => (
           <Button
             key={letra}
             variant="outline"
-            className="h-12 w-12 text-center text-base flex items-center justify-center font-medium"
+            className="h-12 text-center text-base flex items-center justify-center font-medium"
             onClick={() => setLetraSeleccionada(letra)}
           >
             {letra}
@@ -488,12 +488,12 @@ const getCartaMenorDisplay = (name: string): string => {
         ))}
       </div>
       {/* Segunda fila: 6 botones */}
-      <div className="flex gap-2 justify-center">
+      <div className="grid grid-cols-6 gap-2">
         {getLetrasOsho.slice(6, 12).map((letra) => (
           <Button
             key={letra}
             variant="outline"
-            className="h-12 w-12 text-center text-base flex items-center justify-center font-medium"
+            className="h-12 text-center text-base flex items-center justify-center font-medium"
             onClick={() => setLetraSeleccionada(letra)}
           >
             {letra}
@@ -501,12 +501,12 @@ const getCartaMenorDisplay = (name: string): string => {
         ))}
       </div>
       {/* Tercera fila: 5 botones centrados */}
-      <div className="flex gap-2 justify-center">
+      <div className="grid grid-cols-5 gap-2 max-w-lg mx-auto">
         {getLetrasOsho.slice(12).map((letra) => (
           <Button
             key={letra}
             variant="outline"
-            className="h-12 w-12 text-center text-base flex items-center justify-center font-medium"
+            className="h-12 text-center text-base flex items-center justify-center font-medium"
             onClick={() => setLetraSeleccionada(letra)}
           >
             {letra}

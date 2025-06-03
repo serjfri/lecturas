@@ -289,14 +289,16 @@ const InterpretacionCartas: React.FC<InterpretacionCartasProps> = ({
                           </div>
                         )}
 
-                        <div>
-                          <h4 className="font-medium text-purple-900 mb-1">Significado Principal:</h4>
-                          <p className="text-purple-700">{interpretacion.significado}</p>
-                        </div>
-                        <div>
-                          <h4 className="font-medium text-purple-900 mb-1">comentario</h4>
-                          <p className="text-purple-700" dangerouslySetInnerHTML={{ __html: interpretacion.interpretacion }}></p>
-                        </div>
+<div>
+  <h4 className="font-medium text-purple-900 mb-1">Significado:</h4>
+  {/* Changed <p> to <div>, added 'prose' */}
+  <div className="text-purple-700 prose max-w-none" dangerouslySetInnerHTML={{ __html: interpretacion.significado }}></div>
+</div>
+<div>
+  <h4 className="font-medium text-purple-900 mb-1">Comentario:</h4>
+  {/* Changed <p> to <div>, added 'prose' */}
+  <div className="text-purple-700 prose prose-purple max-w-none" dangerouslySetInnerHTML={{ __html: interpretacion.interpretacion }}></div>
+</div>
                         {interpretacion.palabrasClave && interpretacion.palabrasClave.length > 0 && (
                           <div>
                             <h4 className="font-medium text-purple-900 mb-1">Palabras Clave:</h4>
