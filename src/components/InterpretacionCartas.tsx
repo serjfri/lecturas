@@ -131,7 +131,7 @@ const InterpretacionCartas: React.FC<InterpretacionCartasProps> = ({
         return {
           nombre: interp.nombre,
           significado: interp.significado,
-          interpretacion: interp.detalle,
+          interpretacion: interp.comentario,
           elemento: undefined, // Osho no tiene estas propiedades en el mismo formato
           palabrasClave: undefined,
           arquetipo: undefined,
@@ -294,7 +294,7 @@ const InterpretacionCartas: React.FC<InterpretacionCartasProps> = ({
                           <p className="text-purple-700">{interpretacion.significado}</p>
                         </div>
                         <div>
-                          <h4 className="font-medium text-purple-900 mb-1">Interpretación Detallada:</h4>
+                          <h4 className="font-medium text-purple-900 mb-1">comentario</h4>
                           <p className="text-purple-700" dangerouslySetInnerHTML={{ __html: interpretacion.interpretacion }}></p>
                         </div>
                         {interpretacion.palabrasClave && interpretacion.palabrasClave.length > 0 && (
