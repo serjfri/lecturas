@@ -407,26 +407,42 @@ const getCartaMenorDisplay = (name: string): string => {
                     </div>
                   )}
 
-                  {/* Selección de Arcanos Mayores por Letra: Mostrar si categoría es 'mayores' Y no hay letra seleccionada */}
-                  {categoriaSeleccionada === 'mayores' && !letraSeleccionada && (
-                    <>
-                      <label className="block text-sm font-medium text-emerald-900 mb-2">
-                        Primera letra
-                      </label>
-                      <div className="grid grid-cols-6 sm:grid-cols-8 md:grid-cols-10 lg:grid-cols-12 gap-1 justify-items-center">
-                        {getLetrasArcanosMayores.map((letra) => (
-                          <Button
-                            key={letra}
-                            variant="outline"
-                            className="h-8 w-8 p-0 text-center text-xs flex items-center justify-content"
-                            onClick={() => setLetraSeleccionada(letra)}
-                          >
-                            {letra}
-                          </Button>
-                        ))}
-                      </div>
-                    </>
-                  )}
+{/* Selección de Arcanos Mayores por Letra */}
+{categoriaSeleccionada === 'mayores' && !letraSeleccionada && (
+  <>
+    <label className="block text-sm font-medium text-emerald-900 mb-2">
+      Primera letra
+    </label>
+    <div className="space-y-2 max-w-md mx-auto">
+      {/* Primera fila: 6 botones */}
+      <div className="flex gap-2 justify-center">
+        {getLetrasArcanosMayores.slice(0, 6).map((letra) => (
+          <Button
+            key={letra}
+            variant="outline"
+            className="h-12 w-12 text-center text-base flex items-center justify-center font-medium"
+            onClick={() => setLetraSeleccionada(letra)}
+          >
+            {letra}
+          </Button>
+        ))}
+      </div>
+      {/* Segunda fila: 5 botones centrados */}
+      <div className="flex gap-2 justify-center">
+        {getLetrasArcanosMayores.slice(6).map((letra) => (
+          <Button
+            key={letra}
+            variant="outline"
+            className="h-12 w-12 text-center text-base flex items-center justify-center font-medium"
+            onClick={() => setLetraSeleccionada(letra)}
+          >
+            {letra}
+          </Button>
+        ))}
+      </div>
+    </div>
+  </>
+)}
 
                   {/* Selección de Arcanos Menores por Palo: Mostrar si categoría es 'menores' Y no hay palo seleccionado */}
                   {categoriaSeleccionada === 'menores' && !paloSeleccionado && (
@@ -451,26 +467,55 @@ const getCartaMenorDisplay = (name: string): string => {
                 </div>
               )}
 
-              {/* Sección de selección para Tarot de Osho (con botones de letra) */}
-              {baraja === 'osho' && !letraSeleccionada && (
-                <>
-                  <label className="block text-sm font-medium text-emerald-900 mb-2">
-                    Primera letra
-                  </label>
-                  <div className="grid grid-cols-6 sm:grid-cols-8 md:grid-cols-10 lg:grid-cols-12 gap-1 justify-items-center">
-                    {getLetrasOsho.map((letra) => (
-                      <Button
-                        key={letra}
-                        variant="outline"
-                        className="h-8 w-8 p-0 text-center text-xs flex items-center justify-content"
-                        onClick={() => setLetraSeleccionada(letra)}
-                      >
-                        {letra}
-                      </Button>
-                    ))}
-                  </div>
-                </>
-              )}
+{/* Sección de selección para Tarot de Osho (con botones de letra) */}
+{baraja === 'osho' && !letraSeleccionada && (
+  <>
+    <label className="block text-sm font-medium text-emerald-900 mb-2">
+      Primera letra
+    </label>
+    <div className="space-y-2 max-w-md mx-auto">
+      {/* Primera fila: 6 botones */}
+      <div className="flex gap-2 justify-center">
+        {getLetrasOsho.slice(0, 6).map((letra) => (
+          <Button
+            key={letra}
+            variant="outline"
+            className="h-12 w-12 text-center text-base flex items-center justify-center font-medium"
+            onClick={() => setLetraSeleccionada(letra)}
+          >
+            {letra}
+          </Button>
+        ))}
+      </div>
+      {/* Segunda fila: 6 botones */}
+      <div className="flex gap-2 justify-center">
+        {getLetrasOsho.slice(6, 12).map((letra) => (
+          <Button
+            key={letra}
+            variant="outline"
+            className="h-12 w-12 text-center text-base flex items-center justify-center font-medium"
+            onClick={() => setLetraSeleccionada(letra)}
+          >
+            {letra}
+          </Button>
+        ))}
+      </div>
+      {/* Tercera fila: 5 botones centrados */}
+      <div className="flex gap-2 justify-center">
+        {getLetrasOsho.slice(12).map((letra) => (
+          <Button
+            key={letra}
+            variant="outline"
+            className="h-12 w-12 text-center text-base flex items-center justify-center font-medium"
+            onClick={() => setLetraSeleccionada(letra)}
+          >
+            {letra}
+          </Button>
+        ))}
+      </div>
+    </div>
+  </>
+)}
 
               {/* Cartas filtradas por letra o palo: Mostrar si hay letra O palo seleccionado */}
               {((baraja === 'tradicional' && (letraSeleccionada || paloSeleccionado)) ||
@@ -545,22 +590,22 @@ const getCartaMenorDisplay = (name: string): string => {
                         )}
                       </div>
                     ) : (
-                      <div className="grid gap-1 grid-cols-2 sm:grid-cols-3 md:grid-cols-4">
+
+<div className="flex flex-wrap gap-2 justify-center">
 {(baraja === 'tradicional' 
   ? filtrarCartasPorLetra(letraSeleccionada, baraja, categoriaSeleccionada === 'mayores' ? 'mayores' : null)
   : filtrarCartasPorLetra(letraSeleccionada, baraja, null)
 ).map((carta) => (
-                          <Button
-                            key={carta.id}
-                            variant="outline"
-                            className="h-12 p-2 text-center hover:bg-emerald-50 hover:border-emerald-400 text-sm"
-                            onClick={() => handleCartaSelect(carta.id)}
-                          >
-                            {carta.name}
-                          </Button>
-                        ))}
-                      </div>
-                    )}
+  <Button
+    key={carta.id}
+    variant="outline"
+    className="h-12 min-w-32 px-3 text-center hover:bg-emerald-50 hover:border-emerald-400 text-sm"
+    onClick={() => handleCartaSelect(carta.id)}
+  >
+    {carta.name}
+  </Button>
+))}
+</div>)}
                   </div>
                 )}
 

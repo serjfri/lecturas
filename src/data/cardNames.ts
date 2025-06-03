@@ -91,6 +91,7 @@ export const cardNames = [
   { id: 'abundancia-osho', name: 'Abundancia', baraja: 'osho' },
   { id: 'agotamiento-osho', name: 'Agotamiento', baraja: 'osho' },
   { id: 'aislamiento-osho', name: 'Aislamiento', baraja: 'osho' },
+  { id: 'amigabilidad-osho', name: 'Amigabilidad', baraja: 'osho' },
   { id: 'apego-pasado-osho', name: 'Apego al Pasado', baraja: 'osho' },
   { id: 'armonia-osho', name: 'Armonía', baraja: 'osho' },
   { id: 'aventura-osho', name: 'Aventura', baraja: 'osho' },
