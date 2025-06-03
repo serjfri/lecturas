@@ -11,7 +11,6 @@ export interface TraditionalCardMeaning {
   planeta?: string;
   signoAstrologico?: string;
   numerologia?: string;
-  simbolismo?: string; // Puede contener HTML para formateo
   palabrasClaveDerechas: string[];
   palabrasClaveInvertidas: string[];
   significadoDerecho: string;
@@ -33,9 +32,7 @@ export const traditionalMeanings: TraditionalCardMeaning[] = [
     elemento: "Aire",
     planeta: "Urano",
     signoAstrologico: "N/A (asociado con la libertad y la imprevisibilidad)",
-    numerologia: "0 (Potencial ilimitado, nuevos comienzos, salto de fe)",
-    simbolismo: `Un joven con una mochila al hombro y una rosa blanca en la mano, a punto de caer por un precipicio. Un pequeño perro le ladra a sus pies. Mira hacia el cielo, ignorante del peligro. El sol brilla intensamente. La mochila representa las experiencias y herramientas necesarias, la rosa blanca, la pureza y la inocencia. El perro es la intuición o la lealtad que advierte del peligro. El precipicio simboliza el salto de fe o el umbral hacia lo desconocido.`,
-    palabrasClaveDerechas: ["Nuevos comienzos", "oportunidad", "salto de fe", "espontaneidad", "libertad", "inocencia", "aventura", "potencial ilimitado"],
+    numerologia: "0 (Potencial ilimitado, nuevos comienzos, salto de fe)",    palabrasClaveDerechas: ["Nuevos comienzos", "oportunidad", "salto de fe", "espontaneidad", "libertad", "inocencia", "aventura", "potencial ilimitado"],
     palabrasClaveInvertidas: ["Imprudencia", "irresponsabilidad", "caos", "ingenuidad", "miedo a lo desconocido", "falta de dirección"],
     significadoDerecho: `El Loco representa el inicio de un viaje, una aventura hacia lo desconocido, llena de potencial ilimitado. Esta carta te invita a dar un salto de fe, a liberarte de las convenciones y a abrazar la espontaneidad. Simboliza la inocencia, la curiosidad y la apertura a nuevas experiencias.
     
@@ -64,9 +61,7 @@ export const traditionalMeanings: TraditionalCardMeaning[] = [
     elemento: "Aire",
     planeta: "Mercurio",
     signoAstrologico: "Géminis",
-    numerologia: "1 (Comienzo, iniciativa, potencial, manifestación)",
-    simbolismo: `Un hombre de pie con un brazo apuntando al cielo y el otro a la tierra, simbolizando la conexión entre el mundo espiritual y el material ("como es arriba, es abajo"). Sobre su mesa, tiene los cuatro elementos del Tarot (copa, basto, espada, oro), representando las herramientas y el dominio sobre ellos. Un halo de infinito sobre su cabeza y flores a sus pies simbolizan su potencial ilimitado y la fertilidad de sus ideas.`,
-    palabrasClaveDerechas: ["Habilidad", "maestría", "manifestación", "iniciativa", "poder personal", "recursos", "comunicación", "creatividad"],
+    numerologia: "1 (Comienzo, iniciativa, potencial, manifestación)",    palabrasClaveDerechas: ["Habilidad", "maestría", "manifestación", "iniciativa", "poder personal", "recursos", "comunicación", "creatividad"],
     palabrasClaveInvertidas: ["Manipulación", "engaño", "falta de propósito", "poder mal utilizado", "ineficacia", "dispersión de energía"],
     significadoDerecho: `El Mago representa el poder de manifestación y la capacidad de transformar ideas en realidad. Esta carta indica que tienes todas las herramientas, talentos y recursos necesarios para lograr tus objetivos. Es un momento de gran potencial donde tu voluntad y habilidad creativa están en su punto máximo.
     
@@ -95,9 +90,7 @@ export const traditionalMeanings: TraditionalCardMeaning[] = [
     elemento: "Agua",
     planeta: "Luna",
     signoAstrologico: "Cáncer",
-    numerologia: "2 (Dualidad, intuición, misterio, equilibrio)",
-    simbolismo: `Una figura femenina sentada entre dos pilares (Boaz y Jakin, que representan la dualidad). Detrás de ella, un velo cubierto de granadas (frutos de la diosa Perséfone, que simbolizan el subconsciente y el misterio) oculta un cuerpo de agua. Sostiene un pergamino con la palabra "TORA" (ley, sabiduría) parcialmente oculto. Una luna creciente a sus pies simboliza el subconsciente y la intuición.`,
-    palabrasClaveDerechas: ["Intuición", "misterio", "conocimiento oculto", "subconsciente", "receptividad", "paciencia", "sabiduría interior", "secretos"],
+    numerologia: "2 (Dualidad, intuición, misterio, equilibrio)",    palabrasClaveDerechas: ["Intuición", "misterio", "conocimiento oculto", "subconsciente", "receptividad", "paciencia", "sabiduría interior", "secretos"],
     palabrasClaveInvertidas: ["Secretos revelados", "información oculta", "intuición bloqueada", "superficialidad", "juicios equivocados", "falta de fe"],
     significadoDerecho: `La Sacerdotisa representa el reino de la intuición, el conocimiento oculto y el subconsciente. Esta carta te invita a escuchar tu voz interior, a confiar en tus instintos y a buscar respuestas en la quietud de tu ser. Simboliza la paciencia, la receptividad y la sabiduría que reside más allá de la lógica.
     
@@ -126,9 +119,7 @@ export const traditionalMeanings: TraditionalCardMeaning[] = [
     elemento: "Tierra",
     planeta: "Venus",
     signoAstrologico: "Tauro / Libra",
-    numerologia: "3 (Creación, fertilidad, abundancia, expresión)",
-    simbolismo: `Una mujer sentada en un trono en medio de un campo de trigo, rodeada de naturaleza exuberante y un río. Lleva una corona de estrellas y un cetro, símbolo de su conexión con el universo y su autoridad creativa. Un escudo con el símbolo de Venus a sus pies representa el amor y la fertilidad. El trigo simboliza la cosecha y la abundancia, el río el flujo de la vida.`,
-    palabrasClaveDerechas: ["Fertilidad", "abundancia", "creatividad", "naturaleza", "maternidad", "belleza", "sensualidad", "cuidado"],
+    numerologia: "3 (Creación, fertilidad, abundancia, expresión)",    palabrasClaveDerechas: ["Fertilidad", "abundancia", "creatividad", "naturaleza", "maternidad", "belleza", "sensualidad", "cuidado"],
     palabrasClaveInvertidas: ["Esterilidad", "bloqueo creativo", "dependencia", "negligencia", "inseguridad", "excesos", "falta de armonía"],
     significadoDerecho: `La Emperatriz representa la fertilidad, la abundancia y la creatividad en su máxima expresión. Esta carta simboliza la conexión con la naturaleza, la maternidad (en un sentido amplio de nutrir y crear) y la capacidad de manifestar belleza y prosperidad en tu vida.
     
@@ -157,9 +148,7 @@ export const traditionalMeanings: TraditionalCardMeaning[] = [
     elemento: "Fuego",
     planeta: "Marte",
     signoAstrologico: "Aries",
-    numerologia: "4 (Estabilidad, estructura, autoridad, control)",
-    simbolismo: `Un hombre maduro sentado en un trono de piedra, con una armadura visible bajo su vestimenta. Sostiene un cetro Ankh (símbolo de la vida y la autoridad) en una mano y un orbe en la otra, representando su dominio sobre el mundo. Detrás de él, montañas áridas simbolizan su disciplina y su capacidad para crear orden en un entorno desafiante. Un carnero en su trono representa su conexión con Aries, el liderazgo y la determinación.`,
-    palabrasClaveDerechas: ["Autoridad", "estructura", "control", "liderazgo", "estabilidad", "disciplina", "orden", "paternidad"],
+    numerologia: "4 (Estabilidad, estructura, autoridad, control)",    palabrasClaveDerechas: ["Autoridad", "estructura", "control", "liderazgo", "estabilidad", "disciplina", "orden", "paternidad"],
     palabrasClaveInvertidas: ["Tiranía", "rigidez", "abuso de poder", "autoritarismo", "falta de control", "inmadurez", "estructuras débiles"],
     significadoDerecho: `El Emperador representa la autoridad, la estructura y el control. Esta carta simboliza el liderazgo fuerte y la capacidad de establecer orden en tu vida o en una situación. Es la energía de la paternidad, de la disciplina y de la construcción de bases sólidas.
     
@@ -188,9 +177,7 @@ export const traditionalMeanings: TraditionalCardMeaning[] = [
     elemento: "Tierra",
     planeta: "Júpiter",
     signoAstrologico: "Tauro",
-    numerologia: "5 (Conocimiento, tradición, mentoría, fe, guía)",
-    simbolismo: `Una figura religiosa sentada en un trono, con una mano levantada en bendición y la otra sosteniendo una cruz papal. Dos acólitos arrodillados frente a él buscan su sabiduría. Las llaves cruzadas a sus pies simbolizan las llaves del conocimiento y los misterios revelados. Los pilares de un templo detrás de él representan la ley y la tradición.`,
-    palabrasClaveDerechas: ["Tradición", "sabiduría", "mentoría", "institución", "fe", "espiritualidad", "enseñanza", "conformidad"],
+    numerologia: "5 (Conocimiento, tradición, mentoría, fe, guía)",    palabrasClaveDerechas: ["Tradición", "sabiduría", "mentoría", "institución", "fe", "espiritualidad", "enseñanza", "conformidad"],
     palabrasClaveInvertidas: ["Rebelión", "heterodoxia", "creencias limitantes", "dogmatismo", "falsa moral", "desinformación"],
     significadoDerecho: `El Sumo Sacerdote representa la tradición, la sabiduría y la búsqueda de conocimiento espiritual o institucional. Esta carta simboliza la necesidad de guía, de seguir reglas establecidas o de buscar un mentor que te ayude a encontrar tu camino. Es el maestro, el consejero espiritual o la figura de autoridad que te conecta con un sistema de creencias.
     
@@ -219,9 +206,7 @@ export const traditionalMeanings: TraditionalCardMeaning[] = [
     elemento: "Aire",
     planeta: "Mercurio",
     signoAstrologico: "Géminis",
-    numerologia: "6 (Elección, unión, armonía, relaciones)",
-    simbolismo: `Un hombre y una mujer desnudos están de pie bajo la figura de un ángel o Cupido que los bendice. La mujer mira al ángel, mientras el hombre mira a la mujer. Detrás de la mujer, un árbol con una serpiente (conocimiento o tentación); detrás del hombre, un árbol con doce llamas (pasión). El sol brilla sobre ellos. Representa la elección entre el bien y el mal, la unión de opuestos y el amor consciente.`,
-    palabrasClaveDerechas: ["Elección", "amor", "relaciones", "unión", "armonía", "valores", "conexión", "decisión importante"],
+    numerologia: "6 (Elección, unión, armonía, relaciones)",    palabrasClaveDerechas: ["Elección", "amor", "relaciones", "unión", "armonía", "valores", "conexión", "decisión importante"],
     palabrasClaveInvertidas: ["Desarmonía", "conflicto", "ruptura", "infidelidad", "malas decisiones", "desequilibrio", "tentación"],
     significadoDerecho: `Los Amantes representan una elección crucial, a menudo relacionada con el amor, las relaciones o tus valores fundamentales. Esta carta simboliza la unión, la armonía y la necesidad de tomar una decisión consciente que esté alineada con tu verdadero ser.
     
@@ -250,9 +235,7 @@ export const traditionalMeanings: TraditionalCardMeaning[] = [
     elemento: "Agua",
     planeta: "Cáncer (regente del Carro)",
     signoAstrologico: "Cáncer",
-    numerologia: "7 (Victoria, control, avance, determinación)",
-    simbolismo: `Un guerrero victorioso en un carro tirado por dos esfinges (negra y blanca), que miran en direcciones opuestas. El auriga no tiene riendas, lo que sugiere que controla su destino a través de la fuerza de voluntad. Un dosel estrellado sobre el carro simboliza la conexión celestial. La ciudad amurallada detrás de él representa la victoria lograda y el lugar que deja atrás para nuevas conquistas.`,
-    palabrasClaveDerechas: ["Victoria", "voluntad", "control", "determinación", "avance", "autodisciplina", "confianza", "éxito"],
+    numerologia: "7 (Victoria, control, avance, determinación)",    palabrasClaveDerechas: ["Victoria", "voluntad", "control", "determinación", "avance", "autodisciplina", "confianza", "éxito"],
     palabrasClaveInvertidas: ["Falta de control", "derrota", "arrogancia", "dispersión", "falta de dirección", "obstáculos internos", "impulsividad"],
     significadoDerecho: `El Carro representa la victoria, el control y el avance decidido hacia tus metas. Esta carta simboliza la fuerza de voluntad, la autodisciplina y la capacidad de superar obstáculos a través de la determinación. Es el momento de tomar las riendas de tu vida y dirigir tu energía hacia el éxito.
     
@@ -281,9 +264,7 @@ export const traditionalMeanings: TraditionalCardMeaning[] = [
     elemento: "Fuego",
     planeta: "Sol",
     signoAstrologico: "Leo",
-    numerologia: "8 (Poder, dominio, equilibrio, autocontrol)",
-    simbolismo: `Una mujer joven y serena cierra suavemente la boca de un león salvaje, no con fuerza bruta, sino con paciencia y una conexión profunda. Un símbolo de infinito (lemniscata) flota sobre su cabeza, similar al del Mago, representando su dominio sobre las pasiones. Las flores en su cabello y cinto simbolizan la naturaleza. El león, las pasiones animales y la fuerza bruta.`,
-    palabrasClaveDerechas: ["Fuerza interior", "coraje", "paciencia", "autocontrol", "compasión", "determinación", "superación de miedos"],
+    numerologia: "8 (Poder, dominio, equilibrio, autocontrol)",    palabrasClaveDerechas: ["Fuerza interior", "coraje", "paciencia", "autocontrol", "compasión", "determinación", "superación de miedos"],
     palabrasClaveInvertidas: ["Debilidad", "miedo", "falta de autocontrol", "agresión", "tiranía", "inseguridad", "bestialidad"],
     significadoDerecho: `La Fuerza representa el coraje, la paciencia y el autocontrol que provienen de la fortaleza interior. Esta carta simboliza la capacidad de dominar tus instintos más primarios, no a través de la represión, sino de la comprensión y la compasión. Es el triunfo del espíritu sobre la materia, de la mente sobre la bestia.
     
@@ -312,9 +293,7 @@ export const traditionalMeanings: TraditionalCardMeaning[] = [
     elemento: "Tierra",
     planeta: "Mercurio",
     signoAstrologico: "Virgo",
-    numerologia: "9 (Sabiduría, introspección, guía interior, finalización)",
-    simbolismo: `Un anciano de pie en la cima de una montaña, sosteniendo una linterna que oculta una estrella de seis puntas (Sello de Salomón, símbolo de la sabiduría divina). Un bastón en su otra mano simboliza el apoyo en su camino. Su túnica gris representa la sabiduría y la sobriedad. La soledad de la montaña es un lugar de retiro y reflexión profunda.`,
-    palabrasClaveDerechas: ["Introspección", "soledad", "sabiduría", "guía interior", "búsqueda espiritual", "reflexión", "discernimiento", "retiro"],
+    numerologia: "9 (Sabiduría, introspección, guía interior, finalización)",    palabrasClaveDerechas: ["Introspección", "soledad", "sabiduría", "guía interior", "búsqueda espiritual", "reflexión", "discernimiento", "retiro"],
     palabrasClaveInvertidas: ["Aislamiento", "soledad forzada", "rigidez", "miedo a la soledad", "terquedad", "rechazo a la guía", "desconexión"],
     significadoDerecho: `El Ermitaño representa la introspección, la soledad y la búsqueda de sabiduría interior. Esta carta te invita a retirarte del bullicio del mundo para reflexionar, meditar y encontrar tus propias respuestas. Simboliza la necesidad de un periodo de auto-descubrimiento y de conexión con tu guía interna.
     
@@ -343,9 +322,7 @@ export const traditionalMeanings: TraditionalCardMeaning[] = [
     elemento: "Fuego",
     planeta: "Júpiter",
     signoAstrologico: "Sagitario",
-    numerologia: "10 (Ciclos, destino, cambio, oportunidad)",
-    simbolismo: `Una gran rueda con varias figuras alrededor o sobre ella. En la parte superior, una esfinge con una espada (control de las ideas). En los lados, las figuras de Tifón (demonio) y Hermes (dios egipcio), simbolizando la subida y bajada de la fortuna. En las nubes de las esquinas, las cuatro criaturas de Ezequiel (ángel, águila, toro, león), que representan los cuatro evangelistas y los cuatro elementos. La rueda en sí simboliza los ciclos de la vida, el destino y el karma.`,
-    palabrasClaveDerechas: ["Cambio", "oportunidad", "destino", "suerte", "ciclos", "momentum", "nuevas posibilidades", "giro del destino"],
+    numerologia: "10 (Ciclos, destino, cambio, oportunidad)",    palabrasClaveDerechas: ["Cambio", "oportunidad", "destino", "suerte", "ciclos", "momentum", "nuevas posibilidades", "giro del destino"],
     palabrasClaveInvertidas: ["Mala suerte", "retrasos", "mala fortuna", "resistencia al cambio", "patrones negativos", "oportunidades perdidas"],
     significadoDerecho: `La Rueda de la Fortuna representa el cambio, el destino y la llegada de nuevas oportunidades. Esta carta simboliza los ciclos de la vida, la suerte y la idea de que todo está en constante movimiento. Es un recordatorio de que la fortuna puede cambiar en cualquier momento, trayendo consigo nuevas posibilidades y giros inesperados.
     
@@ -374,9 +351,7 @@ export const traditionalMeanings: TraditionalCardMeaning[] = [
     elemento: "Aire",
     planeta: "Venus",
     signoAstrologico: "Libra",
-    numerologia: "11 (Equilibrio, karma, verdad, responsabilidad)",
-    simbolismo: `Una mujer sentada en un trono, con una espada apuntando al cielo en una mano (verdad, discernimiento) y una balanza en la otra (equilibrio, equidad). Viste una túnica roja, símbolo de la pasión por la verdad. Detrás de ella, pilares y un velo púrpura sugieren la ley y la espiritualidad. Su expresión es serena pero firme, sin venda en los ojos, lo que simboliza la capacidad de ver la verdad objetivamente.`,
-    palabrasClaveDerechas: ["Justicia", "equilibrio", "verdad", "imparcialidad", "responsabilidad", "causa y efecto", "ley", "honestidad"],
+    numerologia: "11 (Equilibrio, karma, verdad, responsabilidad)",    palabrasClaveDerechas: ["Justicia", "equilibrio", "verdad", "imparcialidad", "responsabilidad", "causa y efecto", "ley", "honestidad"],
     palabrasClaveInvertidas: ["Injusticia", "desequilibrio", "prejuicio", "deshonestidad", "irresponsabilidad", "fraude", "culpa"],
     significadoDerecho: `La Justicia representa la verdad, el equilibrio y la imparcialidad. Esta carta simboliza la necesidad de actuar con integridad y de asumir la responsabilidad por tus acciones. Es un recordatorio de que la ley del karma está en juego y que recibirás lo que has sembrado.
     
@@ -405,9 +380,7 @@ export const traditionalMeanings: TraditionalCardMeaning[] = [
     elemento: "Agua",
     planeta: "Neptuno",
     signoAstrologico: "Piscis",
-    numerologia: "12 (Sacrificio, perspectiva, suspensión, iluminación)",
-    simbolismo: `Un hombre cuelga de un pie de una viga de madera, con la otra pierna doblada formando una cruz. Sus manos están entrelazadas detrás de su espalda. Un halo de luz rodea su cabeza, simbolizando la iluminación espiritual. Su expresión es serena, no de sufrimiento. Los botones dorados en su vestimenta sugieren su conexión con lo divino. El árbol del que cuelga representa el Árbol de la Vida, y el acto de colgarse voluntariamente simboliza un sacrificio por una perspectiva superior.`,
-    palabrasClaveDerechas: ["Sacrificio", "perspectiva", "suspensión", "rendición", "iluminación", "pausa", "cambio de visión", "desapego"],
+    numerologia: "12 (Sacrificio, perspectiva, suspensión, iluminación)",    palabrasClaveDerechas: ["Sacrificio", "perspectiva", "suspensión", "rendición", "iluminación", "pausa", "cambio de visión", "desapego"],
     palabrasClaveInvertidas: ["Resistencia", "martirio", "estancamiento", "egoísmo", "oportunidades perdidas", "sacrificio inútil", "incapacidad de soltar"],
     significadoDerecho: `El Colgado representa un periodo de suspensión, sacrificio y cambio de perspectiva. Esta carta te invita a soltar el control, a rendirte a la situación y a ver las cosas desde un punto de vista completamente nuevo. Simboliza la iluminación que viene a través de la paciencia, la espera y la disposición a hacer sacrificios personales por un bien mayor.
     
@@ -436,9 +409,7 @@ export const traditionalMeanings: TraditionalCardMeaning[] = [
     elemento: "Agua",
     planeta: "Plutón",
     signoAstrologico: "Escorpio",
-    numerologia: "13 (Transformación, fin de ciclo, renovación, cambio radical)",
-    simbolismo: `Un esqueleto a caballero empuñando una bandera negra con una rosa blanca (símbolo de vida después de la muerte). El caballero pisa a un rey, mientras figuras de niños y mujeres ruegan. Un sol sale en el horizonte, simbolizando el nuevo comienzo. El esqueleto representa la finalización y la limpieza, la bandera la esperanza de renacimiento. El río en el fondo simboliza el paso entre la vida y la muerte.`,
-    palabrasClaveDerechas: ["Transformación", "fin de ciclo", "renovación", "cambio radical", "liberación", "aceptación", "desapego", "muerte y renacimiento"],
+    numerologia: "13 (Transformación, fin de ciclo, renovación, cambio radical)",    palabrasClaveDerechas: ["Transformación", "fin de ciclo", "renovación", "cambio radical", "liberación", "aceptación", "desapego", "muerte y renacimiento"],
     palabrasClaveInvertidas: ["Resistencia al cambio", "estancamiento", "miedo al fin", "negación", "ruptura incompleta", "desesperación", "pérdida"],
     significadoDerecho: `La Muerte representa la transformación radical, el fin de un ciclo y la necesidad de dejar ir lo viejo para que nazca lo nuevo. Esta carta no simboliza la muerte física (necesariamente), sino un cambio profundo y fundamental que es inevitable. Es un proceso de desapego, de limpieza y de renacimiento.
     
@@ -467,9 +438,7 @@ export const traditionalMeanings: TraditionalCardMeaning[] = [
     elemento: "Fuego",
     planeta: "Sagitario",
     signoAstrologico: "Sagitario",
-    numerologia: "14 (Equilibrio, armonía, moderación, integración)",
-    simbolismo: `Un ángel con una pierna en el agua y otra en tierra, mezclando dos copas de líquido sin derramar una gota. Un sendero conduce a un sol naciente en el fondo. El iris amarillo en primer plano simboliza la sabiduría y la esperanza. Las alas del ángel y el halo sugieren su naturaleza divina y su conexión con lo espiritual. El acto de mezclar el agua simboliza la integración y la armonía de opuestos.`,
-    palabrasClaveDerechas: ["Equilibrio", "armonía", "moderación", "paciencia", "integración", "propósito", "sanación", "flujo"],
+    numerologia: "14 (Equilibrio, armonía, moderación, integración)",    palabrasClaveDerechas: ["Equilibrio", "armonía", "moderación", "paciencia", "integración", "propósito", "sanación", "flujo"],
     palabrasClaveInvertidas: ["Desequilibrio", "desarmonía", "exceso", "impaciencia", "conflicto", "falta de moderación", "dispersión"],
     significadoDerecho: `La Templanza representa el equilibrio, la armonía y la moderación. Esta carta te invita a encontrar el punto medio, a integrar diferentes aspectos de tu vida y a actuar con paciencia y propósito. Simboliza la sanación, la combinación de elementos opuestos y la búsqueda de la armonía interior.
     
@@ -498,9 +467,7 @@ export const traditionalMeanings: TraditionalCardMeaning[] = [
     elemento: "Tierra",
     planeta: "Saturno",
     signoAstrologico: "Capricornio",
-    numerologia: "15 (Sombra, adicción, liberación, engaño, tentación)",
-    simbolismo: `Un diablo con alas de murciélago y cuernos, sentado sobre un pedestal. Un hombre y una mujer desnudos están encadenados a su pedestal por el cuello, pero las cadenas son lo suficientemente flojas como para que puedan liberarse si lo desearan. El diablo levanta una antorcha, simbolizando la luz de la ignorancia o la tentación. La cola del hombre termina en uvas, y la de la mujer en fuego, representando los placeres carnales.`,
-    palabrasClaveDerechas: ["Sombra", "adicción", "tentación", "servidumbre", "materialismo", "obsesión", "trampa", "liberación (al reconocer la trampa)"],
+    numerologia: "15 (Sombra, adicción, liberación, engaño, tentación)",    palabrasClaveDerechas: ["Sombra", "adicción", "tentación", "servidumbre", "materialismo", "obsesión", "trampa", "liberación (al reconocer la trampa)"],
     palabrasClaveInvertidas: ["Liberación", "ruptura de cadenas", "superación de adicciones", "despertar", "independencia", "reconocimiento de la verdad", "recuperación"],
     significadoDerecho: `El Diablo representa las cadenas autoimpuestas, las adicciones, las tentaciones y la sombra de tu propia psique. Esta carta simboliza la esclavitud a deseos materiales, obsesiones o comportamientos destructivos. Sin embargo, también te muestra que las cadenas son ilusorias y que tienes el poder de liberarte en cualquier momento.
     
@@ -529,9 +496,7 @@ export const traditionalMeanings: TraditionalCardMeaning[] = [
     elemento: "Fuego",
     planeta: "Marte",
     signoAstrologico: "Leo",
-    numerologia: "16 (Destrucción, revelación, cambio repentino, despertar)",
-    simbolismo: `Una torre es golpeada por un rayo, haciendo que la corona se caiga y figuras caigan al vacío. El rayo representa la intervención divina o un despertar repentino. La corona simboliza estructuras rígidas o falsas creencias que se derrumban. El fuego y la destrucción sugieren una purificación necesaria. Las figuras cayendo representan la pérdida de lo familiar y la necesidad de soltar.`,
-    palabrasClaveDerechas: ["Destrucción", "cambio repentino", "revelación", "crisis", "derrumbe", "despertar", "liberación", "caos"],
+    numerologia: "16 (Destrucción, revelación, cambio repentino, despertar)",    palabrasClaveDerechas: ["Destrucción", "cambio repentino", "revelación", "crisis", "derrumbe", "despertar", "liberación", "caos"],
     palabrasClaveInvertidas: ["Resistencia al cambio", "evitar la crisis", "desastre inminente (aún no manifestado)", "miedo al caos", "cambio pospuesto", "turbulencia prolongada"],
     significadoDerecho: `La Torre representa la destrucción repentina de estructuras, creencias o situaciones que ya no te sirven. Esta carta simboliza una crisis, una revelación abrupta o un despertar que derrumba todo lo que creías sólido. Es un cambio inevitable y a menudo caótico que, aunque doloroso, es necesario para tu crecimiento.
     
@@ -560,9 +525,7 @@ export const traditionalMeanings: TraditionalCardMeaning[] = [
     elemento: "Aire",
     planeta: "Urano",
     signoAstrologico: "Acuario",
-    numerologia: "17 (Esperanza, inspiración, curación, renovación)",
-    simbolismo: `Una mujer desnuda (símbolo de vulnerabilidad y autenticidad) vierte agua de dos jarras: una en un cuerpo de agua (subconsciente, intuición) y otra en tierra (mundo material, manifestación). Una gran estrella brillante sobre ella, rodeada de siete estrellas más pequeñas. Un pájaro Ibis se posa en un árbol en el fondo. El desnudo simboliza la pureza del ser, las estrellas la esperanza y la inspiración divina. El acto de verter agua representa la curación y la renovación.`,
-    palabrasClaveDerechas: ["Esperanza", "inspiración", "sanación", "renovación", "guía divina", "calma", "optimismo", "conexión espiritual"],
+    numerologia: "17 (Esperanza, inspiración, curación, renovación)",    palabrasClaveDerechas: ["Esperanza", "inspiración", "sanación", "renovación", "guía divina", "calma", "optimismo", "conexión espiritual"],
     palabrasClaveInvertidas: ["Desesperanza", "desconexión", "falta de fe", "pesimismo", "duda", "bloqueo creativo", "desilusión"],
     significadoDerecho: `La Estrella representa la esperanza, la inspiración y la sanación después de un período de oscuridad o crisis. Esta carta simboliza la guía divina, la renovación espiritual y la capacidad de ver la luz al final del túnel. Es un momento de optimismo, de fe y de conexión con el universo.
     
@@ -591,9 +554,7 @@ export const traditionalMeanings: TraditionalCardMeaning[] = [
     elemento: "Agua",
     planeta: "Luna",
     signoAstrologico: "Piscis",
-    numerologia: "18 (Ilusión, misterio, subconsciente, sueños)",
-    simbolismo: `Una luna llena brilla en el cielo, con un sol oculto dentro de ella. Dos perros o lobos aúllan a la luna, un cangrejo emerge del agua, y un camino se extiende entre dos torres hacia el horizonte. El agua representa el subconsciente y las emociones. Los animales simbolizan los instintos primarios y el lado salvaje de la psique. Las torres son los límites entre la conciencia y el inconsciente.`,
-    palabrasClaveDerechas: ["Ilusión", "misterio", "subconsciente", "sueños", "intuición", "miedos", "engañocimientos", "ciclos emocionales"],
+    numerologia: "18 (Ilusión, misterio, subconsciente, sueños)",    palabrasClaveDerechas: ["Ilusión", "misterio", "subconsciente", "sueños", "intuición", "miedos", "engañocimientos", "ciclos emocionales"],
     palabrasClaveInvertidas: ["Claridad", "revelación", "liberación de miedos", "honestidad", "superación de engaños", "despertar a la verdad"],
     significadoDerecho: `La Luna representa el reino de las ilusiones, los misterios, el subconsciente y los miedos ocultos. Esta carta simboliza la confusión, la incertidumbre y la necesidad de navegar por las profundidades de tus emociones. Es un momento donde la realidad puede no ser lo que parece y donde tus instintos están a flor de piel.
     
@@ -622,9 +583,7 @@ export const traditionalMeanings: TraditionalCardMeaning[] = [
     elemento: "Fuego",
     planeta: "Sol",
     signoAstrologico: "Leo",
-    numerologia: "19 (Claridad, éxito, alegría, vitalidad, iluminación)",
-    simbolismo: `Un gran sol brillante con rostro humano irradia luz y alegría. Debajo, un niño desnudo monta un caballero blanco, sosteniendo una bandera roja. Girasoles crecen detrás de un muro. El sol representa la vitalidad, la claridad y la verdad. El niño simboliza la inocencia, la pureza y la alegría de la vida. El caballero blanco, la pureza de la energía. El muro, los obstáculos superados.`,
-    palabrasClaveDerechas: ["Alegría", "éxito", "vitalidad", "claridad", "iluminación", "felicidad", "optimismo", "verdad", "inocencia"],
+    numerologia: "19 (Claridad, éxito, alegría, vitalidad, iluminación)",    palabrasClaveDerechas: ["Alegría", "éxito", "vitalidad", "claridad", "iluminación", "felicidad", "optimismo", "verdad", "inocencia"],
     palabrasClaveInvertidas: ["Pesimismo", "tristeza", "falta de vitalidad", "desilusión", "egoísmo", "bloqueo", "oscuridad", "éxito oculto"],
     significadoDerecho: `El Sol representa la alegría, el éxito, la vitalidad y la claridad absoluta. Esta carta simboliza la iluminación, la verdad que sale a la luz y la felicidad que viene de vivir en autenticidad. Es un momento de optimismo, de celebración y de manifestación plena.
     
@@ -653,9 +612,7 @@ export const traditionalMeanings: TraditionalCardMeaning[] = [
     elemento: "Fuego",
     planeta: "Plutón",
     signoAstrologico: "Escorpio",
-    numerologia: "20 (Resurrección, juicio final, llamado, liberación)",
-    simbolismo: `Un ángel (Gabriel) toca una trompeta sobre tumbas abiertas, de las cuales emergen figuras de hombres, mujeres y niños. Una gran bandera con una cruz roja flota desde la trompeta. Las montañas al fondo simbolizan los desafíos superados. La escena representa el juicio final, el despertar espiritual y la llamada a una nueva vida.`,
-    palabrasClaveDerechas: ["Juicio", "renacimiento", "evaluación", "llamado", "absolución", "liberación", "perdón", "despertar espiritual"],
+    numerologia: "20 (Resurrección, juicio final, llamado, liberación)",    palabrasClaveDerechas: ["Juicio", "renacimiento", "evaluación", "llamado", "absolución", "liberación", "perdón", "despertar espiritual"],
     palabrasClaveInvertidas: ["Autocondena", "culpa", "miedo al juicio", "rechazo", "retrasos", "malentendidos", "incapacidad de perdonar"],
     significadoDerecho: `El Juicio representa el renacimiento, la evaluación y la absolución. Esta carta simboliza un llamado a despertar, a perdonarte a ti mismo y a otros, y a liberarte del pasado. Es un momento de profunda introspección donde te enfrentas a tus acciones y recibes la oportunidad de un nuevo comienzo.
     
@@ -684,9 +641,7 @@ export const traditionalMeanings: TraditionalCardMeaning[] = [
     elemento: "Tierra",
     planeta: "Saturno",
     signoAstrologico: "Capricornio",
-    numerologia: "21 (Culminación, realización, totalidad, integración)",
-    simbolismo: `Una figura andrógina desnuda baila dentro de una gran corona de laurel o guirnalda, sosteniendo dos bastones. En las cuatro esquinas, las mismas criaturas de Ezequiel (ángel, águila, toro, león) que aparecen en La Rueda de la Fortuna, simbolizando la integración de los cuatro elementos y los cuatro aspectos de la existencia. La figura baila en un círculo de triunfo.`,
-    palabrasClaveDerechas: ["Culminación", "realización", "totalidad", "éxito", "integración", "logro", "completud", "viaje exitoso"],
+    numerologia: "21 (Culminación, realización, totalidad, integración)",    palabrasClaveDerechas: ["Culminación", "realización", "totalidad", "éxito", "integración", "logro", "completud", "viaje exitoso"],
     palabrasClaveInvertidas: ["Incompletitud", "retrasos", "falta de cierre", "estancamiento", "final pospuesto", "viaje sin fin", "insatisfacción"],
     significadoDerecho: `El Mundo representa la culminación, la realización y la totalidad. Esta carta simboliza el éxito en tus esfuerzos, la integración de todas las partes de ti mismo y la sensación de plenitud y completud. Es el final de un ciclo significativo y el logro de tus objetivos.
     
@@ -717,9 +672,7 @@ export const traditionalMeanings: TraditionalCardMeaning[] = [
     elemento: "Tierra",
     planeta: "Tierra",
     signoAstrologico: "Tauro/Virgo/Capricornio",
-    numerologia: "1 (Comienzo, oportunidad, manifestación, potencial)",
-    simbolismo: `Una mano emerge de una nube, sosteniendo un gran oro brillante o pentáculo. Debajo, un jardín exuberante con flores y un camino que conduce a un arco de triunfo y montañas en la distancia. El oro simboliza una nueva oportunidad tangible. El jardín representa la fertilidad y el potencial de crecimiento. El camino sugiere un nuevo viaje material o financiero.`,
-    palabrasClaveDerechas: ["Nueva oportunidad", "prosperidad", "manifestación", "seguridad", "potencial", "estabilidad financiera", "oferta concreta", "crecimiento"],
+    numerologia: "1 (Comienzo, oportunidad, manifestación, potencial)",    palabrasClaveDerechas: ["Nueva oportunidad", "prosperidad", "manifestación", "seguridad", "potencial", "estabilidad financiera", "oferta concreta", "crecimiento"],
     palabrasClaveInvertidas: ["Oportunidad perdida", "mala inversión", "inseguridad financiera", "materialismo excesivo", "falta de ambición", "retrasos"],
     significadoDerecho: `El As de Oros representa el inicio de una nueva oportunidad tangible, a menudo relacionada con el dinero, la carrera, la propiedad o la seguridad. Esta carta simboliza el potencial para la prosperidad, la manifestación de tus deseos materiales y la base para un crecimiento sólido.
     
@@ -748,9 +701,7 @@ export const traditionalMeanings: TraditionalCardMeaning[] = [
     elemento: "Tierra",
     planeta: "Júpiter",
     signoAstrologico: "Capricornio",
-    numerologia: "2 (Equilibrio, adaptación, decisiones, gestión)",
-    simbolismo: `Un joven malabarista equilibra dos grandes oros que forman un símbolo de infinito, mientras barcos navegan en aguas turbulentas detrás de él. El malabarista representa la necesidad de balancear diferentes aspectos de la vida o recursos. Los barcos en el mar agitado simbolizan las fluctuaciones de la vida y la capacidad de adaptarse a ellas. El infinito representa la necesidad de un equilibrio continuo.`,
-    palabrasClaveDerechas: ["Equilibrio", "malabarismo", "adaptación", "decisiones", "flexibilidad", "gestión", "prioridades", "cambio y flujo"],
+    numerologia: "2 (Equilibrio, adaptación, decisiones, gestión)",    palabrasClaveDerechas: ["Equilibrio", "malabarismo", "adaptación", "decisiones", "flexibilidad", "gestión", "prioridades", "cambio y flujo"],
     palabrasClaveInvertidas: ["Desequilibrio", "estrés", "falta de organización", "indecisión", "abrumación", "pérdida de control", "exceso"],
     significadoDerecho: `El Dos de Oros representa la necesidad de equilibrio y adaptación ante los cambios y las diferentes demandas de la vida. Esta carta simboliza el malabarismo entre dos o más áreas, la gestión de recursos o la toma de decisiones sobre dónde enfocar tu energía.
     
@@ -779,9 +730,7 @@ export const traditionalMeanings: TraditionalCardMeaning[] = [
     elemento: "Tierra",
     planeta: "Marte",
     signoAstrologico: "Tauro",
-    numerologia: "3 (Colaboración, maestría, reconocimiento, construcción)",
-    simbolismo: `Un aprendiz, un monje y un escultor trabajan juntos en el diseño de una catedral. El escultor está parado sobre un banco, mostrando su obra, mientras el monje lo mira y el aprendiz trabaja con herramientas. Los tres oros están grabados en la pared o en un banco de trabajo. La escena representa la colaboración, la maestría en un oficio y el reconocimiento del talento.`,
-    palabrasClaveDerechas: ["Colaboración", "trabajo en equipo", "aprendizaje", "reconocimiento", "maestría", "construcción", "habilidades", "planificación"],
+    numerologia: "3 (Colaboración, maestría, reconocimiento, construcción)",    palabrasClaveDerechas: ["Colaboración", "trabajo en equipo", "aprendizaje", "reconocimiento", "maestría", "construcción", "habilidades", "planificación"],
     palabrasClaveInvertidas: ["Falta de trabajo en equipo", "mediocridad", "falta de habilidades", "desacuerdo", "crítica", "retrasos", "proyectos sin terminar"],
     significadoDerecho: `El Tres de Oros representa la colaboración, el trabajo en equipo y el reconocimiento por tus habilidades. Esta carta simboliza la etapa en la que tus talentos son valorados y contribuyes a un proyecto más grande. Es un momento propicio para aprender de otros, para construir sobre tus fortalezas y para ver los resultados de tu esfuerzo.
     
@@ -810,9 +759,7 @@ export const traditionalMeanings: TraditionalCardMeaning[] = [
     elemento: "Tierra",
     planeta: "Sol",
     signoAstrologico: "Tauro",
-    numerologia: "4 (Estabilidad, seguridad, control, posesión)",
-    simbolismo: `Una figura sentada en un trono, aferrándose firmemente a un oro con ambas manos en su regazo. Otro oro está sobre su cabeza (corona) y dos más bajo sus pies. Detrás de él, una ciudad bulliciosa. El oro en su cabeza simboliza la preocupación por el estatus, los de los pies la necesidad de estabilidad. La postura rígida indica control y aferramiento.`,
-    palabrasClaveDerechas: ["Seguridad", "estabilidad", "posesión", "control", "conservación", "ahorro", "límites", "apego"],
+    numerologia: "4 (Estabilidad, seguridad, control, posesión)",    palabrasClaveDerechas: ["Seguridad", "estabilidad", "posesión", "control", "conservación", "ahorro", "límites", "apego"],
     palabrasClaveInvertidas: ["Desprendimiento", "generosidad", "descontrol", "inseguridad", "codicia", "pérdida", "rigidez", "bloqueo"],
     significadoDerecho: `El Cuatro de Oros representa la seguridad, la estabilidad y la necesidad de conservar lo que tienes. Esta carta simboliza el deseo de control, la posesión y el establecimiento de límites para proteger tus recursos, ya sean materiales, emocionales o energéticos.
     
@@ -841,9 +788,7 @@ export const traditionalMeanings: TraditionalCardMeaning[] = [
     elemento: "Tierra",
     planeta: "Marte",
     signoAstrologico: "Tauro",
-    numerologia: "5 (Pérdida, dificultad, crisis, desafío)",
-    simbolismo: `Dos figuras empobrecidas, enfermas o heridas, caminan penosamente por la nieve junto a la ventana de una iglesia iluminada. Las cinco monedas (oros) están representadas en la ventana, inalcanzables. La nieve y la oscuridad simbolizan la dificultad y la adversidad. La iglesia representa la ayuda y la esperanza que están disponibles, pero que no ven.`,
-    palabrasClaveDerechas: ["Pérdida", "dificultad", "crisis financiera", "enfermedad", "exclusión", "pobreza", "inseguridad", "desesperación"],
+    numerologia: "5 (Pérdida, dificultad, crisis, desafío)",    palabrasClaveDerechas: ["Pérdida", "dificultad", "crisis financiera", "enfermedad", "exclusión", "pobreza", "inseguridad", "desesperación"],
     palabrasClaveInvertidas: ["Recuperación", "ayuda encontrada", "superación de la adversidad", "esperanza", "apoyo", "mejora de la situación"],
     significadoDerecho: `El Cinco de Oros representa la pérdida, la dificultad y la sensación de carencia o exclusión. Esta carta simboliza momentos de crisis financiera, enfermedad, desempleo o la sensación de estar solo y abandonado. Es un periodo de adversidad donde puedes sentirte vulnerable y sin apoyo.
     
@@ -872,9 +817,7 @@ export const traditionalMeanings: TraditionalCardMeaning[] = [
     elemento: "Tierra",
     planeta: "Júpiter",
     signoAstrologico: "Tauro",
-    numerologia: "6 (Generosidad, dar y recibir, caridad, equilibrio)",
-    simbolismo: `Un comerciante rico pesa oro en una balanza, distribuyendo monedas a dos mendigos que están de rodillas ante él. El acto de dar y recibir es central. La balanza simboliza la equidad y la justicia en la distribución. La prosperidad del comerciante contrasta con la necesidad de los mendigos, representando la desigualdad y la responsabilidad de los que tienen más.`,
-    palabrasClaveDerechas: ["Generosidad", "caridad", "dar y recibir", "equilibrio", "justicia", "apoyo", "intercambio", "prosperidad compartida"],
+    numerologia: "6 (Generosidad, dar y recibir, caridad, equilibrio)",    palabrasClaveDerechas: ["Generosidad", "caridad", "dar y recibir", "equilibrio", "justicia", "apoyo", "intercambio", "prosperidad compartida"],
     palabrasClaveInvertidas: ["Egoísmo", "codicia", "desequilibrio", "deuda", "caridad forzada", "favoritismo", "explotación"],
     significadoDerecho: `El Seis de Oros representa la generosidad, el acto de dar y recibir, y el equilibrio en los intercambios. Esta carta simboliza la caridad, el apoyo mutuo y la importancia de la justicia en la distribución de recursos. Es un recordatorio de que la prosperidad se comparte y que hay una circulación de energía.
     
@@ -903,9 +846,7 @@ export const traditionalMeanings: TraditionalCardMeaning[] = [
     elemento: "Tierra",
     planeta: "Saturno",
     signoAstrologico: "Tauro",
-    numerologia: "7 (Paciencia, evaluación, inversión, recompensa a largo plazo)",
-    simbolismo: `Un granjero observa pensativamente las siete monedas que cuelgan de un arbusto o planta, simbolizando la inversión de tiempo y esfuerzo. Su postura es de espera y evaluación, no de acción. Sus herramientas de trabajo están a sus pies. El paisaje de fondo muestra el fruto de su trabajo, pero también el tiempo necesario para la maduración.`,
-    palabrasClaveDerechas: ["Paciencia", "evaluación", "inversión", "cosecha a largo plazo", "espera", "recompensa", "reflexión", "crecimiento lento"],
+    numerologia: "7 (Paciencia, evaluación, inversión, recompensa a largo plazo)",    palabrasClaveDerechas: ["Paciencia", "evaluación", "inversión", "cosecha a largo plazo", "espera", "recompensa", "reflexión", "crecimiento lento"],
     palabrasClaveInvertidas: ["Impaciencia", "malos resultados", "frustración", "trabajo inútil", "retrasos", "desánimo", "cosecha fallida"],
     significadoDerecho: `El Siete de Oros representa la paciencia, la evaluación y la inversión a largo plazo. Esta carta simboliza el momento en que observas los frutos de tu trabajo, pero reconoces que aún no es el momento de la cosecha completa. Es un periodo de espera, de reflexión y de confianza en que tus esfuerzos darán resultado.
     
@@ -934,9 +875,7 @@ export const traditionalMeanings: TraditionalCardMeaning[] = [
     elemento: "Tierra",
     planeta: "Sol",
     signoAstrologico: "Virgo",
-    numerologia: "8 (Habilidad, dedicación, maestría, trabajo duro)",
-    simbolismo: `Un artesano o aprendiz sentado en un banco de trabajo, cincelando cuidadosamente una de las ocho monedas o pentáculos. Varios oros terminados cuelgan en la pared detrás de él. El martillo y las herramientas están a sus pies. Su expresión es de concentración y dedicación. El paisaje de fondo muestra una ciudad a lo lejos, simbolizando el impacto de su trabajo.`,
-    palabrasClaveDerechas: ["Habilidad", "dedicación", "maestría", "trabajo duro", "perfección", "aprendizaje", "práctica", "artesanía"],
+    numerologia: "8 (Habilidad, dedicación, maestría, trabajo duro)",    palabrasClaveDerechas: ["Habilidad", "dedicación", "maestría", "trabajo duro", "perfección", "aprendizaje", "práctica", "artesanía"],
     palabrasClaveInvertidas: ["Pereza", "mediocridad", "falta de habilidad", "perfeccionismo excesivo", "falta de concentración", "estancamiento", "trabajo repetitivo"],
     significadoDerecho: `El Ocho de Oros representa la dedicación, la habilidad y la maestría en un oficio o área de estudio. Esta carta simboliza el trabajo duro, la concentración en los detalles y el compromiso con la mejora continua. Es el momento de pulir tus talentos y de perfeccionar tus habilidades.
     
@@ -965,9 +904,7 @@ export const traditionalMeanings: TraditionalCardMeaning[] = [
     elemento: "Tierra",
     planeta: "Venus",
     signoAstrologico: "Virgo",
-    numerologia: "9 (Logro, abundancia, autosuficiencia, lujo)",
-    simbolismo: `Una mujer elegantemente vestida camina por un viñedo, con un pájaro encapuchado en su mano y una de las nueve monedas a sus pies. El viñedo simboliza los frutos de su trabajo y su riqueza. El pájaro encapuchado (halcón) representa la disciplina y el autocontrol. La mujer sola en el viñedo sugiere independencia y autosuficiencia.`,
-    palabrasClaveDerechas: ["Abundancia", "lujo", "independencia", "autosuficiencia", "logro", "seguridad financiera", "placer", "recompensa"],
+    numerologia: "9 (Logro, abundancia, autosuficiencia, lujo)",    palabrasClaveDerechas: ["Abundancia", "lujo", "independencia", "autosuficiencia", "logro", "seguridad financiera", "placer", "recompensa"],
     palabrasClaveInvertidas: ["Pérdida financiera", "dependencia", "fraude", "excesos", "inseguridad", "soledad", "ostentación"],
     significadoDerecho: `El Nueve de Oros representa la abundancia, el lujo y la autosuficiencia que provienen del trabajo duro y la disciplina. Esta carta simboliza el logro material, la seguridad financiera y la capacidad de disfrutar de los placeres de la vida sin depender de otros.
     
@@ -996,9 +933,7 @@ export const traditionalMeanings: TraditionalCardMeaning[] = [
     elemento: "Tierra",
     planeta: "Mercurio",
     signoAstrologico: "Virgo",
-    numerologia: "10 (Riqueza, herencia, familia, seguridad duradera)",
-    simbolismo: `Una familia (un anciano, una pareja y un niño) se reúne en un pueblo, rodeada de diez oros que forman un árbol cabalístico. Perros juegan a sus pies. El anciano, sentado, simboliza la sabiduría y la herencia. La pareja joven representa la continuidad familiar. Los oros representan la riqueza generacional y la seguridad duradera.`,
-    palabrasClaveDerechas: ["Riqueza", "herencia", "familia", "seguridad duradera", "legado", "tradición", "comunidad", "prosperidad generacional"],
+    numerologia: "10 (Riqueza, herencia, familia, seguridad duradera)",    palabrasClaveDerechas: ["Riqueza", "herencia", "familia", "seguridad duradera", "legado", "tradición", "comunidad", "prosperidad generacional"],
     palabrasClaveInvertidas: ["Disputas familiares", "pérdida de herencia", "inestabilidad financiera", "ruptura de tradiciones", "conflictos", "soledad en la abundancia"],
     significadoDerecho: `El Diez de Oros representa la riqueza, la herencia y la seguridad duradera en el ámbito familiar y material. Esta carta simboliza el legado, las tradiciones y la prosperidad que se extiende a través de generaciones. Es un momento de estabilidad, de pertenencia y de disfrutar de los frutos de un esfuerzo colectivo.
     
@@ -1027,9 +962,7 @@ export const traditionalMeanings: TraditionalCardMeaning[] = [
     elemento: "Tierra",
     planeta: "Tierra",
     signoAstrologico: "Tauro/Virgo/Capricornio",
-    numerologia: "11 (Potencial, mensajes, oportunidades tangibles)",
-    simbolismo: `Una figura joven de pie en un campo verde, sosteniendo un gran oro o pentáculo con ambas manos, mirándolo con seriedad y contemplación. El fondo es un paisaje fértil, con montañas a lo lejos, simbolizando un nuevo horizonte para el crecimiento. Su vestimenta es práctica y sencilla, reflejando su naturaleza terrenal y su enfoque en el aprendizaje.`,
-    palabrasClaveDerechas: ["Nuevas oportunidades", "noticias concretas", "estudiante", "diligencia", "potencial", "estabilidad emergente", "trabajo duro", "foco en lo práctico"],
+    numerologia: "11 (Potencial, mensajes, oportunidades tangibles)",    palabrasClaveDerechas: ["Nuevas oportunidades", "noticias concretas", "estudiante", "diligencia", "potencial", "estabilidad emergente", "trabajo duro", "foco en lo práctico"],
     palabrasClaveInvertidas: ["Falta de ambición", "irresponsabilidad", "oportunidades perdidas", "mensajes negativos", "estudios abandonados", "negligencia"],
     significadoDerecho: `La Sota de Oros representa la llegada de nuevas oportunidades concretas, a menudo relacionadas con el aprendizaje, la carrera o las finanzas. Esta carta simboliza el potencial, la diligencia y la seriedad en el enfoque de los asuntos prácticos. Es un mensajero de noticias tangibles y de nuevos proyectos que requieren tu atención.
     
@@ -1058,9 +991,7 @@ export const traditionalMeanings: TraditionalCardMeaning[] = [
     elemento: "Tierra",
     planeta: "Saturno",
     signoAstrologico: "Tauro/Virgo/Capricornio",
-    numerologia: "12 (Trabajo duro, responsabilidad, paciencia, progreso lento)",
-    simbolismo: `Un caballero vestido con una armadura completa, montado en un caballero pesado y robusto. Sostiene un oro en su mano, mirándolo con seriedad y concentración. El caballero está inmóvil o moviéndose lentamente, simbolizando la paciencia y la diligencia. El fondo es un campo arado, sugiriendo el trabajo constante y la preparación para la siembra.`,
-    palabrasClaveDerechas: ["Trabajo duro", "responsabilidad", "diligencia", "paciencia", "confiabilidad", "progreso lento pero seguro", "realismo", "meticuloso"],
+    numerologia: "12 (Trabajo duro, responsabilidad, paciencia, progreso lento)",    palabrasClaveDerechas: ["Trabajo duro", "responsabilidad", "diligencia", "paciencia", "confiabilidad", "progreso lento pero seguro", "realismo", "meticuloso"],
     palabrasClaveInvertidas: ["Pereza", "estancamiento", "irresponsabilidad", "perfeccionismo excesivo", "aburrimiento", "rigidez", "falta de ambición"],
     significadoDerecho: `El Caballero de Oros representa el trabajo duro, la responsabilidad y la diligencia en la consecución de metas. Esta carta simboliza la paciencia, la confiabilidad y el progreso lento pero seguro en los asuntos prácticos. Es el arquetipo del que se toma su tiempo, pero siempre cumple sus compromisos.
     
@@ -1089,9 +1020,7 @@ export const traditionalMeanings: TraditionalCardMeaning[] = [
     elemento: "Tierra",
     planeta: "Venus",
     signoAstrologico: "Tauro/Virgo/Capricornio",
-    numerologia: "13 (Nutrición, abundancia, seguridad, conexión con la naturaleza)",
-    simbolismo: `Una mujer sentada en un trono adornado con tallas de cabezas de cabra y conejos, símbolos de fertilidad y naturaleza. Sostiene un oro en su regazo, mirándolo con calidez y satisfacción. Rodeada de exuberante vegetación y flores. Un conejo a sus pies. Su expresión es de generosidad, nutrición y abundancia.`,
-    palabrasClaveDerechas: ["Nutrición", "abundancia", "cuidado", "seguridad", "practicidad", "generosidad", "maternidad", "conexión con la naturaleza"],
+    numerologia: "13 (Nutrición, abundancia, seguridad, conexión con la naturaleza)",    palabrasClaveDerechas: ["Nutrición", "abundancia", "cuidado", "seguridad", "practicidad", "generosidad", "maternidad", "conexión con la naturaleza"],
     palabrasClaveInvertidas: ["Codicia", "materialismo", "negligencia", "inseguridad", "falta de cuidado", "dependencia", "frialdad"],
     significadoDerecho: `La Reina de Oros representa la nutrición, la abundancia y la seguridad en el ámbito práctico y material. Esta carta simboliza el cuidado, la generosidad y la conexión con la naturaleza y la comodidad del hogar. Es el arquetipo de la madre tierra, que provee y nutre a quienes la rodean.
     
@@ -1120,9 +1049,7 @@ export const traditionalMeanings: TraditionalCardMeaning[] = [
     elemento: "Tierra",
     planeta: "Saturno",
     signoAstrologico: "Tauro/Virgo/Capricornio",
-    numerologia: "14 (Riqueza, éxito, liderazgo práctico, seguridad establecida)",
-    simbolismo: `Un rey robusto y bien vestido, sentado en un trono adornado con cabezas de toro y uvas, símbolos de prosperidad y fertilidad. Sostiene un oro en una mano y un cetro en la otra. El trono está en un jardín exuberante, con un castillo en la distancia. Su expresión es de confianza y dominio práctico.`,
-    palabrasClaveDerechas: ["Riqueza", "éxito", "liderazgo práctico", "seguridad financiera", "estabilidad", "negocios", "prosperidad", "confiabilidad"],
+    numerologia: "14 (Riqueza, éxito, liderazgo práctico, seguridad establecida)",    palabrasClaveDerechas: ["Riqueza", "éxito", "liderazgo práctico", "seguridad financiera", "estabilidad", "negocios", "prosperidad", "confiabilidad"],
     palabrasClaveInvertidas: ["Codicia", "corrupción", "tiranía financiera", "despilfarro", "inseguridad", "abuso de poder", "rigidez"],
     significadoDerecho: `El Rey de Oros representa la riqueza, el éxito y el liderazgo práctico en el ámbito material y financiero. Esta carta simboliza la seguridad establecida, la maestría en los negocios y la capacidad de crear y mantener una prosperidad duradera. Es el arquetipo del empresario exitoso, el banquero o el inversor.
     
@@ -1152,9 +1079,7 @@ export const traditionalMeanings: TraditionalCardMeaning[] = [
     elemento: "Fuego",
     planeta: "Marte",
     signoAstrologico: "Aries/Leo/Sagitario",
-    numerologia: "1 (Comienzo, inspiración, creatividad, potencial)",
-    simbolismo: `Una mano emerge de una nube, sosteniendo un basto en flor, simbolizando un nuevo comienzo creativo. Hojas y brotes caen del basto. Un paisaje con montañas al fondo y un castillo que sugiere aventura. El basto en flor representa el potencial de crecimiento y la vida. El paisaje montañoso y el castillo evocan la ambición y los desafíos que se avecinan.`,
-    palabrasClaveDerechas: ["Inspiración", "nuevos comienzos", "creatividad", "potencial", "entusiasmo", "aventura", "oportunidad", "iniciativa"],
+    numerologia: "1 (Comienzo, inspiración, creatividad, potencial)",    palabrasClaveDerechas: ["Inspiración", "nuevos comienzos", "creatividad", "potencial", "entusiasmo", "aventura", "oportunidad", "iniciativa"],
     palabrasClaveInvertidas: ["Bloqueo creativo", "falta de dirección", "apatía", "retrasos", "oportunidades perdidas", "comienzos falsos", "destrucción"],
     significadoDerecho: `El As de Bastos representa el inicio de una nueva inspiración, una idea brillante o un proyecto lleno de potencial. Esta carta simboliza el entusiasmo, la chispa creativa y la energía para emprender nuevas aventuras. Es un llamado a la acción, a tomar la iniciativa y a perseguir tus pasiones.
     
@@ -1183,9 +1108,7 @@ export const traditionalMeanings: TraditionalCardMeaning[] = [
     elemento: "Fuego",
     planeta: "Marte",
     signoAstrologico: "Aries",
-    numerologia: "2 (Planificación, futuro, asociación, elección)",
-    simbolismo: `Un hombre de pie sobre un muro o una torre, sosteniendo un globo terráqueo en una mano y un basto en la otra. Otro basto está anclado en el muro. Observa el vasto paisaje y el mar a lo lejos. El globo simboliza las opciones futuras y la expansión. Los dos bastos representan el presente y el futuro, o la planificación y la ejecución. El paisaje sugiere un mundo de posibilidades.`,
-    palabrasClaveDerechas: ["Planificación", "futuro", "elección", "asociación", "exploración", "nuevos horizontes", "decisiones importantes", "visión a largo plazo"],
+    numerologia: "2 (Planificación, futuro, asociación, elección)",    palabrasClaveDerechas: ["Planificación", "futuro", "elección", "asociación", "exploración", "nuevos horizontes", "decisiones importantes", "visión a largo plazo"],
     palabrasClaveInvertidas: ["Falta de planes", "miedo a lo desconocido", "falta de ambición", "decisiones precipitadas", "conflicto de intereses", "oportunidades perdidas"],
     significadoDerecho: `El Dos de Bastos representa la planificación para el futuro, la exploración de nuevas posibilidades y la toma de decisiones importantes. Esta carta simboliza la elección de un camino, la visión a largo plazo y la consideración de asociaciones. Es el momento de evaluar tus opciones y de decidir tu siguiente paso.
     
@@ -1214,9 +1137,7 @@ export const traditionalMeanings: TraditionalCardMeaning[] = [
     elemento: "Fuego",
     planeta: "Sol",
     signoAstrologico: "Aries",
-    numerologia: "3 (Expansión, visión, progreso, éxito inicial)",
-    simbolismo: `Un hombre de pie en un acantilado, mirando barcos que se alejan en el horizonte, sosteniendo uno de los tres bastos. Otros dos bastos están anclados en la tierra. Los barcos simbolizan el comercio, la expansión y las oportunidades que se envían o que regresan. La postura del hombre es de expectación y visión. El vasto mar representa las posibilidades ilimitadas.`,
-    palabrasClaveDerechas: ["Expansión", "crecimiento", "visión de futuro", "éxito inicial", "exploración", "comercio", "oportunidades lejanas", "cooperación"],
+    numerologia: "3 (Expansión, visión, progreso, éxito inicial)",    palabrasClaveDerechas: ["Expansión", "crecimiento", "visión de futuro", "éxito inicial", "exploración", "comercio", "oportunidades lejanas", "cooperación"],
     palabrasClaveInvertidas: ["Refrases", "falta de visión", "oportunidades perdidas", "obstáculos", "fracaso en la expansión", "dependencia"],
     significadoDerecho: `El Tres de Bastos representa la expansión, el crecimiento y el éxito inicial de tus proyectos. Esta carta simboliza la visión de futuro, la exploración de nuevas oportunidades y la confianza en que tus esfuerzos están dando frutos. Es el momento de mirar más allá de lo inmediato y de prepararte para mayores logros.
     
@@ -1245,9 +1166,7 @@ export const traditionalMeanings: TraditionalCardMeaning[] = [
     elemento: "Fuego",
     planeta: "Júpiter",
     signoAstrologico: "Aries",
-    numerologia: "4 (Celebración, hogar, estabilidad, comunidad)",
-    simbolismo: `Dos figuras levantan ramos de flores, celebrando bajo un dosel de cuatro bastos adornados con guirnaldas de flores y frutas. Un puente en el fondo conduce a un castillo, sugiriendo un hogar seguro y establecido. La escena evoca alegría, celebración, estabilidad y el establecimiento de un hogar o comunidad.`,
-    palabrasClaveDerechas: ["Celebración", "hogar", "estabilidad", "comunidad", "matrimonio", "reunión familiar", "seguridad", "felicidad"],
+    numerologia: "4 (Celebración, hogar, estabilidad, comunidad)",    palabrasClaveDerechas: ["Celebración", "hogar", "estabilidad", "comunidad", "matrimonio", "reunión familiar", "seguridad", "felicidad"],
     palabrasClaveInvertidas: ["Inestabilidad", "conflictos familiares", "celebración pospuesta", "ruptura", "mudanza", "falta de armonía", "inseguridad"],
     significadoDerecho: `El Cuatro de Bastos representa la celebración, la estabilidad del hogar y la alegría de la comunidad. Esta carta simboliza los logros, los hitos importantes y la sensación de seguridad y pertenencia. Es un momento para disfrutar de las recompensas de tu trabajo y para compartir tu felicidad con tus seres queridos.
     
@@ -1276,9 +1195,7 @@ export const traditionalMeanings: TraditionalCardMeaning[] = [
     elemento: "Fuego",
     planeta: "Saturno",
     signoAstrologico: "Leo",
-    numerologia: "5 (Conflicto, competencia, desafío, desacuerdo)",
-    simbolismo: `Cinco figuras armadas con bastones se enfrentan en un aparente conflicto, aunque no parece haber un daño real. Sus bastones se cruzan en un patrón caótico. La escena sugiere una escaramuza o una competencia juguetona, pero también la posibilidad de un desacuerdo o conflicto.`,
-    palabrasClaveDerechas: ["Conflicto", "competencia", "desacuerdo", "desafío", "lucha", "rivalidad", "caos", "energía dispersa"],
+    numerologia: "5 (Conflicto, competencia, desafío, desacuerdo)",    palabrasClaveDerechas: ["Conflicto", "competencia", "desacuerdo", "desafío", "lucha", "rivalidad", "caos", "energía dispersa"],
     palabrasClaveInvertidas: ["Resolución de conflictos", "cooperación", "fin de la lucha", "armonía", "evitar el conflicto", "rendición", "claridad"],
     significadoDerecho: `El Cinco de Bastos representa el conflicto, la competencia y el desacuerdo. Esta carta simboliza una lucha, ya sea interna o externa, donde diferentes fuerzas o ideas chocan. Es un momento de desafío, de rivalidad y de energía dispersa.
     
@@ -1307,9 +1224,7 @@ export const traditionalMeanings: TraditionalCardMeaning[] = [
     elemento: "Fuego",
     planeta: "Júpiter",
     signoAstrologico: "Leo",
-    numerologia: "6 (Victoria, reconocimiento, triunfo, éxito público)",
-    simbolismo: `Un jinete coronado con una corona de laurel, cabalgando victoriosamente a través de una multitud que lo aclama. Sostiene un basto adornado con una corona de laurel. Otros bastos son sostenidos por la multitud. El laurel simboliza la victoria y el honor. La multitud que lo aclama representa el reconocimiento público y el triunfo.`,
-    palabrasClaveDerechas: ["Victoria", "reconocimiento", "triunfo", "éxito público", "buenas noticias", "progreso", "confianza", "autoestima"],
+    numerologia: "6 (Victoria, reconocimiento, triunfo, éxito público)",    palabrasClaveDerechas: ["Victoria", "reconocimiento", "triunfo", "éxito público", "buenas noticias", "progreso", "confianza", "autoestima"],
     palabrasClaveInvertidas: ["Fracaso", "humillación", "malas noticias", "falta de reconocimiento", "arrogancia", "dudas", "retrasos"],
     significadoDerecho: `El Seis de Bastos representa la victoria, el reconocimiento y el triunfo después de un esfuerzo. Esta carta simboliza el éxito público, las buenas noticias y la sensación de confianza que viene de haber logrado tus metas. Es un momento de celebración y de sentirte orgulloso de tus logros.
     
@@ -1338,9 +1253,7 @@ export const traditionalMeanings: TraditionalCardMeaning[] = [
     elemento: "Fuego",
     planeta: "Marte",
     signoAstrologico: "Leo",
-    numerologia: "7 (Desafío, defensa, resistencia, valentía)",
-    simbolismo: `Un hombre de pie en una posición elevada, defendiéndose de seis bastones que lo atacan desde abajo. Parece estar en desventaja numérica, pero su postura es firme y decidida. El terreno irregular sugiere un desafío. El hombre solo en la cima simboliza la defensa de sus convicciones y su posición.`,
-    palabrasClaveDerechas: ["Desafío", "defensa", "resistencia", "valentía", "competencia", "postura firme", "determinación", "superación de obstáculos"],
+    numerologia: "7 (Desafío, defensa, resistencia, valentía)",    palabrasClaveDerechas: ["Desafío", "defensa", "resistencia", "valentía", "competencia", "postura firme", "determinación", "superación de obstáculos"],
     palabrasClaveInvertidas: ["Rendición", "derrota", "cobardía", "abrumación", "indecisión", "dudas", "evasión de conflicto"],
     significadoDerecho: `El Siete de Bastos representa el desafío, la defensa de tus convicciones y la resistencia ante la adversidad. Esta carta simboliza la necesidad de mantenerte firme, de defender tu posición y de enfrentar la competencia con valentía. Es un momento para proteger lo que crees y para no ceder ante la presión.
     
@@ -1369,9 +1282,7 @@ export const traditionalMeanings: TraditionalCardMeaning[] = [
     elemento: "Fuego",
     planeta: "Mercurio",
     signoAstrologico: "Sagitario",
-    numerologia: "8 (Movimiento, rapidez, noticias, comunicación)",
-    simbolismo: `Ocho bastones vuelan rápidamente por el aire, en un movimiento descendente hacia un paisaje. El cielo está despejado y el paisaje es abierto. Los bastones en pleno vuelo simbolizan la velocidad, la acción y la comunicación rápida. La ausencia de figuras humanas sugiere que el movimiento es autónomo y no depende de la voluntad de alguien en particular.`,
-    palabrasClaveDerechas: ["Movimiento", "rapidez", "noticias", "comunicación", "acción", "viajes", "progreso rápido", "eventos"],
+    numerologia: "8 (Movimiento, rapidez, noticias, comunicación)",    palabrasClaveDerechas: ["Movimiento", "rapidez", "noticias", "comunicación", "acción", "viajes", "progreso rápido", "eventos"],
     palabrasClaveInvertidas: ["Retrasos", "comunicación deficiente", "estancamiento", "viajes cancelados", "malas noticias", "prisa excesiva", "dispersión"],
     significadoDerecho: `El Ocho de Bastos representa el movimiento rápido, las noticias y la comunicación. Esta carta simboliza el progreso acelerado, la llegada de información importante y la acción sin demoras. Es un momento en el que las cosas se desarrollan rápidamente y las barreras se disuelven.
     
@@ -1400,9 +1311,7 @@ export const traditionalMeanings: TraditionalCardMeaning[] = [
     elemento: "Fuego",
     planeta: "Marte",
     signoAstrologico: "Sagitario",
-    numerologia: "9 (Resistencia, resiliencia, valentía, última batalla)",
-    simbolismo: `Un hombre herido, con una venda en la cabeza, se apoya en un basto, mientras ocho bastos se mantienen erguidos detrás de él, formando una valla protectora. Su expresión es de cansancio, pero también de determinación. El campo detrás de él sugiere batallas pasadas. Representa la resistencia, la resiliencia y la preparación para la última batalla.`,
-    palabrasClaveDerechas: ["Resistencia", "resiliencia", "valentía", "última batalla", "fortaleza", "perseverancia", "cansancio", "preparación"],
+    numerologia: "9 (Resistencia, resiliencia, valentía, última batalla)",    palabrasClaveDerechas: ["Resistencia", "resiliencia", "valentía", "última batalla", "fortaleza", "perseverancia", "cansancio", "preparación"],
     palabrasClaveInvertidas: ["Paranoia", "obstinación", "cobardía", "agotamiento", "derrota", "falta de confianza", "rendición innecesaria"],
     significadoDerecho: `El Nueve de Bastos representa la resistencia, la resiliencia y la preparación para la última batalla. Esta carta simboliza la fortaleza que has ganado a través de las experiencias difíciles, la perseverancia y la capacidad de proteger tus logros. Es un momento de cautela, de defensa y de reunir tus últimas energías.
     
@@ -1431,9 +1340,7 @@ export const traditionalMeanings: TraditionalCardMeaning[] = [
     elemento: "Fuego",
     planeta: "Saturno",
     signoAstrologico: "Sagitario",
-    numerologia: "10 (Carga, responsabilidad, agotamiento, logro)",
-    simbolismo: `Una figura encorvada bajo el peso de diez bastones que lleva, aparentemente dirigiéndose a una ciudad en el horizonte. Su espalda está vuelta, y parece estar luchando con la carga. Los bastones representan responsabilidades y cargas autoimpuestas o necesarias. La ciudad simboliza el destino o el objetivo final.`,
-    palabrasClaveDerechas: ["Carga", "responsabilidad", "agotamiento", "estrés", "logro", "obligaciones", "peso", "trabajo excesivo"],
+    numerologia: "10 (Carga, responsabilidad, agotamiento, logro)",    palabrasClaveDerechas: ["Carga", "responsabilidad", "agotamiento", "estrés", "logro", "obligaciones", "peso", "trabajo excesivo"],
     palabrasClaveInvertidas: ["Alivio", "descarga", "liberación", "delegación", "superación de la carga", "responsabilidad compartida", "fin del estrés"],
     significadoDerecho: `El Diez de Bastos representa una carga pesada, la responsabilidad y el agotamiento que viene de asumir demasiado. Esta carta simboliza el final de un ciclo de esfuerzo intenso, donde te sientes abrumado por tus obligaciones. Es un momento de llevar el peso del mundo sobre tus hombros.
     
@@ -1462,9 +1369,7 @@ export const traditionalMeanings: TraditionalCardMeaning[] = [
     elemento: "Fuego",
     planeta: "Marte",
     signoAstrologico: "Aries/Leo/Sagitario",
-    numerologia: "11 (Noticias, inspiración, entusiasmo, potencial creativo)",
-    simbolismo: `Una figura joven y entusiasta de pie en un paisaje desértico, sosteniendo un basto en flor con ambas manos. Su mirada es curiosa y expectante. El basto en flor simboliza el potencial creativo y las nuevas ideas. El paisaje desértico sugiere un nuevo territorio inexplorado o el inicio de una aventura. Su vestimenta es llamativa, denotando su espíritu vibrante.`,
-    palabrasClaveDerechas: ["Noticias", "inspiración", "entusiasmo", "potencial creativo", "aventura", "exploración", "nuevas ideas", "mensajero"],
+    numerologia: "11 (Noticias, inspiración, entusiasmo, potencial creativo)",    palabrasClaveDerechas: ["Noticias", "inspiración", "entusiasmo", "potencial creativo", "aventura", "exploración", "nuevas ideas", "mensajero"],
     palabrasClaveInvertidas: ["Malas noticias", "retrasos", "falta de inspiración", "inmadurez", "egoísmo", "falsas promesas", "desorientación"],
     significadoDerecho: `La Sota de Bastos representa la llegada de nuevas noticias, inspiración y el inicio de una aventura. Esta carta simboliza el entusiasmo, la chispa creativa y el potencial para explorar nuevos territorios. Es un mensajero de ideas emocionantes y de oportunidades para crecer.
     
@@ -1493,9 +1398,7 @@ export const traditionalMeanings: TraditionalCardMeaning[] = [
     elemento: "Fuego",
     planeta: "Marte",
     signoAstrologico: "Sagitario",
-    numerologia: "12 (Acción, aventura, cambio, impulsividad)",
-    simbolismo: `Un caballero con armadura montado en un caballero que se encabrita, sosteniendo un basto elevado. Parece estar en constante movimiento y listo para la acción. Las llamas en su armadura y el plumero de su casco simbolizan su naturaleza ardiente. El paisaje desértico sugiere una búsqueda o un viaje.`,
-    palabrasClaveDerechas: ["Acción", "aventura", "viajes", "impulso", "energía", "confianza", "pasión", "cambio rápido", "exploración"],
+    numerologia: "12 (Acción, aventura, cambio, impulsividad)",    palabrasClaveDerechas: ["Acción", "aventura", "viajes", "impulso", "energía", "confianza", "pasión", "cambio rápido", "exploración"],
     palabrasClaveInvertidas: ["Prisa excesiva", "imprudencia", "retrasos", "agitación", "arrogancia", "falta de dirección", "conflictos", "interrupciones"],
     significadoDerecho: `El Caballero de Bastos representa la acción, la aventura y la energía para perseguir tus metas. Esta carta simboliza el impulso, la confianza y la disposición a tomar riesgos para lograr tus objetivos. Es un momento de movimiento rápido y de cambios significativos.
     
@@ -1524,9 +1427,7 @@ export const traditionalMeanings: TraditionalCardMeaning[] = [
     elemento: "Fuego",
     planeta: "Sol",
     signoAstrologico: "Leo",
-    numerologia: "13 (Confianza, independencia, carisma, calidez)",
-    simbolismo: `Una mujer sentada en un trono adornado con leones (símbolo de Leo) y girasoles. Sostiene un basto en flor en una mano y una flor en la otra. Un gato negro se sienta a sus pies. El girasol simboliza la alegría y la vitalidad. El gato negro, la independencia y la intuición. Su expresión es de confianza, calidez y carisma.`,
-    palabrasClaveDerechas: ["Confianza", "independencia", "carisma", "calidez", "entusiasmo", "optimismo", "energía", "determinación"],
+    numerologia: "13 (Confianza, independencia, carisma, calidez)",    palabrasClaveDerechas: ["Confianza", "independencia", "carisma", "calidez", "entusiasmo", "optimismo", "energía", "determinación"],
     palabrasClaveInvertidas: ["Egoísmo", "arrogancia", "celos", "inseguridad", "controladora", "falta de enfoque", "agresión"],
     significadoDerecho: `La Reina de Bastos representa la confianza, la independencia y el carisma. Esta carta simboliza el entusiasmo, el optimismo y la capacidad de inspirar a otros con tu energía. Es el arquetipo de la mujer fuerte, vivaz y emprendedora que irradia calidez.
     
@@ -1555,9 +1456,7 @@ export const traditionalMeanings: TraditionalCardMeaning[] = [
     elemento: "Fuego",
     planeta: "Sol",
     signoAstrologico: "Leo/Sagitario",
-    numerologia: "14 (Liderazgo, visión, inspiración, creatividad madura)",
-    simbolismo: `Un rey sentado en un trono adornado con leones y salamandras (símbolos de fuego y transformación). Sostiene un basto en flor con ambas manos, mirando hacia adelante con determinación. Su capa está adornada con salamandras. Su expresión es de confianza, visión y autoridad inspiradora.`,
-    palabrasClaveDerechas: ["Liderazgo", "visión", "inspiración", "creatividad madura", "emprendedor", "determinación", "carisma", "autenticidad"],
+    numerologia: "14 (Liderazgo, visión, inspiración, creatividad madura)",    palabrasClaveDerechas: ["Liderazgo", "visión", "inspiración", "creatividad madura", "emprendedor", "determinación", "carisma", "autenticidad"],
     palabrasClaveInvertidas: ["Tiranía", "autoritarismo", "engaño", "impulsividad", "falta de visión", "egoísmo", "controlador"],
     significadoDerecho: `El Rey de Bastos representa el liderazgo, la visión y la creatividad madura. Esta carta simboliza la capacidad de inspirar a otros, de emprender grandes proyectos y de gobernar con autenticidad y determinación. Es el arquetipo del líder carismático, el visionario o el emprendedor exitoso.
     
@@ -1587,9 +1486,7 @@ export const traditionalMeanings: TraditionalCardMeaning[] = [
     elemento: "Aire",
     planeta: "Urano",
     signoAstrologico: "Géminis/Libra/Acuario",
-    numerologia: "1 (Comienzo, verdad, claridad, avance)",
-    simbolismo: `Una mano emerge de una nube, sosteniendo una espada erguida con una corona sobre la punta. Dos ramas, una de laurel y otra de palma, cuelgan a los lados de la corona, simbolizando victoria y paz. El cielo detrás puede ser claro o tormentoso, indicando el potencial para la claridad o el conflicto. La espada simboliza la verdad, la justicia y el poder de la mente.`,
-    palabrasClaveDerechas: ["Verdad", "claridad", "avance", "decisión", "nueva idea", "ruptura", "justicia", "fuerza mental"],
+    numerologia: "1 (Comienzo, verdad, claridad, avance)",    palabrasClaveDerechas: ["Verdad", "claridad", "avance", "decisión", "nueva idea", "ruptura", "justicia", "fuerza mental"],
     palabrasClaveInvertidas: ["Confusión", "engaño", "tiranía", "destrucción", "uso indebido de poder", "bloqueo mental", "falta de claridad"],
     significadoDerecho: `El As de Espadas representa el inicio de una nueva verdad, una claridad mental o una decisión importante. Esta carta simboliza el poder de la mente, la capacidad de cortar con la confusión y de encontrar soluciones lógicas. Es un momento de avance intelectual y de romper con lo que ya no sirve.
     
@@ -1618,9 +1515,7 @@ export const traditionalMeanings: TraditionalCardMeaning[] = [
     elemento: "Aire",
     planeta: "Luna",
     signoAstrologico: "Libra",
-    numerologia: "2 (Indecisión, estancamiento, bloqueo emocional)",
-    simbolismo: `Una figura con los ojos vendados, sentada con dos espadas cruzadas sobre su pecho, en una postura defensiva. Detrás de ella, un cuerpo de agua tranquilo y una luna creciente. La venda en los ojos simboliza la negación o la evitación de la verdad. Las espadas cruzadas representan el bloqueo emocional y la indecisión. El agua tranquila sugiere una paz superficial que oculta la tensión interna.`,
-    palabrasClaveDerechas: ["Indecisión", "estancamiento", "bloqueo emocional", "evitación", "tregua", "equilibrio precario", "negación", "callejón sin salida"],
+    numerologia: "2 (Indecisión, estancamiento, bloqueo emocional)",    palabrasClaveDerechas: ["Indecisión", "estancamiento", "bloqueo emocional", "evitación", "tregua", "equilibrio precario", "negación", "callejón sin salida"],
     palabrasClaveInvertidas: ["Resolución", "claridad", "abrir los ojos", "tomar decisiones", "liberación emocional", "confrontación", "aceptación"],
     significadoDerecho: `El Dos de Espadas representa la indecisión, el estancamiento y un bloqueo emocional. Esta carta simboliza una situación en la que te niegas a ver la verdad o a tomar una decisión difícil, manteniéndote en un equilibrio precario. Es un momento de conflicto interno, donde la mente y el corazón no están alineados.
     
@@ -1649,9 +1544,7 @@ export const traditionalMeanings: TraditionalCardMeaning[] = [
     elemento: "Aire",
     planeta: "Saturno",
     signoAstrologico: "Libra",
-    numerologia: "3 (Dolor, desilusión, separación, tristeza)",
-    simbolismo: `Un corazón atravesado por tres espadas, con nubes de tormenta y lluvia en el fondo. El corazón simboliza la emoción y el dolor. Las espadas representan las palabras hirientes, el engaño o la separación. La lluvia y las nubes sugieren tristeza y lágrimas, pero también un posible proceso de purificación.`,
-    palabrasClaveDerechas: ["Dolor", "desilusión", "separación", "tristeza", "pérdida", "conflicto", "traición", "corazón roto"],
+    numerologia: "3 (Dolor, desilusión, separación, tristeza)",    palabrasClaveDerechas: ["Dolor", "desilusión", "separación", "tristeza", "pérdida", "conflicto", "traición", "corazón roto"],
     palabrasClaveInvertidas: ["Sanación", "perdón", "superación del dolor", "reconciliación", "liberación emocional", "aprendizaje de la lección"],
     significadoDerecho: `El Tres de Espadas representa el dolor, la desilusión y la separación. Esta carta simboliza un momento de tristeza profunda, pérdida o conflicto que puede romper el corazón. Es la representación de verdades difíciles, traiciones o el fin de una relación.
     
@@ -1680,9 +1573,7 @@ export const traditionalMeanings: TraditionalCardMeaning[] = [
     elemento: "Aire",
     planeta: "Júpiter",
     signoAstrologico: "Libra",
-    numerologia: "4 (Descanso, recuperación, meditación, retiro)",
-    simbolismo: `La efigie de un caballero yace en una tumba o lecho, con una espada a su lado y otras tres espadas colgadas sobre él. Un vitral de una iglesia se ve en el fondo. La postura de descanso sugiere un período de recuperación o retiro. Las espadas sobre él representan los pensamientos o desafíos que aún lo esperan, pero que por ahora están en pausa. El vitral simboliza la paz y el santuario.`,
-    palabrasClaveDerechas: ["Descanso", "recuperación", "meditación", "retiro", "reflexión", "paz mental", "curación", "necesidad de pausa"],
+    numerologia: "4 (Descanso, recuperación, meditación, retiro)",    palabrasClaveDerechas: ["Descanso", "recuperación", "meditación", "retiro", "reflexión", "paz mental", "curación", "necesidad de pausa"],
     palabrasClaveInvertidas: ["Agitación", "agotamiento", "insomnio", "reincorporación", "falta de descanso", "estrés", "impaciencia"],
     significadoDerecho: `El Cuatro de Espadas representa la necesidad de descanso, recuperación y meditación. Esta carta simboliza un período de retiro, de reflexión y de curación después de un conflicto o un período de estrés. Es un llamado a tomar una pausa para recuperar la paz mental y la energía.
     
@@ -1711,9 +1602,7 @@ export const traditionalMeanings: TraditionalCardMeaning[] = [
     elemento: "Aire",
     planeta: "Venus",
     signoAstrologico: "Acuario",
-    numerologia: "5 (Derrota, humillación, conflicto, consecuencias negativas)",
-    simbolismo: `Un hombre victorioso, con una sonrisa maliciosa, recoge dos espadas del suelo, mientras otros dos hombres derrotados se alejan, uno con la cabeza baja y otro con la mano en la cabeza, expresando vergüenza. Una tercera espada yace en el suelo. El cielo detrás de ellos es gris y tormentoso. La escena simboliza una victoria pírrica, donde el costo de ganar es alto.`,
-    palabrasClaveDerechas: ["Derrota", "humillación", "conflicto", "consecuencias negativas", "victoria pírrica", "vergüenza", "pérdida", "deshonestidad"],
+    numerologia: "5 (Derrota, humillación, conflicto, consecuencias negativas)",    palabrasClaveDerechas: ["Derrota", "humillación", "conflicto", "consecuencias negativas", "victoria pírrica", "vergüenza", "pérdida", "deshonestidad"],
     palabrasClaveInvertidas: ["Reconciliación", "perdón", "aceptación de la derrota", "resolución de conflictos", "superación de la vergüenza", "aprendizaje"],
     significadoDerecho: `El Cinco de Espadas representa la derrota, la humillación y las consecuencias negativas de un conflicto. Esta carta simboliza una victoria pírrica, donde el costo de ganar es tan alto que te deja sintiendo vacío o arrepentido. Es un momento de conflicto deshonesto, de pérdida o de vergüenza.
     
@@ -1742,9 +1631,7 @@ export const traditionalMeanings: TraditionalCardMeaning[] = [
     elemento: "Aire",
     planeta: "Mercurio",
     signoAstrologico: "Acuario",
-    numerologia: "6 (Transición, viaje, escape, paso a un nuevo lugar)",
-    simbolismo: `Una figura en un bote remando con seis espadas clavadas en la proa, alejándose de una orilla tormentosa hacia aguas más tranquilas. Otra figura (un niño) está sentada en el bote. La escena representa un viaje o una transición de un lugar difícil a uno más sereno, dejando atrás el pasado. Las espadas simbolizan los pensamientos difíciles o las preocupaciones que se llevan consigo.`,
-    palabrasClaveDerechas: ["Transición", "viaje", "escape", "alejarse del conflicto", "paz mental", "paso a un nuevo lugar", "curación", "soltar el pasado"],
+    numerologia: "6 (Transición, viaje, escape, paso a un nuevo lugar)",    palabrasClaveDerechas: ["Transición", "viaje", "escape", "alejarse del conflicto", "paz mental", "paso a un nuevo lugar", "curación", "soltar el pasado"],
     palabrasClaveInvertidas: ["Estancamiento", "resistencia al cambio", "regreso al conflicto", "dificultad para soltar", "rutina", "carga emocional"],
     significadoDerecho: `El Seis de Espadas representa una transición, un viaje o el acto de alejarse de una situación difícil hacia aguas más tranquilas. Esta carta simboliza la necesidad de dejar atrás el pasado, de buscar la paz mental y de avanzar hacia un nuevo lugar, física o emocionalmente. Es un momento de escape o de curación.
     
@@ -1773,9 +1660,7 @@ export const traditionalMeanings: TraditionalCardMeaning[] = [
     elemento: "Aire",
     planeta: "Urano",
     signoAstrologico: "Acuario",
-    numerologia: "7 (Engaño, estrategia, sigilo, astucia)",
-    simbolismo: `Un hombre se escabulle de un campamento, llevando cinco espadas en sus brazos y dejando dos clavadas en el suelo. Su mirada es furtiva y parece estar actuando de forma deshonesta. El campamento sugiere un lugar de confianza o un grupo. La escena simboliza el engaño, la astucia y la necesidad de una estrategia para salir de una situación.`,
-    palabrasClaveDerechas: ["Engaño", "estrategia", "sigilo", "astucia", "robo", "mentira", "plan secreto", "evasión"],
+    numerologia: "7 (Engaño, estrategia, sigilo, astucia)",    palabrasClaveDerechas: ["Engaño", "estrategia", "sigilo", "astucia", "robo", "mentira", "plan secreto", "evasión"],
     palabrasClaveInvertidas: ["Revelación", "honestidad", "arrepentimiento", "confesión", "mala estrategia", "problemas con la ley", "fracaso del engaño"],
     significadoDerecho: `El Siete de Espadas representa el engaño, la estrategia y la astucia. Esta carta simboliza una situación donde alguien (tú o alguien más) está actuando con poca honestidad, robando ideas o intentando salirse con la suya de forma sigilosa. Es un momento de tácticas dudosas y de evitar la confrontación directa.
     
@@ -1804,9 +1689,7 @@ export const traditionalMeanings: TraditionalCardMeaning[] = [
     elemento: "Aire",
     planeta: "Mercurio",
     signoAstrologico: "Géminis",
-    numerologia: "8 (Restricción, limitación, miedo, prisión mental)",
-    simbolismo: `Una mujer con los ojos vendados y atada con cuerdas, rodeada por ocho espadas clavadas en el suelo, como una cerca. Un charco de agua estancada a sus pies y un castillo lejano en un día nublado. La venda y las cuerdas simbolizan la restricción y el miedo autoimpuesto. Las espadas representan los pensamientos limitantes. El charco de agua sugiere la tristeza y el estancamiento emocional.`,
-    palabrasClaveDerechas: ["Restricción", "limitación", "miedo", "prisión mental", "impotencia", "víctima", "parálisis", "pensamientos negativos"],
+    numerologia: "8 (Restricción, limitación, miedo, prisión mental)",    palabrasClaveDerechas: ["Restricción", "limitación", "miedo", "prisión mental", "impotencia", "víctima", "parálisis", "pensamientos negativos"],
     palabrasClaveInvertidas: ["Liberación", "superación del miedo", "claridad", "encontrar soluciones", "romper límites", "empoderamiento", "escapar"],
     significadoDerecho: `El Ocho de Espadas representa la restricción, la limitación y el miedo que te mantiene prisionero. Esta carta simboliza una situación en la que te sientes impotente, atado por pensamientos negativos o por una percepción errónea de la realidad. Es una prisión mental, a menudo autoimpuesta.
     
@@ -1835,9 +1718,7 @@ export const traditionalMeanings: TraditionalCardMeaning[] = [
     elemento: "Aire",
     planeta: "Marte",
     signoAstrologico: "Géminis",
-    numerologia: "9 (Angustia, pesadillas, preocupación, culpa)",
-    simbolismo: `Una figura sentada en la cama, con las manos en la cara, en una pose de angustia y desesperación. Nueve espadas cuelgan en la pared detrás de ella, una tras otra. El fondo oscuro sugiere la noche y las pesadillas. La escena representa la ansiedad, la culpa, el arrepentimiento y las preocupaciones que nos quitan el sueño.`,
-    palabrasClaveDerechas: ["Angustia", "pesadillas", "preocupación", "culpa", "ansiedad", "miedo", "arrepentimiento", "insomnio"],
+    numerologia: "9 (Angustia, pesadillas, preocupación, culpa)",    palabrasClaveDerechas: ["Angustia", "pesadillas", "preocupación", "culpa", "ansiedad", "miedo", "arrepentimiento", "insomnio"],
     palabrasClaveInvertidas: ["Alivio", "esperanza", "liberación de la culpa", "aceptación", "superación de la ansiedad", "soluciones", "despertar"],
     significadoDerecho: `El Nueve de Espadas representa la angustia, las pesadillas y la preocupación intensa. Esta carta simboliza un momento de ansiedad, culpa, arrepentimiento o miedo que te quita el sueño. Es la manifestación de tus pensamientos más oscuros y tus inseguridades.
     
@@ -1866,9 +1747,7 @@ export const traditionalMeanings: TraditionalCardMeaning[] = [
     elemento: "Aire",
     planeta: "Sol",
     signoAstrologico: "Géminis",
-    numerologia: "10 (Fin, finalización, ruina, nuevo comienzo)",
-    simbolismo: `Una figura yace boca abajo, con diez espadas clavadas en su espalda, en una imagen de finalización y ruina. El sol sale en el horizonte, y el mar está tranquilo. La escena simboliza un final doloroso, una derrota o una traición, pero el amanecer sugiere que este final es también un nuevo comienzo.`,
-    palabrasClaveDerechas: ["Fin", "finalización", "ruina", "derrota", "traición", "punto sin retorno", "crisis", "nuevo comienzo"],
+    numerologia: "10 (Fin, finalización, ruina, nuevo comienzo)",    palabrasClaveDerechas: ["Fin", "finalización", "ruina", "derrota", "traición", "punto sin retorno", "crisis", "nuevo comienzo"],
     palabrasClaveInvertidas: ["Recuperación", "regeneración", "resistencia al cambio", "evitar el fin", "nuevos comienzos", "mejora"],
     significadoDerecho: `El Diez de Espadas representa un final definitivo, una finalización dolorosa o una derrota aparente. Esta carta simboliza la ruina, la traición o el punto más bajo de una situación. Es un momento de crisis, donde te sientes completamente vencido y sin esperanza.
     
@@ -1897,9 +1776,7 @@ export const traditionalMeanings: TraditionalCardMeaning[] = [
     elemento: "Aire",
     planeta: "Urano",
     signoAstrologico: "Géminis/Libra/Acuario",
-    numerologia: "11 (Curiosidad, vigilancia, noticias, mente activa)",
-    simbolismo: `Una figura joven de pie en un terreno ventoso, sosteniendo una espada erguida con vigilancia. Las nubes se mueven rápidamente detrás de ella. Su expresión es de alerta y curiosidad. La espada erguida simboliza la búsqueda de la verdad y la agudeza mental. El viento y las nubes sugieren un ambiente de cambio o incertidumbre, pero también la capacidad de adaptarse.`,
-    palabrasClaveDerechas: ["Curiosidad", "vigilancia", "noticias", "mente activa", "intelecto", "alerta", "verdad", "comunicación"],
+    numerologia: "11 (Curiosidad, vigilancia, noticias, mente activa)",    palabrasClaveDerechas: ["Curiosidad", "vigilancia", "noticias", "mente activa", "intelecto", "alerta", "verdad", "comunicación"],
     palabrasClaveInvertidas: ["Chismorreo", "engaño", "malas noticias", "falta de enfoque", "imprudencia", "agresión verbal", "superficialidad"],
     significadoDerecho: `La Sota de Espadas representa la curiosidad, la vigilancia y la llegada de noticias. Esta carta simboliza una mente activa, la búsqueda de la verdad y la necesidad de estar alerta. Es un mensajero de información importante, a menudo desafiante, que requiere tu atención y análisis.
     
@@ -1928,9 +1805,7 @@ export const traditionalMeanings: TraditionalCardMeaning[] = [
     elemento: "Aire",
     planeta: "Marte",
     signoAstrologico: "Acuario",
-    numerologia: "12 (Ambición, franqueza, rapidez, agresión)",
-    simbolismo: `Un caballero con armadura montado en un caballero al galope, con la espada levantada en alto, listo para la batalla. Las nubes se agitan violentamente detrás de él, sugiriendo un movimiento rápido y una atmósfera de conflicto. El caballero mira fijamente hacia adelante, con determinación y ferocidad.`,
-    palabrasClaveDerechas: ["Ambición", "franqueza", "rapidez", "agresión", "valentía", "determinación", "confrontación", "acción decisiva"],
+    numerologia: "12 (Ambición, franqueza, rapidez, agresión)",    palabrasClaveDerechas: ["Ambición", "franqueza", "rapidez", "agresión", "valentía", "determinación", "confrontación", "acción decisiva"],
     palabrasClaveInvertidas: ["Imprudencia", "ira", "tiranía", "destrucción", "falta de tacto", "precipitación", "crueldad"],
     significadoDerecho: `El Caballero de Espadas representa la ambición, la franqueza y la rapidez en la acción. Esta carta simboliza la valentía, la determinación y la disposición a enfrentar los desafíos de frente. Es un arquetipo de acción decisiva y de comunicación directa, a veces agresiva.
     
@@ -1959,9 +1834,7 @@ export const traditionalMeanings: TraditionalCardMeaning[] = [
     elemento: "Aire",
     planeta: "Saturno",
     signoAstrologico: "Libra/Acuario",
-    numerologia: "13 (Independencia, intelecto, honestidad, frialdad)",
-    simbolismo: `Una mujer sentada en un trono adornado con mariposas (símbolo de transformación) y querubines (símbolos de sabiduría). Sostiene una espada en una mano, mirando hacia adelante con una expresión seria y distante. El cielo detrás de ella es claro. La Reina simboliza la independencia, el intelecto agudo y la capacidad de ver la verdad sin emociones.`,
-    palabrasClaveDerechas: ["Independencia", "intelecto", "honestidad", "frialdad", "objetividad", "justicia", "crítica", "sabiduría"],
+    numerologia: "13 (Independencia, intelecto, honestidad, frialdad)",    palabrasClaveDerechas: ["Independencia", "intelecto", "honestidad", "frialdad", "objetividad", "justicia", "crítica", "sabiduría"],
     palabrasClaveInvertidas: ["Crueldad", "amargura", "intolerancia", "manipulación", "frialdad excesiva", "juicio"],
     significadoDerecho: `La Reina de Espadas representa la independencia, el intelecto agudo y la honestidad. Esta carta simboliza la objetividad, la capacidad de ver la verdad sin emociones y de comunicar con claridad, incluso si es doloroso. Es el arquetipo de la mujer sabia, perspicaz y a veces distante.
     
@@ -1990,9 +1863,7 @@ export const traditionalMeanings: TraditionalCardMeaning[] = [
     elemento: "Aire",
     planeta: "Saturno",
     signoAstrologico: "Géminis/Libra/Acuario",
-    numerologia: "14 (Autoridad, intelecto, justicia, liderazgo mental)",
-    simbolismo: `Un rey sentado en un trono, sosteniendo una espada erguida con una mano y mirando hacia adelante con una expresión de autoridad y concentración. Nubes y pájaros vuelan en el cielo detrás de él. El rey simboliza la autoridad intelectual, la justicia y la toma de decisiones con lógica. El cielo despejado sugiere claridad mental.`,
-    palabrasClaveDerechas: ["Autoridad", "intelecto", "justicia", "liderazgo mental", "razón", "objetividad", "disciplina", "claridad"],
+    numerologia: "14 (Autoridad, intelecto, justicia, liderazgo mental)",    palabrasClaveDerechas: ["Autoridad", "intelecto", "justicia", "liderazgo mental", "razón", "objetividad", "disciplina", "claridad"],
     palabrasClaveInvertidas: ["Tiranía", "crueldad", "abuso de poder", "intelecto frío", "prejuicio", "rigidez mental", "falta de compasión"],
     significadoDerecho: `El Rey de Espadas representa la autoridad, el intelecto y la justicia. Esta carta simboliza el liderazgo basado en la razón, la objetividad y la capacidad de tomar decisiones difíciles con claridad y lógica. Es el arquetipo del juez, el abogado, el científico o el líder que se rige por principios.
     
@@ -2022,9 +1893,7 @@ export const traditionalMeanings: TraditionalCardMeaning[] = [
     elemento: "Agua",
     planeta: "Neptuno",
     signoAstrologico: "Cáncer/Escorpio/Piscis",
-    numerologia: "1 (Comienzo, amor, emoción, potencial)",
-    simbolismo: `Una mano emerge de una nube, sosteniendo una gran copa de la que desbordan cinco chorros de agua, formando una cascada que cae sobre un estanque lleno de nenúfares. Una paloma con una hostia en el pico vuela hacia la copa. La copa simboliza el corazón y las emociones. El agua desbordante representa el flujo de sentimientos, la fertilidad y la abundancia. La paloma y la hostia sugieren la gracia divina y el amor espiritual.`,
-    palabrasClaveDerechas: ["Nuevo amor", "emociones", "conexión espiritual", "alegría", "compasión", "oportunidad emocional", "intuición", "creatividad"],
+    numerologia: "1 (Comienzo, amor, emoción, potencial)",    palabrasClaveDerechas: ["Nuevo amor", "emociones", "conexión espiritual", "alegría", "compasión", "oportunidad emocional", "intuición", "creatividad"],
     palabrasClaveInvertidas: ["Emociones reprimidas", "amor no correspondido", "corazón roto", "falta de creatividad", "bloqueo emocional", "dolor", "desconexión"],
     significadoDerecho: `El As de Copas representa el inicio de un nuevo amor, una conexión emocional profunda o una oportunidad para la alegría y la compasión. Esta carta simboliza el desbordamiento de sentimientos, la creatividad y la apertura del corazón. Es un llamado a abrazar tus emociones y a sumergirte en experiencias significativas.
     
@@ -2053,9 +1922,7 @@ export const traditionalMeanings: TraditionalCardMeaning[] = [
     elemento: "Agua",
     planeta: "Venus",
     signoAstrologico: "Cáncer",
-    numerologia: "2 (Unión, amor, asociación, conexión)",
-    simbolismo: `Un hombre y una mujer se miran, levantando sus copas en un brindis. Sobre ellos, un caduceo con un león alado, simbolizando la curación y la unión de energías opuestas. Un río fluye tranquilamente detrás de ellos. La escena representa la unión, la armonía, el amor mutuo y la conexión profunda.`,
-    palabrasClaveDerechas: ["Unión", "amor", "asociación", "conexión", "relación", "armonía", "matrimonio", "amistad"],
+    numerologia: "2 (Unión, amor, asociación, conexión)",    palabrasClaveDerechas: ["Unión", "amor", "asociación", "conexión", "relación", "armonía", "matrimonio", "amistad"],
     palabrasClaveInvertidas: ["Desequilibrio", "conflicto", "ruptura", "desconexión", "amor no correspondido", "desconfianza", "separación"],
     significadoDerecho: `El Dos de Copas representa la unión, el amor y la asociación armoniosa. Esta carta simboliza una conexión profunda y recíproca, ya sea en una relación romántica, una amistad sólida o una colaboración exitosa. Es el arquetipo del alma gemela o del encuentro significativo.
     
@@ -2084,9 +1951,7 @@ export const traditionalMeanings: TraditionalCardMeaning[] = [
     elemento: "Agua",
     planeta: "Mercurio",
     signoAstrologico: "Cáncer",
-    numerologia: "3 (Celebración, amistad, comunidad, alegría)",
-    simbolismo: `Tres figuras femeninas, con guirnaldas de flores en el cabello, levantan sus copas en un brindis festivo, celebrando juntas. Frutas y calabazas están esparcidas a sus pies. El entorno es un viñedo con un cielo claro. La escena representa la alegría, la celebración, la amistad y la comunidad.`,
-    palabrasClaveDerechas: ["Celebración", "amistad", "comunidad", "alegría", "reunión", "fiesta", "éxito compartido", "apoyo social"],
+    numerologia: "3 (Celebración, amistad, comunidad, alegría)",    palabrasClaveDerechas: ["Celebración", "amistad", "comunidad", "alegría", "reunión", "fiesta", "éxito compartido", "apoyo social"],
     palabrasClaveInvertidas: ["Excesos", "chismorreo", "aislamiento", "conflictos sociales", "desconexión", "celebración forzada", "desconfianza"],
     significadoDerecho: `El Tres de Copas representa la celebración, la amistad y la alegría en comunidad. Esta carta simboliza los momentos de felicidad compartida, las reuniones festivas y el apoyo de tus seres queridos. Es un recordatorio de la importancia de la conexión social y de disfrutar los éxitos con aquellos que te rodean.
     
@@ -2115,9 +1980,7 @@ export const traditionalMeanings: TraditionalCardMeaning[] = [
     elemento: "Agua",
     planeta: "Luna",
     signoAstrologico: "Cáncer",
-    numerologia: "4 (Apatía, aburrimiento, reevaluación, oportunidades perdidas)",
-    simbolismo: `Una figura sentada bajo un árbol, con los brazos cruzados, mirando fijamente a tres copas que tiene delante. Una mano surge de una nube, ofreciéndole una cuarta copa, pero él no la ve o la ignora. El árbol y la postura estática sugieren aburrimiento y complacencia. La copa ofrecida simboliza una nueva oportunidad emocional ignorada.`,
-    palabrasClaveDerechas: ["Apatía", "aburrimiento", "desinterés", "reevaluación", "oportunidades perdidas", "complacencia", "melancolía", "descontento"],
+    numerologia: "4 (Apatía, aburrimiento, reevaluación, oportunidades perdidas)",    palabrasClaveDerechas: ["Apatía", "aburrimiento", "desinterés", "reevaluación", "oportunidades perdidas", "complacencia", "melancolía", "descontento"],
     palabrasClaveInvertidas: ["Nuevo interés", "motivación", "aceptación de la oferta", "entusiasmo", "despertar emocional", "aprovechar oportunidades"],
     significadoDerecho: `El Cuatro de Copas representa la apatía, el aburrimiento y el desinterés ante las oportunidades que se presentan. Esta carta simboliza un período de reevaluación, donde te sientes insatisfecho con lo que tienes y no ves el valor en las nuevas ofertas. Es un momento de melancolía y complacencia.
     
@@ -2146,9 +2009,7 @@ export const traditionalMeanings: TraditionalCardMeaning[] = [
     elemento: "Agua",
     planeta: "Marte",
     signoAstrologico: "Escorpio",
-    numerologia: "5 (Pérdida, arrepentimiento, duelo, oportunidades no vistas)",
-    simbolismo: `Una figura encapuchada, vestida de negro, mira a tres copas derramadas en el suelo, lamentando la pérdida. Detrás de ella, dos copas permanecen erguidas, pero ella no las ve. Un río tumultuoso y un puente lejano. La escena representa la pérdida, el arrepentimiento y la incapacidad de ver las bendiciones restantes o las oportunidades de seguir adelante.`,
-    palabrasClaveDerechas: ["Pérdida", "arrepentimiento", "duelo", "tristeza", "desilusión", "fracaso", "concentración en lo negativo", "oportunidades no vistas"],
+    numerologia: "5 (Pérdida, arrepentimiento, duelo, oportunidades no vistas)",    palabrasClaveDerechas: ["Pérdida", "arrepentimiento", "duelo", "tristeza", "desilusión", "fracaso", "concentración en lo negativo", "oportunidades no vistas"],
     palabrasClaveInvertidas: ["Aceptación", "recuperación", "sanación", "liberación del arrepentimiento", "nueva perspectiva", "oportunidades ocultas"],
     significadoDerecho: `El Cinco de Copas representa la pérdida, el arrepentimiento y el duelo. Esta carta simboliza un momento de tristeza profunda, desilusión o el lamento por lo que se ha perdido. Te enfocas en las copas derramadas, sin ver las que aún permanecen en pie.
     
@@ -2177,9 +2038,7 @@ export const traditionalMeanings: TraditionalCardMeaning[] = [
     elemento: "Agua",
     planeta: "Sol",
     signoAstrologico: "Piscis",
-    numerologia: "6 (Nostalgia, pasado, inocencia, regalos)",
-    simbolismo: `Un niño le ofrece una copa llena de flores a otro niño, que la acepta. Seis copas con flores están alrededor. Una casa grande y un anciano con un bastón en el fondo, sugiriendo el pasado y la memoria. La escena evoca la nostalgia, la inocencia, los recuerdos de la infancia y los regalos del pasado.`,
-    palabrasClaveDerechas: ["Nostalgia", "pasado", "inocencia", "recuerdos", "regalos", "infancia", "perdón", "generosidad"],
+    numerologia: "6 (Nostalgia, pasado, inocencia, regalos)",    palabrasClaveDerechas: ["Nostalgia", "pasado", "inocencia", "recuerdos", "regalos", "infancia", "perdón", "generosidad"],
     palabrasClaveInvertidas: ["Vivir en el pasado", "melancolía excesiva", "desconexión del pasado", "abuso del pasado", "falta de perdón", "crecimiento lento"],
     significadoDerecho: `El Seis de Copas representa la nostalgia, los recuerdos del pasado y la inocencia. Esta carta simboliza la conexión con la infancia, la aparición de viejos amigos o amantes, y la alegría de recibir regalos o actos de generosidad. Es un momento de mirar hacia atrás con cariño.
     
@@ -2208,9 +2067,7 @@ export const traditionalMeanings: TraditionalCardMeaning[] = [
     elemento: "Agua",
     planeta: "Venus",
     signoAstrologico: "Piscis",
-    numerologia: "7 (Elecciones, ilusiones, fantasía, engaño)",
-    simbolismo: `Una figura mira con asombro a siete copas que flotan en el aire, cada una conteniendo algo diferente: una serpiente, una figura velada, un castillo, joyas, una corona, una cabeza de dragón y una guirnalda. Nubes se agitan detrás de las copas. La escena representa las muchas opciones, a menudo ilusorias o fantásticas, y la necesidad de elegir con discernimiento.`,
-    palabrasClaveDerechas: ["Elecciones", "ilusiones", "fantasía", "engaño", "deseos", "sueños", "confusión", "distracciones"],
+    numerologia: "7 (Elecciones, ilusiones, fantasía, engaño)",    palabrasClaveDerechas: ["Elecciones", "ilusiones", "fantasía", "engaño", "deseos", "sueños", "confusión", "distracciones"],
     palabrasClaveInvertidas: ["Claridad", "realidad", "toma de decisiones", "oportunidad real", "superación de la confusión", "despertar", "objetividad"],
     significadoDerecho: `El Siete de Copas representa las muchas opciones, a menudo ilusorias o engañosas, que se presentan en tu vida. Esta carta simboliza la fantasía, los sueños y la posibilidad de perderse en un mundo de deseos sin concretar. Es un momento de confusión, donde es difícil discernir entre la realidad y la ilusión.
     
@@ -2239,9 +2096,7 @@ export const traditionalMeanings: TraditionalCardMeaning[] = [
     elemento: "Agua",
     planeta: "Saturno",
     signoAstrologico: "Piscis",
-    numerologia: "8 (Abandono, búsqueda, viaje, desilusión)",
-    simbolismo: `Una figura se aleja de ocho copas apiladas, caminando en la noche hacia montañas en la distancia. Su postura es de partida, dejando atrás algo. La luna creciente ilumina su camino. Las copas apiladas simbolizan algo que fue construido o logrado, pero que ahora se abandona por insatisfacción. El viaje nocturno y las montañas sugieren una búsqueda espiritual o un nuevo camino.`,
-    palabrasClaveDerechas: ["Abandono", "búsqueda", "viaje", "desilusión", "insatisfacción", "dejar atrás", "nuevo camino", "retiro"],
+    numerologia: "8 (Abandono, búsqueda, viaje, desilusión)",    palabrasClaveDerechas: ["Abandono", "búsqueda", "viaje", "desilusión", "insatisfacción", "dejar atrás", "nuevo camino", "retiro"],
     palabrasClaveInvertidas: ["Regreso", "evasión", "apego", "estancamiento", "miedo al cambio", "reafirmación", "soluciones"],
     significadoDerecho: `El Ocho de Copas representa el abandono, la búsqueda y el viaje lejos de una situación que ya no te satisface. Esta carta simboliza la desilusión, la necesidad de dejar atrás lo que fue y de emprender un nuevo camino en busca de algo más significativo. Es un momento de retiro, de introspección y de búsqueda espiritual.
     
@@ -2270,9 +2125,7 @@ export const traditionalMeanings: TraditionalCardMeaning[] = [
     elemento: "Agua",
     planeta: "Júpiter",
     signoAstrologico: "Piscis",
-    numerologia: "9 (Satisfacción, deseos cumplidos, disfrute, felicidad)",
-    simbolismo: `Un hombre corpulento y satisfecho está sentado delante de una cortina azul de la que cuelgan nueve copas. Sus brazos están cruzados, y su expresión es de complacencia y disfrute. El hombre representa la realización de deseos y la satisfacción. Las copas detrás de él simbolizan los deseos cumplidos y la abundancia emocional.`,
-    palabrasClaveDerechas: ["Satisfacción", "deseos cumplidos", "felicidad", "disfrute", "abundancia emocional", "éxito", "autocomplacencia", "placer"],
+    numerologia: "9 (Satisfacción, deseos cumplidos, disfrute, felicidad)",    palabrasClaveDerechas: ["Satisfacción", "deseos cumplidos", "felicidad", "disfrute", "abundancia emocional", "éxito", "autocomplacencia", "placer"],
     palabrasClaveInvertidas: ["Insatisfacción", "deseos no cumplidos", "excesos", "vacío", "materialismo", "egoísmo", "problemas de salud"],
     significadoDerecho: `El Nueve de Copas representa la satisfacción, los deseos cumplidos y la felicidad en el ámbito emocional. Esta carta simboliza la abundancia, el disfrute de la vida y la realización de tus anhelos. Es un momento de complacencia, donde te sientes feliz y afortunado por lo que tienes.
     
@@ -2301,9 +2154,7 @@ export const traditionalMeanings: TraditionalCardMeaning[] = [
     elemento: "Agua",
     planeta: "Júpiter",
     signoAstrologico: "Piscis",
-    numerologia: "10 (Felicidad, hogar, familia, alegría duradera)",
-    simbolismo: `Una pareja feliz, con los brazos alrededor, observa un arco iris sobre su hogar, mientras dos niños juegan a sus pies. Diez copas brillantes forman el arco iris. La escena representa la felicidad doméstica, la armonía familiar y la alegría duradera. El arco iris simboliza la bendición y la realización de los sueños.`,
-    palabrasClaveDerechas: ["Felicidad", "hogar", "familia", "alegría duradera", "armonía", "matrimonio", "comunidad", "paz emocional"],
+    numerologia: "10 (Felicidad, hogar, familia, alegría duradera)",    palabrasClaveDerechas: ["Felicidad", "hogar", "familia", "alegría duradera", "armonía", "matrimonio", "comunidad", "paz emocional"],
     palabrasClaveInvertidas: ["Conflictos familiares", "infelicidad", "ruptura de hogar", "desconexión", "falta de armonía", "divorcio", "tristeza"],
     significadoDerecho: `El Diez de Copas representa la felicidad, la armonía en el hogar y la alegría duradera en el ámbito familiar. Esta carta simboliza la culminación emocional, la realización de los sueños familiares y la sensación de paz y plenitud. Es un momento de bendición y de disfrutar de las relaciones más importantes en tu vida.
     
@@ -2332,9 +2183,7 @@ export const traditionalMeanings: TraditionalCardMeaning[] = [
     elemento: "Agua",
     planeta: "Neptuno",
     signoAstrologico: "Cáncer/Escorpio/Piscis",
-    numerologia: "11 (Mensajes, creatividad, intuición, sensibilidad)",
-    simbolismo: `Una figura joven y andrógina de pie en la orilla del mar, sosteniendo una copa de la que un pez asoma la cabeza, mirándola. El mar tranquilo y el pez simbolizan la intuición, la creatividad y el inconsciente. La expresión de la figura es de asombro y sensibilidad. Su vestimenta es fluida y artística.`,
-    palabrasClaveDerechas: ["Mensajes emocionales", "creatividad", "intuición", "sensibilidad", "romance", "sueños", "propuestas", "asombro"],
+    numerologia: "11 (Mensajes, creatividad, intuición, sensibilidad)",    palabrasClaveDerechas: ["Mensajes emocionales", "creatividad", "intuición", "sensibilidad", "romance", "sueños", "propuestas", "asombro"],
     palabrasClaveInvertidas: ["Emociones bloqueadas", "inmadurez emocional", "manipulación", "falsas promesas", "decepción", "falta de inspiración"],
     significadoDerecho: `La Sota de Copas representa la llegada de mensajes emocionales, la creatividad y la intuición. Esta carta simboliza la sensibilidad, el asombro y la apertura a nuevas experiencias emocionales. Es un mensajero de propuestas románticas, oportunidades creativas o el despertar de tu lado intuitivo.
     
@@ -2363,9 +2212,7 @@ export const traditionalMeanings: TraditionalCardMeaning[] = [
     elemento: "Agua",
     planeta: "Piscis",
     signoAstrologico: "Cáncer/Escorpio/Piscis",
-    numerologia: "12 (Romance, idealismo, propuestas, encanto)",
-    simbolismo: `Un caballero con armadura, montado en un caballero que se mueve lentamente y con gracia, sosteniendo una copa en alto. Un río fluye detrás de él, y el paisaje es suave y fértil. El caballero simboliza el romanticismo, la propuesta y la invitación a explorar el mundo emocional. Su postura es de reverencia y ofrecimiento.`,
-    palabrasClaveDerechas: ["Romance", "idealismo", "propuestas", "encanto", "invitación", "caballerosidad", "sensibilidad", "seducción"],
+    numerologia: "12 (Romance, idealismo, propuestas, encanto)",    palabrasClaveDerechas: ["Romance", "idealismo", "propuestas", "encanto", "invitación", "caballerosidad", "sensibilidad", "seducción"],
     palabrasClaveInvertidas: ["Desilusión", "engaño", "manipulación", "irrealismo", "propuestas falsas", "desequilibrio emocional", "celos"],
     significadoDerecho: `El Caballero de Copas representa el romance, el idealismo y la llegada de propuestas emocionales o invitaciones. Esta carta simboliza el encanto, la sensibilidad y la disposición a expresar tus sentimientos de manera caballerosa. Es un arquetipo de la propuesta, del enamorado o del artista soñador.
     
@@ -2394,9 +2241,7 @@ export const traditionalMeanings: TraditionalCardMeaning[] = [
     elemento: "Agua",
     planeta: "Neptuno",
     signoAstrologico: "Cáncer",
-    numerologia: "13 (Compasión, intuición, sensibilidad, sanación)",
-    simbolismo: `Una mujer sentada en un trono tallado con sirenas (símbolo de intuición y emociones) y conchas. Sostiene una copa elaboradamente decorada con asas de ángel, mirándola pensativamente. El trono está en el borde del agua. La Reina simboliza la intuición, la compasión, la sanación y la conexión profunda con las emociones.`,
-    palabrasClaveDerechas: ["Compasión", "intuición", "sensibilidad", "sanación", "cuidado", "empatía", "apoyo emocional", "psíquica"],
+    numerologia: "13 (Compasión, intuición, sensibilidad, sanación)",    palabrasClaveDerechas: ["Compasión", "intuición", "sensibilidad", "sanación", "cuidado", "empatía", "apoyo emocional", "psíquica"],
     palabrasClaveInvertidas: ["Dependencia emocional", "manipulación", "inseguridad", "emociones abrumadoras", "falta de empatía", "crueldad emocional"],
     significadoDerecho: `La Reina de Copas representa la compasión, la intuición y la sanación emocional. Esta carta simboliza la empatía, el cuidado y la capacidad de conectar profundamente con las emociones de otros. Es el arquetipo de la consejera, la sanadora o la figura materna que ofrece apoyo incondicional.
     
@@ -2425,9 +2270,7 @@ export const traditionalMeanings: TraditionalCardMeaning[] = [
     elemento: "Agua",
     planeta: "Neptuno",
     signoAstrologico: "Cáncer/Escorpio/Piscis",
-    numerologia: "14 (Liderazgo emocional, sabiduría, compasión, equilibrio)",
-    simbolismo: `Un rey sentado en un trono flotante en el agua, con un pez emergiendo a su lado y un barco navegando en el fondo. Sostiene una copa en una mano y un cetro en la otra. El pez simboliza la intuición y las emociones. El barco en el mar tempestuoso (o tranquilo) sugiere su dominio sobre los altibajos emocionales. El Rey simboliza el liderazgo emocional, la sabiduría y la compasión.`,
-    palabrasClaveDerechas: ["Liderazgo emocional", "sabiduría", "compasión", "equilibrio", "control emocional", "asesoramiento", "tolerancia", "calma"],
+    numerologia: "14 (Liderazgo emocional, sabiduría, compasión, equilibrio)",    palabrasClaveDerechas: ["Liderazgo emocional", "sabiduría", "compasión", "equilibrio", "control emocional", "asesoramiento", "tolerancia", "calma"],
     palabrasClaveInvertidas: ["Manipulación", "inestabilidad emocional", "adicción", "engaño", "crueldad", "falta de control", "egoísmo"],
     significadoDerecho: `El Rey de Copas representa el liderazgo emocional, la sabiduría y la compasión. Esta carta simboliza el equilibrio, el control emocional y la capacidad de ofrecer asesoramiento con empatía. Es el arquetipo del terapeuta, el consejero o el líder que guía con el corazón.
     

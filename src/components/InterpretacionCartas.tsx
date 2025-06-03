@@ -120,7 +120,6 @@ const InterpretacionCartas: React.FC<InterpretacionCartasProps> = ({
           planeta: interp.planeta,
           signoAstrologico: interp.signoAstrologico,
           numerologia: interp.numerologia,
-          simbolismo: interp.simbolismo,
         };
       }
     } else { // Baraja Osho
