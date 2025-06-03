@@ -4,7 +4,7 @@ import React, { useState, useMemo, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { ChevronLeft, Copy, Trash, Undo2 } from "lucide-react";
+import { ChevronLeft, Copy, Trash, Undo2, CheckCircle } from "lucide-react"; // Importamos CheckCircle
 import { Tirada, CartaSeleccionada } from '@/pages/Index'; // Adjust path if needed
 import { useToast } from "@/hooks/use-toast";
 
@@ -223,9 +223,15 @@ const CartaSelector: React.FC<CartaSelectorProps> = ({
 
       onCartaAdd(nuevaCarta);
 
+      // Notificación más discreta para baraja Osho
       toast({
-        title: "Carta añadida",
-        description: `${getCardNameById(idCarta)} ha sido añadida.`,
+        description: (
+          <div className="flex items-center gap-2">
+            <CheckCircle className="h-4 w-4 text-emerald-600" />
+            <span>Carta añadida.</span>
+          </div>
+        ),
+        duration: 1500, // 1.5 segundos
       });
 
       if (!modoLibre && posicion < tirada.numeroCartas) {
@@ -252,9 +258,15 @@ const CartaSelector: React.FC<CartaSelectorProps> = ({
 
     onCartaAdd(nuevaCarta);
 
+    // Notificación más discreta para baraja tradicional
     toast({
-      title: "Carta añadida",
-      description: `${cartaPendiente.nombre} (${invertida ? 'Invertida' : 'Al Derecho'}) ha sido añadida.`,
+      description: (
+        <div className="flex items-center gap-2">
+          <CheckCircle className="h-4 w-4 text-emerald-600" />
+          <span>Carta añadida.</span>
+        </div>
+      ),
+      duration: 1500, // 1.5 segundos
     });
 
     if (!modoLibre && cartaPendiente.posicion < tirada.numeroCartas) {
@@ -341,7 +353,7 @@ const CartaSelector: React.FC<CartaSelectorProps> = ({
               </CardContent>
             </Card>
           )}
-          
+
           {/* Selección de cartas */}
           <Card className="bg-white/80 backdrop-blur-sm border-emerald-200">
             <CardHeader className="pb-4">
