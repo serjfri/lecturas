@@ -99,3 +99,14 @@
     @apply bg-background text-foreground;
   }
 }
+/* ========== CONFIGURACIÓN MINÚSCULAS ========== */
+/* Añadir al final de index.css */
+
+* {
+  text-transform: lowercase !important;
+}
+
+/* Excepciones para inputs y elementos técnicos */
+input, textarea, select, code, pre {
+  text-transform: none !important;
+}

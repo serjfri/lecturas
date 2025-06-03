@@ -437,7 +437,7 @@ export const traditionalMeanings: TraditionalCardMeaning[] = [
     planeta: "Plutón",
     signoAstrologico: "Escorpio",
     numerologia: "13 (Transformación, fin de ciclo, renovación, cambio radical)",
-    simbolismo: `Un esqueleto a caballo empuñando una bandera negra con una rosa blanca (símbolo de vida después de la muerte). El caballo pisa a un rey, mientras figuras de niños y mujeres ruegan. Un sol sale en el horizonte, simbolizando el nuevo comienzo. El esqueleto representa la finalización y la limpieza, la bandera la esperanza de renacimiento. El río en el fondo simboliza el paso entre la vida y la muerte.`,
+    simbolismo: `Un esqueleto a caballero empuñando una bandera negra con una rosa blanca (símbolo de vida después de la muerte). El caballero pisa a un rey, mientras figuras de niños y mujeres ruegan. Un sol sale en el horizonte, simbolizando el nuevo comienzo. El esqueleto representa la finalización y la limpieza, la bandera la esperanza de renacimiento. El río en el fondo simboliza el paso entre la vida y la muerte.`,
     palabrasClaveDerechas: ["Transformación", "fin de ciclo", "renovación", "cambio radical", "liberación", "aceptación", "desapego", "muerte y renacimiento"],
     palabrasClaveInvertidas: ["Resistencia al cambio", "estancamiento", "miedo al fin", "negación", "ruptura incompleta", "desesperación", "pérdida"],
     significadoDerecho: `La Muerte representa la transformación radical, el fin de un ciclo y la necesidad de dejar ir lo viejo para que nazca lo nuevo. Esta carta no simboliza la muerte física (necesariamente), sino un cambio profundo y fundamental que es inevitable. Es un proceso de desapego, de limpieza y de renacimiento.
@@ -623,7 +623,7 @@ export const traditionalMeanings: TraditionalCardMeaning[] = [
     planeta: "Sol",
     signoAstrologico: "Leo",
     numerologia: "19 (Claridad, éxito, alegría, vitalidad, iluminación)",
-    simbolismo: `Un gran sol brillante con rostro humano irradia luz y alegría. Debajo, un niño desnudo monta un caballo blanco, sosteniendo una bandera roja. Girasoles crecen detrás de un muro. El sol representa la vitalidad, la claridad y la verdad. El niño simboliza la inocencia, la pureza y la alegría de la vida. El caballo blanco, la pureza de la energía. El muro, los obstáculos superados.`,
+    simbolismo: `Un gran sol brillante con rostro humano irradia luz y alegría. Debajo, un niño desnudo monta un caballero blanco, sosteniendo una bandera roja. Girasoles crecen detrás de un muro. El sol representa la vitalidad, la claridad y la verdad. El niño simboliza la inocencia, la pureza y la alegría de la vida. El caballero blanco, la pureza de la energía. El muro, los obstáculos superados.`,
     palabrasClaveDerechas: ["Alegría", "éxito", "vitalidad", "claridad", "iluminación", "felicidad", "optimismo", "verdad", "inocencia"],
     palabrasClaveInvertidas: ["Pesimismo", "tristeza", "falta de vitalidad", "desilusión", "egoísmo", "bloqueo", "oscuridad", "éxito oculto"],
     significadoDerecho: `El Sol representa la alegría, el éxito, la vitalidad y la claridad absoluta. Esta carta simboliza la iluminación, la verdad que sale a la luz y la felicidad que viene de vivir en autenticidad. Es un momento de optimismo, de celebración y de manifestación plena.
@@ -1059,7 +1059,7 @@ export const traditionalMeanings: TraditionalCardMeaning[] = [
     planeta: "Saturno",
     signoAstrologico: "Tauro/Virgo/Capricornio",
     numerologia: "12 (Trabajo duro, responsabilidad, paciencia, progreso lento)",
-    simbolismo: `Un caballero vestido con una armadura completa, montado en un caballo pesado y robusto. Sostiene un oro en su mano, mirándolo con seriedad y concentración. El caballo está inmóvil o moviéndose lentamente, simbolizando la paciencia y la diligencia. El fondo es un campo arado, sugiriendo el trabajo constante y la preparación para la siembra.`,
+    simbolismo: `Un caballero vestido con una armadura completa, montado en un caballero pesado y robusto. Sostiene un oro en su mano, mirándolo con seriedad y concentración. El caballero está inmóvil o moviéndose lentamente, simbolizando la paciencia y la diligencia. El fondo es un campo arado, sugiriendo el trabajo constante y la preparación para la siembra.`,
     palabrasClaveDerechas: ["Trabajo duro", "responsabilidad", "diligencia", "paciencia", "confiabilidad", "progreso lento pero seguro", "realismo", "meticuloso"],
     palabrasClaveInvertidas: ["Pereza", "estancamiento", "irresponsabilidad", "perfeccionismo excesivo", "aburrimiento", "rigidez", "falta de ambición"],
     significadoDerecho: `El Caballero de Oros representa el trabajo duro, la responsabilidad y la diligencia en la consecución de metas. Esta carta simboliza la paciencia, la confiabilidad y el progreso lento pero seguro en los asuntos prácticos. Es el arquetipo del que se toma su tiempo, pero siempre cumple sus compromisos.
@@ -1494,7 +1494,7 @@ export const traditionalMeanings: TraditionalCardMeaning[] = [
     planeta: "Marte",
     signoAstrologico: "Sagitario",
     numerologia: "12 (Acción, aventura, cambio, impulsividad)",
-    simbolismo: `Un caballero con armadura montado en un caballo que se encabrita, sosteniendo un basto elevado. Parece estar en constante movimiento y listo para la acción. Las llamas en su armadura y el plumero de su casco simbolizan su naturaleza ardiente. El paisaje desértico sugiere una búsqueda o un viaje.`,
+    simbolismo: `Un caballero con armadura montado en un caballero que se encabrita, sosteniendo un basto elevado. Parece estar en constante movimiento y listo para la acción. Las llamas en su armadura y el plumero de su casco simbolizan su naturaleza ardiente. El paisaje desértico sugiere una búsqueda o un viaje.`,
     palabrasClaveDerechas: ["Acción", "aventura", "viajes", "impulso", "energía", "confianza", "pasión", "cambio rápido", "exploración"],
     palabrasClaveInvertidas: ["Prisa excesiva", "imprudencia", "retrasos", "agitación", "arrogancia", "falta de dirección", "conflictos", "interrupciones"],
     significadoDerecho: `El Caballero de Bastos representa la acción, la aventura y la energía para perseguir tus metas. Esta carta simboliza el impulso, la confianza y la disposición a tomar riesgos para lograr tus objetivos. Es un momento de movimiento rápido y de cambios significativos.
@@ -1929,7 +1929,7 @@ export const traditionalMeanings: TraditionalCardMeaning[] = [
     planeta: "Marte",
     signoAstrologico: "Acuario",
     numerologia: "12 (Ambición, franqueza, rapidez, agresión)",
-    simbolismo: `Un caballero con armadura montado en un caballo al galope, con la espada levantada en alto, listo para la batalla. Las nubes se agitan violentamente detrás de él, sugiriendo un movimiento rápido y una atmósfera de conflicto. El caballero mira fijamente hacia adelante, con determinación y ferocidad.`,
+    simbolismo: `Un caballero con armadura montado en un caballero al galope, con la espada levantada en alto, listo para la batalla. Las nubes se agitan violentamente detrás de él, sugiriendo un movimiento rápido y una atmósfera de conflicto. El caballero mira fijamente hacia adelante, con determinación y ferocidad.`,
     palabrasClaveDerechas: ["Ambición", "franqueza", "rapidez", "agresión", "valentía", "determinación", "confrontación", "acción decisiva"],
     palabrasClaveInvertidas: ["Imprudencia", "ira", "tiranía", "destrucción", "falta de tacto", "precipitación", "crueldad"],
     significadoDerecho: `El Caballero de Espadas representa la ambición, la franqueza y la rapidez en la acción. Esta carta simboliza la valentía, la determinación y la disposición a enfrentar los desafíos de frente. Es un arquetipo de acción decisiva y de comunicación directa, a veces agresiva.
@@ -2364,7 +2364,7 @@ export const traditionalMeanings: TraditionalCardMeaning[] = [
     planeta: "Piscis",
     signoAstrologico: "Cáncer/Escorpio/Piscis",
     numerologia: "12 (Romance, idealismo, propuestas, encanto)",
-    simbolismo: `Un caballero con armadura, montado en un caballo que se mueve lentamente y con gracia, sosteniendo una copa en alto. Un río fluye detrás de él, y el paisaje es suave y fértil. El caballero simboliza el romanticismo, la propuesta y la invitación a explorar el mundo emocional. Su postura es de reverencia y ofrecimiento.`,
+    simbolismo: `Un caballero con armadura, montado en un caballero que se mueve lentamente y con gracia, sosteniendo una copa en alto. Un río fluye detrás de él, y el paisaje es suave y fértil. El caballero simboliza el romanticismo, la propuesta y la invitación a explorar el mundo emocional. Su postura es de reverencia y ofrecimiento.`,
     palabrasClaveDerechas: ["Romance", "idealismo", "propuestas", "encanto", "invitación", "caballerosidad", "sensibilidad", "seducción"],
     palabrasClaveInvertidas: ["Desilusión", "engaño", "manipulación", "irrealismo", "propuestas falsas", "desequilibrio emocional", "celos"],
     significadoDerecho: `El Caballero de Copas representa el romance, el idealismo y la llegada de propuestas emocionales o invitaciones. Esta carta simboliza el encanto, la sensibilidad y la disposición a expresar tus sentimientos de manera caballerosa. Es un arquetipo de la propuesta, del enamorado o del artista soñador.

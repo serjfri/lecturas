@@ -134,23 +134,25 @@ const CartaSelector: React.FC<CartaSelectorProps> = ({
     return [];
   };
 
-  const getCartaMenorDisplay = (name: string): string => {
-    if (name.includes('As')) return 'As';
-    if (name.includes('Dos')) return '2';
-    if (name.includes('Tres')) return '3';
-    if (name.includes('Cuatro')) return '4';
-    if (name.includes('Cinco')) return '5';
-    if (name.includes('Seis')) return '6';
-    if (name.includes('Siete')) return '7';
-    if (name.includes('Ocho')) return '8';
-    if (name.includes('Nueve')) return '9';
-    if (name.includes('Diez')) return '10';
-    if (name.includes('Sota')) return 'Sota';
-    if (name.includes('Caballo')) return 'Caballero';
-    if (name.includes('Reina')) return 'Reina';
-    if (name.includes('Rey')) return 'Rey';
-    return name;
-  };
+const getCartaMenorDisplay = (name: string): string => {
+  // Usar búsquedas más específicas con espacios o al inicio de palabra
+  if (name.match(/\bAs\b/i)) return 'As';
+  if (name.match(/\bDos\b/i)) return '2';
+  if (name.match(/\bTres\b/i)) return '3';
+  if (name.match(/\bCuatro\b/i)) return '4';
+  if (name.match(/\bCinco\b/i)) return '5';
+  if (name.match(/\bSeis\b/i)) return '6';
+  if (name.match(/\bSiete\b/i)) return '7';
+  if (name.match(/\bOcho\b/i)) return '8';
+  if (name.match(/\bNueve\b/i)) return '9';
+  if (name.match(/\bDiez\b/i)) return '10';
+  if (name.match(/\bSota\b/i)) return 'Sota';
+  if (name.match(/\bCaballero\b/i)) return 'Caballero';
+  if (name.match(/\bReina\b/i)) return 'Reina';
+  if (name.match(/\bRey\b/i)) return 'Rey';
+  
+  return name;
+};
 
   const filtrarCartasPorPalo = (palo: string) => {
     // Convertir el palo a minúsculas para coincidir con los IDs (e.g., 'bastos', 'copas')
@@ -170,7 +172,7 @@ const CartaSelector: React.FC<CartaSelectorProps> = ({
           if (name.includes('Nueve')) return 9;
           if (name.includes('Diez')) return 10;
           if (name.includes('Sota')) return 11;
-          if (name.includes('Caballo')) return 12;
+          if (name.includes('Caballero')) return 12;
           if (name.includes('Reina')) return 13;
           if (name.includes('Rey')) return 14;
           return 99;
@@ -180,7 +182,7 @@ const CartaSelector: React.FC<CartaSelectorProps> = ({
 
     const asToFive = cartasDelPalo.filter(c => ['As', 'Dos', 'Tres', 'Cuatro', 'Cinco'].some(n => c.name.includes(n)));
     const sixToTen = cartasDelPalo.filter(c => ['Seis', 'Siete', 'Ocho', 'Nueve', 'Diez'].some(n => c.name.includes(n)));
-    const sotaCaballero = cartasDelPalo.filter(c => ['Sota', 'Caballo'].some(n => c.name.includes(n)));
+    const sotaCaballero = cartasDelPalo.filter(c => ['Sota', 'Caballero'].some(n => c.name.includes(n)));
     const reinaRey = cartasDelPalo.filter(c => ['Reina', 'Rey'].some(n => c.name.includes(n)));
 
     return { asToFive, sixToTen, sotaCaballero, reinaRey };
