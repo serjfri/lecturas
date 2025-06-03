@@ -12,7 +12,7 @@ import { cardNames } from '@/data/cardNames';
 
 interface CartaSelectorProps {
   tirada: Tirada;
-  baraja: 'tradicional' | 'osho'; // This prop will always be set when CartaSelector is rendered
+  baraja: 'tradicional' | 'osho';
   cartasSeleccionadas: CartaSeleccionada[];
   onCartaAdd: (carta: CartaSeleccionada) => void;
   onCartaToggle: (posicion: number) => void;
@@ -22,12 +22,12 @@ interface CartaSelectorProps {
   onDeshacerUltimaCarta: () => void;
   puedeIrAInterpretacion: boolean;
   modoLibre: boolean;
-  onCambiarBaraja?: (baraja: 'tradicional' | 'osho') => void; // Keep this prop for internal resets
+  onCambiarBaraja?: (baraja: 'tradicional' | 'osho') => void;
 }
 
 const CartaSelector: React.FC<CartaSelectorProps> = ({
   tirada,
-  baraja, // This prop will now always have a value when CartaSelector is mounted
+  baraja,
   cartasSeleccionadas,
   onCartaAdd,
   onCartaToggle,
@@ -37,7 +37,7 @@ const CartaSelector: React.FC<CartaSelectorProps> = ({
   onDeshacerUltimaCarta,
   puedeIrAInterpretacion,
   modoLibre,
-  onCambiarBaraja // Keep this to allow internal resetting of selected cards if baraja changes
+  onCambiarBaraja
 }) => {
   const [posicionActual, setPosicionActual] = useState(1);
   const [categoriaSeleccionada, setCategoriaSeleccionada] = useState<'mayores' | 'menores' | null>(null);
@@ -274,12 +274,6 @@ const CartaSelector: React.FC<CartaSelectorProps> = ({
     }
   };
 
-  // REMOVIDA la función handleCambiarBaraja de este componente
-  // Ahora CartaSelector recibe la baraja ya pre-seleccionada de Index.tsx
-  // Si necesitas que un cambio de baraja desde *dentro* de CartaSelector
-  // limpie las cartas, puedes llamarlo a través de la prop `onCambiarBaraja`
-  // que viene del padre, pero no se utiliza para la selección inicial aquí.
-
   const getCardNameById = (id: string) => {
     const card = cardNames.find(c => c.id === id);
     return card ? card.name : id;
@@ -328,14 +322,6 @@ const CartaSelector: React.FC<CartaSelectorProps> = ({
     <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-teal-50 to-emerald-100">
       <div className="container mx-auto px-4 py-8">
         <div className="max-w-4xl mx-auto space-y-6">
-          <div className="text-center">
-            <h2 className="text-3xl font-serif text-emerald-900 mb-2">
-              Selecciona las Cartas
-            </h2>
-            <p className="text-emerald-700">
-              {tirada.nombre}
-            </p>
-          </div>
 
           {/* Progreso de selección */}
           {!modoLibre && (
@@ -355,54 +341,7 @@ const CartaSelector: React.FC<CartaSelectorProps> = ({
               </CardContent>
             </Card>
           )}
-
-          {/* Posición actual */}
-          {posicionActualData && (
-            <Card className="bg-white/80 backdrop-blur-sm border-emerald-200">
-              <CardHeader className="pb-4">
-                <CardTitle className="text-xl text-emerald-900">
-                  {posicionActualData.nombre}
-                </CardTitle>
-                <p className="text-emerald-600">{posicionActualData.descripcion}</p>
-              </CardHeader>
-            </Card>
-          )}
-
-          {/* **MODIFICADO:** Mostrar la baraja seleccionada (solo en modo libre) */}
-          {modoLibre && (
-            <Card className="bg-white/80 backdrop-blur-sm border-emerald-200">
-              <CardHeader className="pb-4">
-                <CardTitle className="text-lg text-emerald-900">Baraja Seleccionada</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <Button
-                  variant="default"
-                  // CAMBIADO: Reducimos la altura y el ancho para que no sea tan dominante
-                  className="h-10 px-4 py-2 text-sm w-auto" // <-- ESTA ES LA LÍNEA CLAVE
-                  disabled // Deshabilitado porque ya está seleccionada
-                >
-                  {baraja === 'tradicional' ? 'Tarot Tradicional' : 'Tarot de Osho'}
-                </Button>
-                {/* Puedes añadir un botón para cambiar la baraja aquí si quieres que se pueda,
-                    pero llamaría a onCambiarBaraja y limpiaría la selección */}
-                {/* Ejemplo:
-                <Button
-                  variant="outline"
-                  className="h-10 mt-2 w-full text-sm" // Si lo añades, también ajústale el tamaño
-                  onClick={() => {
-                    if (onCambiarBaraja) {
-                      onCambiarBaraja(baraja === 'tradicional' ? 'osho' : 'tradicional');
-                    }
-                  }}
-                >
-                  Cambiar a {baraja === 'tradicional' ? 'Osho' : 'Tradicional'}
-                </Button>
-                */}
-              </CardContent>
-            </Card>
-          )}
-
-
+          
           {/* Selección de cartas */}
           <Card className="bg-white/80 backdrop-blur-sm border-emerald-200">
             <CardHeader className="pb-4">
@@ -686,9 +625,6 @@ const CartaSelector: React.FC<CartaSelectorProps> = ({
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="text-center">
-                  <p className="text-sm text-amber-700 mb-2">
-                    {posicionActualData?.nombre || `Posición ${cartaPendiente.posicion}`}
-                  </p>
                   <p className="font-medium text-amber-900 text-lg">
                     {cartaPendiente.nombre}
                   </p>
