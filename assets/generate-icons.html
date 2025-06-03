@@ -1,0 +1,130 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Generar Iconos PWA</title>
+</head>
+<body>
+    <canvas id="canvas" width="512" height="512" style="border: 1px solid #ccc;"></canvas>
+    <br><br>
+    <button onclick="generateIcon(72)">Generar 72x72</button>
+    <button onclick="generateIcon(96)">Generar 96x96</button>
+    <button onclick="generateIcon(128)">Generar 128x128</button>
+    <button onclick="generateIcon(144)">Generar 144x144</button>
+    <button onclick="generateIcon(152)">Generar 152x152</button>
+    <button onclick="generateIcon(192)">Generar 192x192</button>
+    <button onclick="generateIcon(384)">Generar 384x384</button>
+    <button onclick="generateIcon(512)">Generar 512x512</button>
+    <button onclick="generateFavicon(16)">Generar Favicon 16x16</button>
+    <button onclick="generateFavicon(32)">Generar Favicon 32x32</button>
+
+    <script>
+        function drawIcon(canvas, size) {
+            const ctx = canvas.getContext('2d');
+            
+            // Limpiar canvas
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // Redimensionar canvas
+            canvas.width = size;
+            canvas.height = size;
+            
+            // Fondo con gradiente
+            const gradient = ctx.createLinearGradient(0, 0, size, size);
+            gradient.addColorStop(0, '#d97706');
+            gradient.addColorStop(1, '#ea580c');
+            
+            // Fondo redondeado
+            ctx.fillStyle = gradient;
+            const radius = size * 0.125;
+            ctx.beginPath();
+            ctx.roundRect(0, 0, size, size, radius);
+            ctx.fill();
+            
+            // Carta de tarot
+            const cardWidth = size * 0.39;
+            const cardHeight = size * 0.625;
+            const cardX = (size - cardWidth) / 2;
+            const cardY = size * 0.1875;
+            
+            ctx.fillStyle = 'white';
+            ctx.strokeStyle = '#fbbf24';
+            ctx.lineWidth = size * 0.008;
+            ctx.beginPath();
+            ctx.roundRect(cardX, cardY, cardWidth, cardHeight, size * 0.03);
+            ctx.fill();
+            ctx.stroke();
+            
+            // Círculo central
+            ctx.fillStyle = '#d97706';
+            ctx.beginPath();
+            ctx.arc(size / 2, size * 0.34, size * 0.047, 0, 2 * Math.PI);
+            ctx.fill();
+            
+            // Líneas decorativas
+            const lineY1 = size * 0.42;
+            const lineY2 = size * 0.45;
+            const lineY3 = size * 0.48;
+            
+            ctx.fillStyle = '#d97706';
+            ctx.fillRect(cardX + cardWidth * 0.2, lineY1, cardWidth * 0.6, size * 0.008);
+            ctx.fillRect(cardX + cardWidth * 0.2, lineY2, cardWidth * 0.4, size * 0.008);
+            ctx.fillRect(cardX + cardWidth * 0.2, lineY3, cardWidth * 0.5, size * 0.008);
+            
+            // Estrella
+            const starCenterX = size / 2;
+            const starCenterY = size * 0.58;
+            const starSize = size * 0.02;
+            
+            ctx.fillStyle = '#d97706';
+            ctx.beginPath();
+            for (let i = 0; i < 5; i++) {
+                const angle = (i * 144 - 90) * Math.PI / 180;
+                const x = starCenterX + Math.cos(angle) * starSize;
+                const y = starCenterY + Math.sin(angle) * starSize;
+                if (i === 0) ctx.moveTo(x, y);
+                else ctx.lineTo(x, y);
+                
+                const innerAngle = ((i * 144) + 72 - 90) * Math.PI / 180;
+                const innerX = starCenterX + Math.cos(innerAngle) * starSize * 0.5;
+                const innerY = starCenterY + Math.sin(innerAngle) * starSize * 0.5;
+                ctx.lineTo(innerX, innerY);
+            }
+            ctx.closePath();
+            ctx.fill();
+            
+            // Líneas inferiores
+            const lineY4 = size * 0.71;
+            const lineY5 = size * 0.74;
+            
+            ctx.fillRect(cardX + cardWidth * 0.2, lineY4, cardWidth * 0.6, size * 0.008);
+            ctx.fillRect(cardX + cardWidth * 0.2, lineY5, cardWidth * 0.4, size * 0.008);
+        }
+        
+        function generateIcon(size) {
+            const canvas = document.getElementById('canvas');
+            drawIcon(canvas, size);
+            
+            // Descargar
+            const link = document.createElement('a');
+            link.download = `icon-${size}x${size}.png`;
+            link.href = canvas.toDataURL();
+            link.click();
+        }
+        
+        function generateFavicon(size) {
+            const canvas = document.getElementById('canvas');
+            drawIcon(canvas, size);
+            
+            // Descargar
+            const link = document.createElement('a');
+            link.download = `favicon-${size}x${size}.png`;
+            link.href = canvas.toDataURL();
+            link.click();
+        }
+        
+        // Generar icono inicial
+        drawIcon(document.getElementById('canvas'), 512);
+    </script>
+</body>
+</html>
