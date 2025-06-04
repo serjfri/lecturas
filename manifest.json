@@ -1,6 +1,6 @@
 {
-  "name": "Guía de Tarot",
-  "short_name": "Tarot",
+  "name": "lecturas",
+  "short_name": "lecturas",
   "description": "PWA para interpretación de tiradas de tarot tradicional y de Osho",
   "start_url": "./",
   "display": "standalone",

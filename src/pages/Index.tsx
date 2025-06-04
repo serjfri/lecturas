@@ -2,10 +2,8 @@
 import React, { useState, useEffect } from 'react';
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { CreditCard, Layers } from "lucide-react";
-// Importa un ícono para el I Ching, por ejemplo, `BookOpenText` o `GanttChart` (si usas Lucide Icons)
-import { BookOpenText } from "lucide-react"; // O el icono que prefieras
-import { Link } from 'react-router-dom'; // <--- IMPORTANTE: Importa Link de react-router-dom
+import { CreditCard, Layers, BookOpenText, Activity } from "lucide-react"; // Usamos 'Activity' como prueba
+import { Link } from 'react-router-dom';
 
 import CartaSelector from '@/components/CartaSelector';
 import TiradaSelector from '@/components/TiradaSelector';
@@ -49,7 +47,8 @@ const tiradaLibreBase: Tirada = {
 };
 
 const Index = () => {
-  const [vistaActual, setVistaActual] = useState<'inicio' | 'seleccionLibre' | 'tiradas' | 'cartas' | 'interpretacion' | 'seleccionBarajaLibre'>('inicio');
+  // **MODIFICADO:** Añadimos 'tarotOptions' a los tipos de vista.
+  const [vistaActual, setVistaActual] = useState<'inicio' | 'seleccionLibre' | 'tiradas' | 'cartas' | 'interpretacion' | 'seleccionBarajaLibre' | 'tarotOptions'>('inicio');
   const [tiradaSeleccionada, setTiradaSeleccionada] = useState<Tirada | null>(null);
   const [barajaSeleccionada, setBarajaSeleccionada] = useState<'tradicional' | 'osho'>('tradicional');
   const [cartasSeleccionadas, setCartasSeleccionadas] = useState<CartaSeleccionada[]>([]);
@@ -64,6 +63,11 @@ const Index = () => {
       setPosicionActualParaSelector(cartasSeleccionadas.length);
     }
   }, [vistaActual, modoLibre, tiradaSeleccionada, cartasSeleccionadas.length]);
+
+  // **NUEVA FUNCIÓN:** Para mostrar las opciones de Tarot
+  const handleShowTarotOptions = () => {
+    setVistaActual('tarotOptions');
+  };
 
   const handleSeleccionLibre = () => {
     setModoLibre(true);
@@ -188,6 +192,7 @@ const Index = () => {
     }
   };
 
+  // **MODIFICADO:** Lógica de handleVolver para la nueva vista 'tarotOptions'
   const handleVolver = () => {
     if (vistaActual === 'cartas') {
       if (modoLibre) {
@@ -202,17 +207,22 @@ const Index = () => {
     } else if (vistaActual === 'interpretacion') {
       setVistaActual('cartas');
     } else if (vistaActual === 'seleccionBarajaLibre') {
-      setVistaActual('inicio');
+      setVistaActual('tarotOptions'); // Vuelve a las opciones de Tarot
       setModoLibre(false);
       setBarajaSeleccionada('tradicional');
       setTiradaSeleccionada(null);
-    }
-    else { // Si estamos en 'tiradas'
-      setVistaActual('inicio');
+    } else if (vistaActual === 'tiradas') {
+      setVistaActual('tarotOptions'); // Vuelve a las opciones de Tarot
+      setTiradaSeleccionada(null);
+      setCartasSeleccionadas([]);
+      setPosicionActualParaSelector(0);
+    } else if (vistaActual === 'tarotOptions') { // NUEVA CONDICIÓN
+      setVistaActual('inicio'); // Vuelve a la pantalla de inicio principal
       setTiradaSeleccionada(null);
       setCartasSeleccionadas([]);
       setPosicionActualParaSelector(0);
     }
+    // Si estamos en 'inicio' y la URL cambia (por el Link al I Ching), no necesitamos un handleVolver aquí.
   };
 
   const handleInterpretarCartas = () => {
@@ -292,7 +302,7 @@ const Index = () => {
                   onClick={handleVolver}
                   className="w-full mt-4"
                 >
-                  Volver al Inicio
+                  Volver
                 </Button>
               </CardContent>
             </Card>
@@ -300,87 +310,128 @@ const Index = () => {
         </div>
       )}
 
-      {vistaActual === 'inicio' && (
-        <div className="min-h-screen bg-gradient-to-br from-amber-50 via-orange-50 to-amber-100">
-          <div className="container mx-auto px-4 py-8">
-            <div className="max-w-4xl mx-auto">
-              <div className="text-center mb-12">
-                <h1 className="text-5xl font-serif text-amber-900 mb-4">
-                  Guía de Tarot
-                </h1>
-              </div>
-
-              <div className="grid md:grid-cols-2 gap-8 max-w-3xl mx-auto">
-                <Card
-                  className="group bg-white/80 backdrop-blur-sm border-amber-200 hover:border-amber-400 transition-all duration-300 cursor-pointer hover:shadow-xl hover:-translate-y-1"
-                  onClick={handleSeleccionLibre}
-                >
-                  <CardContent className="p-8 text-center">
-                    <div className="mb-6">
-                      <div className="mx-auto w-16 h-16 bg-gradient-to-br from-amber-400 to-orange-500 rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                        <CreditCard className="w-8 h-8 text-white" />
-                      </div>
-                      <h3 className="text-2xl font-serif text-amber-900 mb-3">
-                        Seleccionar Cartas
-                      </h3>
+      {/* **NUEVA VISTA:** Opciones de Tarot (Agrupa Seleccionar Cartas y Seleccionar Tiradas) */}
+      {vistaActual === 'tarotOptions' && (
+        <div className="min-h-screen bg-gradient-to-br from-amber-50 via-orange-50 to-amber-100 flex flex-col items-center py-8 px-4">
+          <div className="container mx-auto max-w-2xl w-full">
+            <Button
+              variant="outline"
+              onClick={handleVolver}
+              className="mb-8 inline-flex items-center text-gray-700 hover:text-gray-900 font-semibold"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                <path fillRule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clipRule="evenodd" />
+              </svg>
+              Volver a Oráculos
+            </Button>
+            <div className="grid md:grid-cols-2 gap-8 max-w-3xl mx-auto">
+              <Card
+                className="group bg-white/80 backdrop-blur-sm border-amber-200 hover:border-amber-400 transition-all duration-300 cursor-pointer hover:shadow-xl hover:-translate-y-1"
+                onClick={handleSeleccionLibre}
+              >
+                <CardContent className="p-8 text-center">
+                  <div className="mb-6">
+                    <div className="mx-auto w-16 h-16 bg-gradient-to-br from-amber-400 to-orange-500 rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                      <CreditCard className="w-8 h-8 text-white" />
                     </div>
-                    <Button
-                      size="lg"
-                      className="w-full bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-700 hover:to-orange-700 text-white font-medium"
-                    >
-                      Comenzar Lectura
-                    </Button>
-                  </CardContent>
-                </Card>
-
-                <Card
-                  className="group bg-white/80 backdrop-blur-sm border-amber-200 hover:border-amber-400 transition-all duration-300 cursor-pointer hover:shadow-xl hover:-translate-y-1"
-                  onClick={handleSeleccionTiradas}
-                >
-                  <CardContent className="p-8 text-center">
-                    <div className="mb-6">
-                      <div className="mx-auto w-16 h-16 bg-gradient-to-br from-orange-400 to-red-500 rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                        <Layers className="w-8 h-8 text-white" />
-                      </div>
-                      <h3 className="text-2xl font-serif text-amber-900 mb-3">
-                        Seleccionar Tiradas
-                      </h3>
-                    </div>
-                    <Button
-                      size="lg"
-                      className="w-full bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 text-white font-medium"
-                    >
-                      Explorar Tiradas
-                    </Button>
-                  </CardContent>
-                </Card>
-
-                {/* ¡NUEVA CARD PARA EL I CHING! */}
-                <Link to="/iching" className="col-span-full"> {/* Envuelve toda la Card con Link para que sea clicable */}
-                  <Card
-                    className="group bg-white/80 backdrop-blur-sm border-amber-200 hover:border-amber-400 transition-all duration-300 cursor-pointer hover:shadow-xl hover:-translate-y-1"
-                    // No necesitas onClick aquí, el Link se encarga
+                    <h3 className="text-2xl font-serif text-amber-900 mb-3">
+                      Seleccionar Cartas
+                    </h3>
+                  </div>
+                  <Button
+                    size="lg"
+                    className="w-full bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-700 hover:to-orange-700 text-white font-medium"
                   >
-                    <CardContent className="p-8 text-center">
-                      <div className="mb-6">
-                        <div className="mx-auto w-16 h-16 bg-gradient-to-br from-purple-400 to-indigo-500 rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                          <BookOpenText className="w-8 h-8 text-white" /> {/* Icono para I Ching */}
-                        </div>
-                        <h3 className="text-2xl font-serif text-amber-900 mb-3">
-                          Consultar I Ching
-                        </h3>
-                      </div>
-                      <Button
-                        size="lg"
-                        className="w-full bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white font-medium"
-                      >
-                        Descubrir la Sabiduría
-                      </Button>
-                    </CardContent>
-                  </Card>
-                </Link>
+                    Comenzar Lectura
+                  </Button>
+                </CardContent>
+              </Card>
 
-              </div>
+              <Card
+                className="group bg-white/80 backdrop-blur-sm border-amber-200 hover:border-amber-400 transition-all duration-300 cursor-pointer hover:shadow-xl hover:-translate-y-1"
+                onClick={handleSeleccionTiradas}
+              >
+                <CardContent className="p-8 text-center">
+                  <div className="mb-6">
+                    <div className="mx-auto w-16 h-16 bg-gradient-to-br from-orange-400 to-red-500 rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                      <Layers className="w-8 h-8 text-white" />
+                    </div>
+                    <h3 className="text-2xl font-serif text-amber-900 mb-3">
+                      Seleccionar Tiradas
+                    </h3>
+                  </div>
+                  <Button
+                    size="lg"
+                    className="w-full bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 text-white font-medium"
+                  >
+                    Explorar Tiradas
+                  </Button>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* **VISTA INICIAL:** Solo muestra Tarot e I Ching */}
+      {vistaActual === 'inicio' && (
+        <div className="min-h-screen bg-gradient-to-br from-amber-50 via-orange-50 to-amber-100 flex flex-col items-center py-8 px-4">
+          <div className="container mx-auto max-w-4xl">
+            {/* El título se ha eliminado aquí según tu petición anterior */}
+            {/* <div className="text-center mb-12">
+              <h1 className="text-5xl font-serif text-amber-900 mb-4">
+                Oráculos
+              </h1>
+            </div> */}
+
+            <div className="grid md:grid-cols-2 gap-8 max-w-3xl mx-auto">
+              {/* Opción para Tarot */}
+              <Card
+                className="group bg-white/80 backdrop-blur-sm border-amber-200 hover:border-amber-400 transition-all duration-300 cursor-pointer hover:shadow-xl hover:-translate-y-1"
+                onClick={handleShowTarotOptions} // Llama a la nueva función
+              >
+                <CardContent className="p-8 text-center">
+                  <div className="mb-6">
+                    <div className="mx-auto w-16 h-16 bg-gradient-to-br from-rose-400 to-red-500 rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                      <Activity className="w-8 h-8 text-white" /> {/* Un icono representativo para Tarot */}
+                    </div>
+                    <h3 className="text-2xl font-serif text-amber-900 mb-3">
+                      Tarot
+                    </h3>
+                  </div>
+                  <Button
+                    size="lg"
+                    className="w-full bg-gradient-to-r from-rose-600 to-red-600 hover:from-rose-700 hover:to-red-700 text-white font-medium"
+                  >
+                    Explorar Lecturas
+                  </Button>
+                </CardContent>
+              </Card>
+
+              {/* Opción para I Ching (sigue siendo un Link) */}
+              <Link to="/iching" className="col-span-full md:col-span-1"> {/* Puedes ajustar col-span si quieres que estén uno al lado del otro */}
+                <Card
+                  className="group bg-white/80 backdrop-blur-sm border-amber-200 hover:border-amber-400 transition-all duration-300 cursor-pointer hover:shadow-xl hover:-translate-y-1"
+                >
+                  <CardContent className="p-8 text-center">
+                    <div className="mb-6">
+                      <div className="mx-auto w-16 h-16 bg-gradient-to-br from-purple-400 to-indigo-500 rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                        <BookOpenText className="w-8 h-8 text-white" />
+                      </div>
+                      <h3 className="text-2xl font-serif text-amber-900 mb-3">
+                        I Ching
+                      </h3>
+                    </div>
+                    <Button
+                      size="lg"
+                      className="w-full bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white font-medium"
+                    >
+                      seleccionar hexagrama
+                    </Button>
+                  </CardContent>
+                </Card>
+              </Link>
+
             </div>
           </div>
         </div>
