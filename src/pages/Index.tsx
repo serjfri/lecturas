@@ -3,6 +3,10 @@ import React, { useState, useEffect } from 'react';
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { CreditCard, Layers } from "lucide-react";
+// Importa un ícono para el I Ching, por ejemplo, `BookOpenText` o `GanttChart` (si usas Lucide Icons)
+import { BookOpenText } from "lucide-react"; // O el icono que prefieras
+import { Link } from 'react-router-dom'; // <--- IMPORTANTE: Importa Link de react-router-dom
+
 import CartaSelector from '@/components/CartaSelector';
 import TiradaSelector from '@/components/TiradaSelector';
 import InterpretacionCartas from '@/components/InterpretacionCartas';
@@ -45,7 +49,6 @@ const tiradaLibreBase: Tirada = {
 };
 
 const Index = () => {
-  // **MODIFICADO:** Añadimos 'seleccionBarajaLibre' a los tipos de vista.
   const [vistaActual, setVistaActual] = useState<'inicio' | 'seleccionLibre' | 'tiradas' | 'cartas' | 'interpretacion' | 'seleccionBarajaLibre'>('inicio');
   const [tiradaSeleccionada, setTiradaSeleccionada] = useState<Tirada | null>(null);
   const [barajaSeleccionada, setBarajaSeleccionada] = useState<'tradicional' | 'osho'>('tradicional');
@@ -62,12 +65,10 @@ const Index = () => {
     }
   }, [vistaActual, modoLibre, tiradaSeleccionada, cartasSeleccionadas.length]);
 
-  // **MODIFICADO:** handleSeleccionLibre ahora lleva a una nueva vista.
   const handleSeleccionLibre = () => {
     setModoLibre(true);
     setTiradaSeleccionada({ ...tiradaLibreBase, numeroCartas: 1 });
     setCartasSeleccionadas([]);
-    // **CLAVE:** Ahora vamos a una vista intermedia para seleccionar la baraja
     setVistaActual('seleccionBarajaLibre');
     setPosicionActualParaSelector(0);
   };
@@ -77,10 +78,9 @@ const Index = () => {
     setVistaActual('tiradas');
   };
 
-  // **NUEVA FUNCIÓN:** Para manejar la selección de baraja en modo libre.
   const handleBarajaLibreSelect = (baraja: 'tradicional' | 'osho') => {
     setBarajaSeleccionada(baraja);
-    setVistaActual('cartas'); // Una vez seleccionada la baraja, pasamos a seleccionar cartas
+    setVistaActual('cartas');
   };
 
   const handleTiradaSelect = (tirada: Tirada, baraja: 'tradicional' | 'osho') => {
@@ -91,9 +91,6 @@ const Index = () => {
     setPosicionActualParaSelector(0);
   };
 
-  // Esta función `handleCambiarBaraja` solo se usará DENTRO de CartaSelector
-  // si el usuario ya ha empezado a seleccionar cartas y quiere cambiar la baraja,
-  // lo cual limpiaría la selección actual.
   const handleCambiarBaraja = (nuevaBaraja: 'tradicional' | 'osho') => {
     setBarajaSeleccionada(nuevaBaraja);
     setCartasSeleccionadas([]);
@@ -173,7 +170,7 @@ const Index = () => {
         if (posicionActualParaSelector > 0) {
             setPosicionActualParaSelector(prevPos => prevPos - 1);
         } else {
-            setPosicionActualParaSelector(0);
+          setPosicionActualParaSelector(0);
         }
       }
     } else {
@@ -191,14 +188,12 @@ const Index = () => {
     }
   };
 
-  // **MODIFICADO:** handleVolver para manejar la nueva vista 'seleccionBarajaLibre'.
   const handleVolver = () => {
     if (vistaActual === 'cartas') {
       if (modoLibre) {
-        // Al volver desde cartas en modo libre, volvemos a la selección de baraja
-        setVistaActual('seleccionBarajaLibre'); // **CLAVE**
-        setCartasSeleccionadas([]); // Limpiar cartas al volver a la selección de baraja
-        setPosicionActualParaSelector(0); // Resetear posición
+        setVistaActual('seleccionBarajaLibre');
+        setCartasSeleccionadas([]);
+        setPosicionActualParaSelector(0);
       } else {
         setVistaActual('tiradas');
         setCartasSeleccionadas([]);
@@ -206,10 +201,10 @@ const Index = () => {
       }
     } else if (vistaActual === 'interpretacion') {
       setVistaActual('cartas');
-    } else if (vistaActual === 'seleccionBarajaLibre') { // **NUEVA CONDICIÓN**
-      setVistaActual('inicio'); // Volver a la pantalla de inicio desde la selección de baraja libre
+    } else if (vistaActual === 'seleccionBarajaLibre') {
+      setVistaActual('inicio');
       setModoLibre(false);
-      setBarajaSeleccionada('tradicional'); // Resetear
+      setBarajaSeleccionada('tradicional');
       setTiradaSeleccionada(null);
     }
     else { // Si estamos en 'tiradas'
@@ -257,7 +252,7 @@ const Index = () => {
           onDeshacerUltimaCarta={handleDeshacerUltimaCarta}
           puedeIrAInterpretacion={puedeIrAInterpretacion()}
           modoLibre={modoLibre}
-          onCambiarBaraja={handleCambiarBaraja} // Mantener esta prop para la lógica interna de CartaSelector de cambiar la baraja y limpiar cartas si el usuario decide cambiarla DESPUÉS de haber seleccionado alguna carta.
+          onCambiarBaraja={handleCambiarBaraja}
         />
       )}
 
@@ -268,7 +263,6 @@ const Index = () => {
         />
       )}
 
-      {/* **NUEVA VISTA:** Selección de baraja para modo libre */}
       {vistaActual === 'seleccionBarajaLibre' && modoLibre && (
         <div className="min-h-screen bg-gradient-to-br from-amber-50 via-orange-50 to-amber-100 flex items-center justify-center">
           <div className="container mx-auto px-4 py-8 max-w-xl">
@@ -295,7 +289,7 @@ const Index = () => {
                 </div>
                 <Button
                   variant="outline"
-                  onClick={handleVolver} // Permite volver al inicio
+                  onClick={handleVolver}
                   className="w-full mt-4"
                 >
                   Volver al Inicio
@@ -360,6 +354,32 @@ const Index = () => {
                     </Button>
                   </CardContent>
                 </Card>
+
+                {/* ¡NUEVA CARD PARA EL I CHING! */}
+                <Link to="/iching" className="col-span-full"> {/* Envuelve toda la Card con Link para que sea clicable */}
+                  <Card
+                    className="group bg-white/80 backdrop-blur-sm border-amber-200 hover:border-amber-400 transition-all duration-300 cursor-pointer hover:shadow-xl hover:-translate-y-1"
+                    // No necesitas onClick aquí, el Link se encarga
+                  >
+                    <CardContent className="p-8 text-center">
+                      <div className="mb-6">
+                        <div className="mx-auto w-16 h-16 bg-gradient-to-br from-purple-400 to-indigo-500 rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                          <BookOpenText className="w-8 h-8 text-white" /> {/* Icono para I Ching */}
+                        </div>
+                        <h3 className="text-2xl font-serif text-amber-900 mb-3">
+                          Consultar I Ching
+                        </h3>
+                      </div>
+                      <Button
+                        size="lg"
+                        className="w-full bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white font-medium"
+                      >
+                        Descubrir la Sabiduría
+                      </Button>
+                    </CardContent>
+                  </Card>
+                </Link>
+
               </div>
             </div>
           </div>
