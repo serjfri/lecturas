@@ -1,0 +1,229 @@
+// src/data/runaMeanings.ts
+export interface RunaMeaning {
+  id: string;
+  nombre: string;
+  unicode: string; // <-- NUEVA PROPIEDAD: para el carácter Unicode de la runa
+  significadoDerecho: string;
+  significadoInvertido?: string;
+  simbolismo: string;
+  palabrasClave: string[];
+}
+
+export const runaMeanings: RunaMeaning[] = [
+  {
+    id: 'fehu',
+    nombre: 'Fehu',
+    unicode: 'ᚠ', // Runa Fehu
+    significadoDerecho: 'Abundancia, prosperidad, éxito material, nuevas oportunidades, ganado, riqueza, alimentación, seguridad.',
+    significadoInvertido: 'Pérdida de bienes, frustración, estancamiento, avaricia, insatisfacción.',
+    simbolismo: 'La runa de la riqueza y el ganado. Representa la creación y el flujo de la fortuna.',
+    palabrasClave: ['riqueza', 'abundancia', 'éxito', 'prosperidad', 'posesiones', 'seguridad', 'inicio']
+  },
+  {
+    id: 'uruz',
+    nombre: 'Uruz',
+    unicode: 'ᚢ', // Runa Uruz
+    significadoDerecho: 'Fuerza, vitalidad, poder indomable, instinto, potencial, cambio brusco, salud robusta.',
+    significadoInvertido: 'Debilidad, enfermedad, oportunidad perdida, falta de voluntad, fuerza mal dirigida.',
+    simbolismo: 'El buey salvaje (auroch). Representa la fuerza primal, la formación, la resistencia.',
+    palabrasClave: ['fuerza', 'poder', 'vitalidad', 'cambio', 'salud', 'instinto', 'coraje']
+  },
+  {
+    id: 'thurisaz',
+    nombre: 'Thurisaz',
+    unicode: 'ᚦ', // Runa Thurisaz
+    significadoDerecho: 'Protección, defensa, fuerza destructiva/regeneradora, espina, golpe, umbral, caos, purificación.',
+    significadoInvertido: 'Peligro, vulnerabilidad, compulsión, traición, imprudencia, acción precipitada.',
+    simbolismo: 'El gigante, el espino. Representa la fuerza caótica y protectora, los desafíos y las defensas.',
+    palabrasClave: ['protección', 'defensa', 'conflicto', 'purificación', 'desafío', 'umbrales', 'reflexión']
+  },
+  {
+    id: 'ansuz',
+    nombre: 'Ansuz',
+    unicode: 'ᚨ', // Runa Ansuz
+    significadoDerecho: 'Comunicación, inspiración, sabiduría, conocimiento, mensaje, verdad, aliento divino, examen.',
+    significadoInvertido: 'Malentendido, engaño, manipulación, vanidad, desinformación, discurso ineficaz.',
+    simbolismo: 'La runa de Odín, el aliento, la boca. Representa el poder de la palabra y la sabiduría ancestral.',
+    palabrasClave: ['comunicación', 'sabiduría', 'inspiración', 'mensaje', 'verdad', 'conocimiento', 'aprendizaje']
+  },
+  {
+    id: 'raidho',
+    nombre: 'Raidho',
+    unicode: 'ᚱ', // Runa Raidho
+    significadoDerecho: 'Viaje, movimiento, progreso, ritmo, justicia, orden, reencuentro, viaje espiritual.',
+    significadoInvertido: 'Crisis, estancamiento, viaje frustrado, injusticia, interrupción, falsedad, destino incorrecto.',
+    simbolismo: 'El carro, el viaje. Representa el movimiento ordenado y el camino hacia un objetivo.',
+    palabrasClave: ['viaje', 'movimiento', 'progreso', 'orden', 'justicia', 'ritmo', 'evolución']
+  },
+  {
+    id: 'kenaz',
+    nombre: 'Kenaz',
+    unicode: 'ᚲ', // Runa Kenaz
+    significadoDerecho: 'Conocimiento, inspiración, iluminación, creatividad, fuego controlado, revelación, renovación.',
+    significadoInvertido: 'Oscuridad, enfermedad, disolución, falsa esperanza, creatividad bloqueada, fin de una fase.',
+    simbolismo: 'La antorcha, la llama controlada. Representa la luz del conocimiento y la chispa creativa.',
+    palabrasClave: ['conocimiento', 'creatividad', 'iluminación', 'inspiración', 'revelación', 'transformación']
+  },
+  {
+    id: 'gebo',
+    nombre: 'Gebo',
+    unicode: 'ᚷ', // Runa Gebo
+    significadoDerecho: 'Regalo, sociedad, unión, generosidad, equilibrio, sacrificio, conexión, intercambio.',
+    simbolismo: 'No tiene significado invertido. El regalo, la unión. Representa la reciprocidad y la conexión sin expectativas.',
+    palabrasClave: ['regalo', 'unión', 'sociedad', 'generosidad', 'equilibrio', 'intercambio', 'conexión']
+  },
+  {
+    id: 'wunjo',
+    nombre: 'Wunjo',
+    unicode: 'ᚹ', // Runa Wunjo
+    significadoDerecho: 'Alegría, felicidad, gloria, compañerismo, bienestar, armonía, realización de deseos.',
+    significadoInvertido: 'Pena, sufrimiento, alienación, tristeza, retraso, infelicidad, conflicto.',
+    simbolismo: 'La alegría. Representa el éxtasis y la satisfacción, especialmente en grupo.',
+    palabrasClave: ['alegría', 'felicidad', 'armonía', 'bienestar', 'compañerismo', 'realización', 'satisfacción']
+  },
+  {
+    id: 'hagalaz',
+    nombre: 'Hagalaz',
+    unicode: 'ᚺ', // Runa Hagalaz
+    significadoDerecho: 'Granizo, interrupción, destrucción controlada, cambio drástico, calamidad, liberación, purificación.',
+    simbolismo: 'No tiene significado invertido. El granizo, la tormenta. Representa la interrupción incontrolable y la purificación.',
+    palabrasClave: ['destrucción', 'cambio', 'interrupción', 'crisis', 'liberación', 'purificación', 'evento inesperado']
+  },
+  {
+    id: 'naudiz',
+    nombre: 'Naudiz',
+    unicode: 'ᚾ', // Runa Naudiz
+    significadoDerecho: 'Necesidad, restricción, escasez, paciencia, resiliencia, afrontar la adversidad, desarrollo lento.',
+    significadoInvertido: 'Angustia, necesidad extrema, restricción autoimpuesta, fatalidad, culpa, miseria.',
+    simbolismo: 'La necesidad, la restricción. Representa los desafíos y la resistencia ante la adversidad.',
+    palabrasClave: ['necesidad', 'restricción', 'paciencia', 'adversidad', 'resistencia', 'determinación', 'trabajo duro']
+  },
+  {
+    id: 'isa',
+    nombre: 'Isa',
+    unicode: 'ᛁ', // Runa Isa
+    significadoDerecho: 'Hielo, estancamiento, pausa, quietud, inacción, autoconocimiento, claridad, observación.',
+    simbolismo: 'No tiene significado invertido. El hielo. Representa la inmovilidad y la introspección forzada.',
+    palabrasClave: ['estancamiento', 'pausa', 'quietud', 'inacción', 'introspección', 'claridad', 'espera']
+  },
+  {
+    id: 'jera',
+    nombre: 'Jera',
+    unicode: 'ᛃ', // Runa Jera
+    significadoDerecho: 'Cosecha, recompensa, ciclo, tiempo, paz, fertilidad, buenos resultados, esfuerzo recompensado.',
+    simbolismo: 'No tiene significado invertido. La cosecha, el año. Representa los ciclos naturales y la recompensa justa del trabajo.',
+    palabrasClave: ['cosecha', 'recompensa', 'ciclo', 'tiempo', 'paz', 'fertilidad', 'resultados']
+  },
+  {
+    id: 'eihwaz',
+    nombre: 'Eihwaz',
+    unicode: 'ᛇ', // Runa Eihwaz
+    significadoDerecho: 'Tejo, fiabilidad, resistencia, conexión vida-muerte, superación de obstáculos, transformación, sabiduría.',
+    simbolismo: 'No tiene significado invertido. El tejo. Representa el eje del mundo, la conexión entre reinos y la resistencia.',
+    palabrasClave: ['resistencia', 'transformación', 'superación', 'conexión', 'sabiduría', 'protección']
+  },
+  {
+    id: 'perthro',
+    nombre: 'Perthro',
+    unicode: 'ᛈ', // Runa Perthro
+    significadoDerecho: 'Misterio, secreto, destino, azar, renacimiento, conocimiento oculto, lo desconocido, juegos de azar.',
+    significadoInvertido: 'Estancamiento, secretos revelados dolorosamente, adicción, mala suerte, eventos negativos.',
+    simbolismo: 'La copa de los dados, el útero, el pozo de la memoria. Representa el destino y los secretos ocultos.',
+    palabrasClave: ['misterio', 'destino', 'secreto', 'azar', 'renacimiento', 'intuición', 'cambio']
+  },
+  {
+    id: 'algiz',
+    nombre: 'Algiz',
+    unicode: 'ᛉ', // Runa Algiz
+    significadoDerecho: 'Protección, defensa, santuario, conexión divina, despertar espiritual, amistad, nuevos contactos.',
+    significadoInvertido: 'Vulnerabilidad, peligro, sacrificio, engaño, debilidad, ataque, advertencia.',
+    simbolismo: 'El alce, la caña, el cuerno de protección. Representa la defensa, la conexión con lo divino y el instinto de supervivencia.',
+    palabrasClave: ['protección', 'defensa', 'conexión', 'espiritualidad', 'amistad', 'seguridad', 'intuición']
+  },
+  {
+    id: 'sowilo',
+    nombre: 'Sowilo',
+    unicode: 'ᛊ', // Runa Sowilo
+    significadoDerecho: 'Sol, éxito, honor, fuerza vital, victoria, totalidad, guía, energía, salud radiante.',
+    simbolismo: 'No tiene significado invertido. El sol. Representa la luz, la energía vital, la victoria y la realización.',
+    palabrasClave: ['sol', 'éxito', 'victoria', 'energía', 'salud', 'guía', 'honor', 'totalidad']
+  },
+  {
+    id: 'tiwaz',
+    nombre: 'Tiwaz',
+    unicode: 'ᛏ', // Runa Tiwaz
+    significadoDerecho: 'Justicia, honor, victoria, autosacrificio, liderazgo, resolución de conflictos, fe, coraje.',
+    significadoInvertido: 'Derrota, injusticia, falta de liderazgo, sacrificio inútil, desequilibrio, guerra.',
+    simbolismo: 'El dios Tyr, la espada. Representa la justicia, el honor y el sacrificio por el bien mayor.',
+    palabrasClave: ['justicia', 'honor', 'victoria', 'liderazgo', 'coraje', 'sacrificio', 'determinación']
+  },
+  {
+    id: 'berkano',
+    nombre: 'Berkano',
+    unicode: 'ᛒ', // Runa Berkano
+    significadoDerecho: 'Crecimiento, renacimiento, fertilidad, nueva vida, inicio, curación, desarrollo, familia.',
+    significadoInvertido: 'Estancamiento, enfermedad, retrasos, problemas familiares, ansiedad, esterilidad.',
+    simbolismo: 'El abedul, la diosa madre. Representa la fertilidad, el nacimiento, el crecimiento y la renovación.',
+    palabrasClave: ['crecimiento', 'nacimiento', 'fertilidad', 'familia', 'renovación', 'curación', 'desarrollo']
+  },
+  {
+    id: 'ehwaz',
+    nombre: 'Ehwaz',
+    unicode: 'ᛖ', // Runa Ehwaz
+    significadoDerecho: 'Caballo, transporte, progreso, confianza, trabajo en equipo, lealtad, armonía, matrimonio.',
+    significadoInvertido: 'Desarmonía, desconfianza, traición, estancamiento, progreso lento, fricción.',
+    simbolismo: 'El caballo. Representa el movimiento, el progreso y la relación simbiótica.',
+    palabrasClave: ['progreso', 'movimiento', 'confianza', 'trabajo en equipo', 'lealtad', 'armonía', 'matrimonio']
+  },
+  {
+    id: 'mannaz',
+    nombre: 'Mannaz',
+    unicode: 'ᛗ', // Runa Mannaz
+    significadoDerecho: 'Humanidad, yo, comunidad, intelecto, conciencia, ayuda mutua, interdependencia, cooperación.',
+    significadoInvertido: 'Egoísmo, aislamiento, hostilidad, autoengaño, soledad, problemas sociales.',
+    simbolismo: 'El hombre, la humanidad. Representa el ser humano, la comunidad y la interacción social.',
+    palabrasClave: ['humanidad', 'comunidad', 'intelecto', 'cooperación', 'yo', 'ayuda mutua', 'sociedad']
+  },
+  {
+    id: 'laguz',
+    nombre: 'Laguz',
+    unicode: 'ᛚ', // Runa Laguz
+    significadoDerecho: 'Agua, intuición, flujo, sueños, emociones, curación, inconsciente, crecimiento orgánico, limpieza.',
+    significadoInvertido: 'Miedo, evitación, falta de intuición, estancamiento emocional, toxicidad, confusión.',
+    simbolismo: 'El agua, el lago. Representa las emociones, el flujo de la vida y el inconsciente.',
+    palabrasClave: ['intuición', 'emociones', 'flujo', 'agua', 'sueños', 'curación', 'inconsciente', 'adaptabilidad']
+  },
+  {
+    id: 'ingwaz',
+    nombre: 'Ingwaz',
+    unicode: 'ᛜ', // Runa Ingwaz
+    significadoDerecho: 'Fertilidad, finalización, nuevos comienzos, potencial, liberación de energía, embarazo, seguridad.',
+    simbolismo: 'No tiene significado invertido. El dios Ing. Representa la fertilidad, la finalización de un ciclo y el potencial latente.',
+    palabrasClave: ['finalización', 'nuevos comienzos', 'fertilidad', 'potencial', 'liberación', 'seguridad', 'cumplimiento']
+  },
+  {
+    id: 'othala',
+    nombre: 'Othala',
+    unicode: 'ᛟ', // Runa Othala
+    significadoDerecho: 'Herencia, patria, propiedades, legado, familia, tradición, seguridad, bienestar ancestral.',
+    significadoInvertido: 'Pérdida de hogar, falta de raíces, pobreza, prejuicio, abandono, falta de tradición.',
+    simbolismo: 'La herencia, el hogar ancestral. Representa la tierra, la familia, la tradición y las posesiones heredadas.',
+    palabrasClave: ['herencia', 'hogar', 'familia', 'propiedad', 'tradición', 'seguridad', 'legado']
+  },
+  {
+    id: 'dagaz',
+    nombre: 'Dagaz',
+    unicode: 'ᛞ', // Runa Dagaz
+    significadoDerecho: 'Día, amanecer, transformación, avance, claridad, conciencia, gran éxito, revelación.',
+    simbolismo: 'No tiene significado invertido. El día. Representa el amanecer, la luz, la transformación y la revelación.',
+    palabrasClave: ['amanecer', 'transformación', 'claridad', 'avance', 'éxito', 'conciencia', 'momento oportuno']
+  },
+  {
+    id: 'blank', // Runa en blanco (representa lo desconocido, el destino)
+    nombre: 'Runa Blanca',
+    unicode: '?', // Carácter placeholder para la runa blanca, ya que no tiene un unicode oficial.
+    significadoDerecho: 'Lo desconocido, el destino, el vacío, el potencial ilimitado, nuevas posibilidades, una carta en blanco para tu futuro.',
+    simbolismo: 'El vacío, el destino. Representa lo que está por venir y la influencia del destino en la vida.',
+    palabrasClave: ['destino', 'desconocido', 'vacío', 'potencial', 'nuevas posibilidades', 'futuro incierto']
+  }
+];

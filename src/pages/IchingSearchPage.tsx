@@ -7,17 +7,14 @@ import { Button } from "@/components/ui/button";
 // Importa los datos de tu archivo JSON del I Ching
 import ichingData from '../data/iching.json';
 
-// --- ¡NUEVA INTERFAZ PARA DEFINIR LA ESTRUCTURA DEL HEXAGRAMA! ---
 interface LineaIChing {
   numero: number;
   text: string;
-  // Puedes añadir 'tipo' si lo incluyes en otras líneas, aunque en tu JSON de ejemplo no está.
-  // tipo?: 'Yang' | 'Yin';
 }
 
 interface HexagramaIChing {
-  numero: number; // Asegúrate de que esta propiedad exista y sea un número
-  name: string; // "name" en minúsculas, como en tu JSON
+  numero: number;
+  name: string;
   character: string;
   trigram_top: string;
   trigram_bottom: string;
@@ -35,7 +32,6 @@ interface HexagramaIChing {
 
 const IchingSearchPage = () => {
   const [hexagramNumber, setHexagramNumber] = useState('');
-  // Usa la nueva interfaz para tipar el estado
   const [hexagramInterpretation, setHexagramInterpretation] = useState<HexagramaIChing | null>(null);
   const [error, setError] = useState('');
 
@@ -50,7 +46,6 @@ const IchingSearchPage = () => {
       return;
     }
 
-    // Asegúrate de que ichingData es tratado como un array de HexagramaIChing
     const foundHexagram = (ichingData as HexagramaIChing[]).find(h => h.numero === num);
 
     if (foundHexagram) {
@@ -62,7 +57,8 @@ const IchingSearchPage = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-50 via-indigo-50 to-purple-100 flex flex-col items-center py-8 px-4">
-      <div className="container mx-auto max-w-2xl w-full">
+      {/* CAMBIO AQUÍ: Permitimos más ancho en pantallas pequeñas y limitamos en grandes */}
+      <div className="container mx-auto w-full md:max-w-3xl lg:max-w-4xl">
         <Link to="/" className="back-button mb-8 inline-flex items-center text-indigo-700 hover:text-indigo-900 font-semibold">
           <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
             <path fillRule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clipRule="evenodd" />
@@ -98,9 +94,12 @@ const IchingSearchPage = () => {
             {hexagramInterpretation && (
               <div className="hexagram-result mt-8 pt-6 border-t border-indigo-200 text-left">
                 <h3 className="text-2xl font-serif text-indigo-900 mb-3 text-center">
-                  {/* Aquí es donde accedemos a las propiedades: */}
-                  {hexagramInterpretation.numero}. {hexagramInterpretation.name} {/* Usamos .name porque en tu JSON así se llama */}
+                  {hexagramInterpretation.numero}. {hexagramInterpretation.name}
                 </h3>
+                <p className="text-6xl text-indigo-800 font-mono text-center mb-6">
+                  {hexagramInterpretation.character}
+                </p>
+
                 <p className="text-gray-800 mb-2">
                   <strong>Trigramas:</strong> Superior: {hexagramInterpretation.trigram_top}, Inferior: {hexagramInterpretation.trigram_bottom}
                 </p>
@@ -109,7 +108,6 @@ const IchingSearchPage = () => {
                 <h4 className="text-xl font-serif text-indigo-800 mt-4 mb-2">La Imagen</h4>
                 <p className="text-gray-700 leading-relaxed mb-4">{hexagramInterpretation.image}</p>
                 
-                {/* Nuevos campos */}
                 <h4 className="text-xl font-serif text-indigo-800 mt-4 mb-2">Significado Profundo</h4>
                 <p className="text-gray-700 leading-relaxed mb-4">{hexagramInterpretation.significado_profundo}</p>
 
@@ -125,14 +123,13 @@ const IchingSearchPage = () => {
                     <li key={index}>{cita}</li>
                   ))}
                 </ul>
-                {/* Fin de nuevos campos */}
 
                 <h4 className="text-xl font-serif text-indigo-800 mt-4 mb-2">Comentarios de las Líneas</h4>
                 <ul className="space-y-3">
-                  {hexagramInterpretation.lines.map(linea => ( // Accedemos a .lines (plural)
+                  {hexagramInterpretation.lines.map(linea => (
                     <li key={linea.numero} className="bg-indigo-50 p-4 rounded-md border border-indigo-100 shadow-sm">
-                      <strong className="text-indigo-700">Línea {linea.numero}:</strong>{' '} {/* Accedemos a linea.numero */}
-                      <span className="text-gray-800">{linea.text}</span> {/* Accedemos a linea.text */}
+                      <strong className="text-indigo-700">Línea {linea.numero}:</strong>{' '}
+                      <span className="text-gray-800">{linea.text}</span>
                     </li>
                   ))}
                 </ul>

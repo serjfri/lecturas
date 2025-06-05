@@ -1,13 +1,18 @@
-// src/pages/Index.tsx
 import React, { useState, useEffect } from 'react';
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { CreditCard, Layers, BookOpenText, Activity } from "lucide-react"; // Usamos 'Activity' como prueba
+import { CreditCard, Layers, BookOpenText, Activity } from "lucide-react";
 import { Link } from 'react-router-dom';
 
 import CartaSelector from '@/components/CartaSelector';
 import TiradaSelector from '@/components/TiradaSelector';
 import InterpretacionCartas from '@/components/InterpretacionCartas';
+import BackButton from '@/components/BackButton'; // Asegúrate de tener este import si BackButton es un componente separado
+
+// NUEVAS IMPORTACIONES para Runas
+import RunaSelector from '@/components/RunaSelector';
+import InterpretacionRunas from '@/components/InterpretacionRunas';
+import { RunaMeaning } from '@/data/runaMeanings'; // Importa la interfaz RunaMeaning
 
 export interface Posicion {
   numero: number;
@@ -47,14 +52,17 @@ const tiradaLibreBase: Tirada = {
 };
 
 const Index = () => {
-  // **MODIFICADO:** Añadimos 'tarotOptions' a los tipos de vista.
-  const [vistaActual, setVistaActual] = useState<'inicio' | 'seleccionLibre' | 'tiradas' | 'cartas' | 'interpretacion' | 'seleccionBarajaLibre' | 'tarotOptions'>('inicio');
+  // **MODIFICADO:** Añadimos 'runasOptions', 'runas', 'interpretacionRunas' a los tipos de vista.
+  const [vistaActual, setVistaActual] = useState<'inicio' | 'seleccionLibre' | 'tiradas' | 'cartas' | 'interpretacion' | 'seleccionBarajaLibre' | 'tarotOptions' | 'runasOptions' | 'runas' | 'interpretacionRunas'>('inicio');
   const [tiradaSeleccionada, setTiradaSeleccionada] = useState<Tirada | null>(null);
   const [barajaSeleccionada, setBarajaSeleccionada] = useState<'tradicional' | 'osho'>('tradicional');
   const [cartasSeleccionadas, setCartasSeleccionadas] = useState<CartaSeleccionada[]>([]);
   const [modoLibre, setModoLibre] = useState(false);
 
   const [posicionActualParaSelector, setPosicionActualParaSelector] = useState(0);
+
+  // NUEVO ESTADO: para la runa que se va a interpretar
+  const [selectedRunaForInterpretation, setSelectedRunaForInterpretation] = useState<RunaMeaning | null>(null);
 
   useEffect(() => {
     if (vistaActual === 'cartas' && !modoLibre && tiradaSeleccionada) {
@@ -67,6 +75,17 @@ const Index = () => {
   // **NUEVA FUNCIÓN:** Para mostrar las opciones de Tarot
   const handleShowTarotOptions = () => {
     setVistaActual('tarotOptions');
+  };
+
+  // **NUEVA FUNCIÓN:** Para mostrar las opciones de Runas
+  const handleShowRunasOptions = () => {
+    setVistaActual('runasOptions');
+  };
+
+  // NUEVA FUNCIÓN: Para manejar la selección de una runa desde RunaSelector y pasarla a InterpretacionRunas
+  const handleSelectRunaForInterpretation = (runa: RunaMeaning) => {
+    setSelectedRunaForInterpretation(runa);
+    setVistaActual('interpretacionRunas');
   };
 
   const handleSeleccionLibre = () => {
@@ -172,13 +191,13 @@ const Index = () => {
         }
       } else {
         if (posicionActualParaSelector > 0) {
-            setPosicionActualParaSelector(prevPos => prevPos - 1);
+          setPosicionActualParaSelector(prevPos => prevPos - 1);
         } else {
           setPosicionActualParaSelector(0);
         }
       }
     } else {
-        setPosicionActualParaSelector(0);
+      setPosicionActualParaSelector(0);
     }
   };
 
@@ -192,7 +211,7 @@ const Index = () => {
     }
   };
 
-  // **MODIFICADO:** Lógica de handleVolver para la nueva vista 'tarotOptions'
+  // **MODIFICADO:** Lógica de handleVolver para las nuevas vistas de Runas
   const handleVolver = () => {
     if (vistaActual === 'cartas') {
       if (modoLibre) {
@@ -207,20 +226,28 @@ const Index = () => {
     } else if (vistaActual === 'interpretacion') {
       setVistaActual('cartas');
     } else if (vistaActual === 'seleccionBarajaLibre') {
-      setVistaActual('tarotOptions'); // Vuelve a las opciones de Tarot
+      setVistaActual('tarotOptions');
       setModoLibre(false);
       setBarajaSeleccionada('tradicional');
       setTiradaSeleccionada(null);
     } else if (vistaActual === 'tiradas') {
-      setVistaActual('tarotOptions'); // Vuelve a las opciones de Tarot
+      setVistaActual('tarotOptions');
       setTiradaSeleccionada(null);
       setCartasSeleccionadas([]);
       setPosicionActualParaSelector(0);
-    } else if (vistaActual === 'tarotOptions') { // NUEVA CONDICIÓN
+    } else if (vistaActual === 'tarotOptions') {
       setVistaActual('inicio'); // Vuelve a la pantalla de inicio principal
       setTiradaSeleccionada(null);
       setCartasSeleccionadas([]);
       setPosicionActualParaSelector(0);
+    } else if (vistaActual === 'runasOptions') {
+      setVistaActual('inicio'); // Vuelve a la pantalla de inicio principal
+    } else if (vistaActual === 'runas') { // Esta es la vista donde está RunaSelector
+      setVistaActual('runasOptions'); // Vuelve a las opciones de Runas
+      setSelectedRunaForInterpretation(null); // Limpia la runa seleccionada si vuelves
+    } else if (vistaActual === 'interpretacionRunas') {
+      setVistaActual('runas'); // Vuelve a la pantalla de RunaSelector
+      setSelectedRunaForInterpretation(null); // Limpia la runa interpretada al volver
     }
     // Si estamos en 'inicio' y la URL cambia (por el Link al I Ching), no necesitamos un handleVolver aquí.
   };
@@ -314,16 +341,8 @@ const Index = () => {
       {vistaActual === 'tarotOptions' && (
         <div className="min-h-screen bg-gradient-to-br from-amber-50 via-orange-50 to-amber-100 flex flex-col items-center py-8 px-4">
           <div className="container mx-auto max-w-2xl w-full">
-            <Button
-              variant="outline"
-              onClick={handleVolver}
-              className="mb-8 inline-flex items-center text-gray-700 hover:text-gray-900 font-semibold"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
-                <path fillRule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clipRule="evenodd" />
-              </svg>
-              Volver a Oráculos
-            </Button>
+            {/* CORREGIDO: Se añadió la prop onVolver */}
+            <BackButton onVolver={handleVolver} label="Volver a Oráculos" />
             <div className="grid md:grid-cols-2 gap-8 max-w-3xl mx-auto">
               <Card
                 className="group bg-white/80 backdrop-blur-sm border-amber-200 hover:border-amber-400 transition-all duration-300 cursor-pointer hover:shadow-xl hover:-translate-y-1"
@@ -373,27 +392,69 @@ const Index = () => {
         </div>
       )}
 
-      {/* **VISTA INICIAL:** Solo muestra Tarot e I Ching */}
+      {/* **NUEVA VISTA:** Opciones de Runas (por ahora simple) */}
+      {vistaActual === 'runasOptions' && (
+        <div className="min-h-screen bg-gradient-to-br from-green-50 via-emerald-50 to-green-100 flex flex-col items-center py-8 px-4">
+          <div className="container mx-auto max-w-2xl w-full">
+            {/* CORREGIDO: Se añadió la prop onVolver */}
+            <BackButton onVolver={handleVolver} label="Volver a Oráculos" className="mb-8 inline-flex items-center" />
+            <div className="grid md:grid-cols-1 gap-8 max-w-3xl mx-auto">
+              <Card
+                className="group bg-white/80 backdrop-blur-sm border-emerald-200 hover:border-emerald-400 transition-all duration-300 cursor-pointer hover:shadow-xl hover:-translate-y-1"
+                onClick={() => setVistaActual('runas')} // Simplificado por ahora
+              >
+                <CardContent className="p-8 text-center">
+                  <div className="mb-6">
+                    <div className="mx-auto w-16 h-16 bg-gradient-to-br from-emerald-400 to-green-500 rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                      <Activity className="w-8 h-8 text-white" /> {/* Placeholder icon */}
+                    </div>
+                    <h3 className="text-2xl font-serif text-emerald-900 mb-3">
+                      Lanzar Runas
+                    </h3>
+                  </div>
+                  <Button
+                    size="lg"
+                    className="w-full bg-gradient-to-r from-emerald-600 to-green-600 hover:from-emerald-700 hover:to-green-700 text-white font-medium"
+                  >
+                    Comenzar Lectura
+                  </Button>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* **NUEVA VISTA:** Componente para la selección/lanzamiento de Runas */}
+      {vistaActual === 'runas' && (
+          <RunaSelector
+            onVolver={handleVolver} // Pasa la función de volver
+            onSelectRunaForInterpretation={handleSelectRunaForInterpretation} // Pasa la función para interpretar
+          />
+      )}
+
+      {/* **NUEVA VISTA:** Componente para la interpretación de Runas */}
+      {vistaActual === 'interpretacionRunas' && selectedRunaForInterpretation && ( // Asegúrate de que hay una runa seleccionada
+          <InterpretacionRunas
+            runa={selectedRunaForInterpretation} // Pasa la runa seleccionada
+            onVolver={handleVolver} // Pasa la función de volver
+          />
+      )}
+
+      {/* **VISTA INICIAL:** Ahora con 3 opciones */}
       {vistaActual === 'inicio' && (
         <div className="min-h-screen bg-gradient-to-br from-amber-50 via-orange-50 to-amber-100 flex flex-col items-center py-8 px-4">
           <div className="container mx-auto max-w-4xl">
-            {/* El título se ha eliminado aquí según tu petición anterior */}
-            {/* <div className="text-center mb-12">
-              <h1 className="text-5xl font-serif text-amber-900 mb-4">
-                Oráculos
-              </h1>
-            </div> */}
-
-            <div className="grid md:grid-cols-2 gap-8 max-w-3xl mx-auto">
+            <div className="grid md:grid-cols-3 gap-8 max-w-3xl mx-auto">
               {/* Opción para Tarot */}
               <Card
                 className="group bg-white/80 backdrop-blur-sm border-amber-200 hover:border-amber-400 transition-all duration-300 cursor-pointer hover:shadow-xl hover:-translate-y-1"
-                onClick={handleShowTarotOptions} // Llama a la nueva función
+                onClick={handleShowTarotOptions}
               >
                 <CardContent className="p-8 text-center">
                   <div className="mb-6">
                     <div className="mx-auto w-16 h-16 bg-gradient-to-br from-rose-400 to-red-500 rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                      <Activity className="w-8 h-8 text-white" /> {/* Un icono representativo para Tarot */}
+                      <Activity className="w-8 h-8 text-white" />
                     </div>
                     <h3 className="text-2xl font-serif text-amber-900 mb-3">
                       Tarot
@@ -409,7 +470,7 @@ const Index = () => {
               </Card>
 
               {/* Opción para I Ching (sigue siendo un Link) */}
-              <Link to="/iching" className="col-span-full md:col-span-1"> {/* Puedes ajustar col-span si quieres que estén uno al lado del otro */}
+              <Link to="/iching" className="col-span-full md:col-span-1">
                 <Card
                   className="group bg-white/80 backdrop-blur-sm border-amber-200 hover:border-amber-400 transition-all duration-300 cursor-pointer hover:shadow-xl hover:-translate-y-1"
                 >
@@ -432,6 +493,28 @@ const Index = () => {
                 </Card>
               </Link>
 
+              {/* **NUEVA OPCIÓN:** Runas */}
+              <Card
+                className="group bg-white/80 backdrop-blur-sm border-amber-200 hover:border-amber-400 transition-all duration-300 cursor-pointer hover:shadow-xl hover:-translate-y-1"
+                onClick={handleShowRunasOptions}
+              >
+                <CardContent className="p-8 text-center">
+                  <div className="mb-6">
+                    <div className="mx-auto w-16 h-16 bg-gradient-to-br from-green-400 to-emerald-500 rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                      <Layers className="w-8 h-8 text-white" /> {/* Icono provisional para runas */}
+                    </div>
+                    <h3 className="text-2xl font-serif text-amber-900 mb-3">
+                      Runas
+                    </h3>
+                  </div>
+                  <Button
+                    size="lg"
+                    className="w-full bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-medium"
+                  >
+                    Lanzar Runas
+                  </Button>
+                </CardContent>
+              </Card>
             </div>
           </div>
         </div>
