@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Redireccionando...</title>
+    <script type="text/javascript">
+        // Define la URL base de tu aplicación en GitHub Pages
+        // ¡Asegúrate de que sea exactamente '/lecturas/'!
+        var BASE_URL = '/lecturas/';
+
+        // Redirige al index.html de tu aplicación, manteniendo cualquier
+        // query string (ej: ?param=valor) o hash (ej: #seccion) de la URL original.
+        location.replace(BASE_URL + 'index.html' + location.search + location.hash);
+    </script>
+</head>
+<body>
+    <noscript>
+        <p>Necesitas JavaScript para ver esta página.</p>
+        <p><a href="/lecturas/">Haz clic aquí para ir a la página principal.</a></p>
+    </noscript>
+</body>
+</html>
