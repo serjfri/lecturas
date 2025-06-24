@@ -510,97 +510,110 @@ toast({
               </>
             )}
 
-            {/* Cartas filtradas por letra o palo: Mostrar si hay letra O palo seleccionado */}
+{/* Cartas filtradas por letra o palo: Mostrar si hay letra O palo seleccionado */}
             {((baraja === 'tradicional' && (letraSeleccionada || paloSeleccionado)) ||
               (baraja === 'osho' && letraSeleccionada)) && (
                 <div>
-                  <label className="block text-sm font-medium text-emerald-900 mb-2">
+                  <label className="block text-sm font-medium text-emerald-900 mb-3">
                     Cartas disponibles
                   </label>
+                  
+                  {/* ARCANOS MENORES - Layout por grupos organizados */}
                   {baraja === 'tradicional' && categoriaSeleccionada === 'menores' && paloSeleccionado && cartasPorGruposDePalo ? (
-                    <div className="space-y-2">
-                      {/* Fila: As, 2, 3, 4, 5 */}
-                      {cartasPorGruposDePalo.asToFive.length > 0 && (
-                        <div className="flex flex-wrap gap-1 justify-center">
-                          {cartasPorGruposDePalo.asToFive.map((carta) => (
-                            <Button
-                              key={carta.id}
-                              variant="outline"
-                              // Adjusted size for minor arcana numbers/faces
-                              className="h-9 w-12 p-0 text-center hover:bg-emerald-50 hover:border-emerald-400 text-xs"
-                              onClick={() => handleCartaSelect(carta.id)}
-                            >
-                              {getCartaMenorDisplay(carta.name)}
-                            </Button>
-                          ))}
-                        </div>
-                      )}
-                      {/* Fila: 6, 7, 8, 9, 10 */}
-                      {cartasPorGruposDePalo.sixToTen.length > 0 && (
-                        <div className="flex flex-wrap gap-1 justify-center">
-                          {cartasPorGruposDePalo.sixToTen.map((carta) => (
-                            <Button
-                              key={carta.id}
-                              variant="outline"
-                              // Adjusted size for minor arcana numbers/faces
-                              className="h-9 w-12 p-0 text-center hover:bg-emerald-50 hover:border-emerald-400 text-xs"
-                              onClick={() => handleCartaSelect(carta.id)}
-                            >
-                              {getCartaMenorDisplay(carta.name)}
-                            </Button>
-                          ))}
-                        </div>
-                      )}
+                    <div className="space-y-4">
+                      
+                      {/* Números (As - 10) */}
+                      <div className="space-y-2">
+                        <h4 className="text-xs font-semibold text-emerald-800 mb-2">Números</h4>
+                        
+                        {/* Fila: As, 2, 3, 4, 5 */}
+                        {cartasPorGruposDePalo.asToFive.length > 0 && (
+                          <div className="grid grid-cols-5 gap-2">
+                            {cartasPorGruposDePalo.asToFive.map((carta) => (
+                              <Button
+                                key={carta.id}
+                                variant="outline"
+                                className="h-12 flex items-center justify-center hover:bg-emerald-50 hover:border-emerald-400 font-semibold text-emerald-800 border-emerald-200 bg-emerald-25"
+                                onClick={() => handleCartaSelect(carta.id)}
+                              >
+                                {getCartaMenorDisplay(carta.name)}
+                              </Button>
+                            ))}
+                          </div>
+                        )}
+                        
+                        {/* Fila: 6, 7, 8, 9, 10 */}
+                        {cartasPorGruposDePalo.sixToTen.length > 0 && (
+                          <div className="grid grid-cols-5 gap-2">
+                            {cartasPorGruposDePalo.sixToTen.map((carta) => (
+                              <Button
+                                key={carta.id}
+                                variant="outline"
+                                className="h-12 flex items-center justify-center hover:bg-emerald-50 hover:border-emerald-400 font-semibold text-emerald-800 border-emerald-200 bg-emerald-25"
+                                onClick={() => handleCartaSelect(carta.id)}
+                              >
+                                {getCartaMenorDisplay(carta.name)}
+                              </Button>
+                            ))}
+                          </div>
+                        )}
+                      </div>
 
-                      {/* Fila: Sota, Caballero */}
-                      {cartasPorGruposDePalo.sotaCaballero.length > 0 && (
-                        <div className="flex flex-wrap gap-1 justify-center">
-                          {cartasPorGruposDePalo.sotaCaballero.map((carta) => (
-                            <Button
-                              key={carta.id}
-                              variant="outline"
-                              // Adjusted size for minor arcana numbers/faces
-                              className="h-9 w-16 p-0 text-center hover:bg-emerald-50 hover:border-emerald-400 text-xs"
-                              onClick={() => handleCartaSelect(carta.id)}
-                            >
-                              {getCartaMenorDisplay(carta.name)}
-                            </Button>
-                          ))}
-                        </div>
-                      )}
+                      {/* Figuras (Sota, Caballero, Reina, Rey) */}
+                      <div className="space-y-2">
+                        <h4 className="text-xs font-semibold text-emerald-800 mb-2">Figuras</h4>
+                        
+                        {/* Primera fila: Sota, Caballero */}
+                        {cartasPorGruposDePalo.sotaCaballero.length > 0 && (
+                          <div className="grid grid-cols-2 gap-2">
+                            {cartasPorGruposDePalo.sotaCaballero.map((carta) => (
+                              <Button
+                                key={carta.id}
+                                variant="outline"
+                                className="h-12 flex items-center justify-center hover:bg-emerald-50 hover:border-emerald-400 font-medium text-emerald-800 border-emerald-200 bg-emerald-25 text-sm"
+                                onClick={() => handleCartaSelect(carta.id)}
+                              >
+                                {getCartaMenorDisplay(carta.name)}
+                              </Button>
+                            ))}
+                          </div>
+                        )}
 
-                      {/* Fila: Reina, Rey */}
-                      {cartasPorGruposDePalo.reinaRey.length > 0 && (
-                        <div className="flex flex-wrap gap-1 justify-center">
-                          {cartasPorGruposDePalo.reinaRey.map((carta) => (
-                            <Button
-                              key={carta.id}
-                              variant="outline"
-                              // Adjusted size for minor arcana numbers/faces
-                              className="h-9 w-16 p-0 text-center hover:bg-emerald-50 hover:border-emerald-400 text-xs"
-                              onClick={() => handleCartaSelect(carta.id)}
-                            >
-                              {getCartaMenorDisplay(carta.name)}
-                            </Button>
-                          ))}
-                        </div>
-                      )}
+                        {/* Segunda fila: Reina, Rey */}
+                        {cartasPorGruposDePalo.reinaRey.length > 0 && (
+                          <div className="grid grid-cols-2 gap-2">
+                            {cartasPorGruposDePalo.reinaRey.map((carta) => (
+                              <Button
+                                key={carta.id}
+                                variant="outline"
+                                className="h-12 flex items-center justify-center hover:bg-emerald-50 hover:border-emerald-400 font-medium text-emerald-800 border-emerald-200 bg-emerald-25 text-sm"
+                                onClick={() => handleCartaSelect(carta.id)}
+                              >
+                                {getCartaMenorDisplay(carta.name)}
+                              </Button>
+                            ))}
+                          </div>
+                        )}
+                      </div>
                     </div>
                   ) : (
-                    <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
-                      {filtrarCartasPorLetra(letraSeleccionada, baraja, categoriaSeleccionada === 'mayores' ? 'mayores' : null)
-                        .map((carta) => (
-                          <Button
-                            key={carta.id}
-                            variant="outline"
-                            // Adjusted size for Osho card name buttons
-                            className="flex flex-col items-center justify-center p-1 text-center font-medium rounded-lg border border-emerald-300 bg-emerald-50 hover:bg-emerald-100 hover:border-emerald-500 transition-all duration-200 cursor-pointer h-10 text-sm sm:h-12 sm:text-base w-full"
-                            onClick={() => handleCartaSelect(carta.id)}
-                          >
-                            <span className="font-semibold text-emerald-900 text-sm sm:text-base">{carta.name}</span>
-                          </Button>
-                        ))}
-                    </div>
+// ✅✅✅ CÓDIGO NUEVO PARA ARCANOS MAYORES Y OSHO EN 3 COLUMNAS ✅✅✅
+<div className="grid grid-cols-2 gap-2">
+  {filtrarCartasPorLetra(letraSeleccionada, baraja, categoriaSeleccionada === 'mayores' ? 'mayores' : null)
+    .map((carta) => (
+      <Button
+        key={carta.id}
+        variant="outline"
+        className="w-full h-auto min-h-[3rem] p-3 flex items-center justify-center text-center font-medium rounded-lg border-emerald-300 bg-emerald-50 hover:bg-emerald-100 hover:border-emerald-500 transition-all duration-200 cursor-pointer"
+        onClick={() => handleCartaSelect(carta.id)}
+      >
+        <span className="font-semibold text-emerald-900 leading-tight">
+          {carta.name}
+        </span>
+      </Button>
+    ))}
+</div>
+// ✅✅✅ FIN DEL CÓDIGO NUEVO ✅✅✅
                   )}
                 </div>
               )}

@@ -9,9 +9,13 @@ import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import IchingSearchPage from "./pages/IchingSearchPage";
 
-// IMPORTA AQUÍ TU NUEVO COMPONENTE PARA LA SECCIÓN DE TAROT
-// Necesitarás crear este archivo (ej: src/pages/TarotPage.tsx)
-import TarotPage from "./pages/TarotPage"; // <--- ¡NUEVA IMPORTACIÓN!
+// IMPORTA AQUÍ TU COMPONENTE PARA LA SECCIÓN DE TAROT
+import TarotPage from "./pages/TarotPage";
+
+// IMPORTA AQUÍ TU COMPONENTE PARA LA SECCIÓN DE RUNAS
+// Asegúrate de que el nombre aquí coincida exactamente con el nombre de tu archivo.
+// Si tu archivo es 'RunesPage.tsx', la importación debe ser 'RunesPage'.
+import RunesPage from "./pages/RunesPage"; // <--- ¡CORREGIDO PARA RunesPage.tsx!
 
 const queryClient = new QueryClient();
 
@@ -24,9 +28,12 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/iching" element={<IchingSearchPage />} />
 
-          {/* ¡NUEVA RUTA PARA LA SECCIÓN DE TAROT! */}
-          {/* Esta ruta ahora manejará todo lo relacionado con el Tarot */}
-          <Route path="/tarot" element={<TarotPage />} /> {/* <--- ¡AÑADE ESTA LÍNEA! */}
+          {/* Ruta para la sección de Tarot */}
+          <Route path="/tarot" element={<TarotPage />} />
+
+          {/* Ruta para la sección de Runas */}
+          {/* Aquí también el elemento debe ser RunesPage para coincidir con la importación */}
+          <Route path="/runas" element={<RunesPage />} /> {/* <--- ¡CORREGIDO PARA RunesPage! */}
 
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />

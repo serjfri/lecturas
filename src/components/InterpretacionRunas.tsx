@@ -1,9 +1,12 @@
-// src/components/InterpretacionRunas.tsx
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { ChevronLeft } from "lucide-react";
-import { RunaMeaning } from '@/data/runaMeanings'; // Make sure this path is correct
+// ELIMINADO: import { Button } from "@/components/ui/button"; // Ya no se usa directamente el Button de shadcn para el volver
+// ELIMINADO: import { ChevronLeft } from "lucide-react"; // Ya no se usa directamente el ChevronLeft aquí
+
+// AÑADIDO: Importa tu componente BackButton personalizado
+import BackButton from '@/components/BackButton';
+
+import { RunaMeaning } from '@/data/runaMeanings'; // Asegúrate de que esta ruta sea correcta
 
 interface InterpretacionRunasProps {
   runa: RunaMeaning;
@@ -12,11 +15,16 @@ interface InterpretacionRunasProps {
 
 const InterpretacionRunas: React.FC<InterpretacionRunasProps> = ({ runa, onVolver }) => {
   return (
-    // MODIFIED: Removed px-4 from the outermost div to give more horizontal space
     <div className="min-h-screen bg-gradient-to-br from-purple-50 via-indigo-50 to-purple-100 py-8">
-      {/* MODIFIED: Changed container class to w-full and added explicit horizontal padding.
-                  Also adjusted max-width for larger screens. */}
-      <div className="mx-auto w-full px-4 sm:px-6 md:max-w-4xl lg:max-w-5xl xl:max-w-6xl space-y-6"> {/* The main content container */}
+      {/* AÑADIDO: El BackButton flotante en la esquina superior izquierda */}
+      <BackButton
+        onVolver={onVolver}
+        isRound={true} // Para que sea el botón redondo con solo la flecha
+        className="fixed top-4 left-4 z-50" // Posicionamiento fijo y z-index alto
+      />
+
+      {/* MODIFICADO: Ajustado el padding-top para que el contenido no quede debajo del botón fijo */}
+      <div className="mx-auto w-full px-4 sm:px-6 md:max-w-4xl lg:max-w-5xl xl:max-w-6xl space-y-6 pt-16"> {/* The main content container */}
         <div className="text-center mb-6">
           <h2 className="text-3xl font-serif text-purple-900 mb-2">
             Interpretación de la Runa
@@ -136,17 +144,9 @@ const InterpretacionRunas: React.FC<InterpretacionRunasProps> = ({ runa, onVolve
           </CardContent>
         </Card>
 
-        {/* Botón volver */}
-        <div className="flex justify-center mt-6">
-          <Button
-            variant="outline"
-            className="text-purple-700 border-purple-300 hover:bg-purple-50"
-            onClick={onVolver}
-          >
-            <ChevronLeft className="w-4 h-4 mr-2" />
-            Volver a Runas
-          </Button>
-        </div>
+        {/* ELIMINADO: El botón "Volver" que estaba aquí ha sido removido.
+           Ahora el BackButton personalizado se añade directamente al principio del componente. */}
+
       </div>
     </div>
   );

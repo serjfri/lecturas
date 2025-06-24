@@ -36,11 +36,21 @@ const RunesPage = () => {
 
   return (
     <div className="relative min-h-screen">
+      {/* AÑADIDO: El BackButton flotante que se muestra en todas las vistas de RunesPage */}
+      {/* Se renderiza siempre, pero su funcionalidad depende de vistaActual */}
+      <BackButton
+        onVolver={handleVolver}
+        isRound={true} // Para que sea el botón redondo con solo la flecha
+        className="fixed top-4 left-4 z-50" // Posicionamiento fijo y z-index alto
+      />
+
       {vistaActual === 'runesOptions' && (
         <div className="min-h-screen bg-gradient-to-br from-green-50 via-emerald-50 to-green-100 flex flex-col items-center py-8 px-4">
           <div className="container mx-auto max-w-2xl w-full">
-            <BackButton onVolver={handleVolver} label="Volver a Inicio" className="mb-8 inline-flex items-center" />
-            <div className="grid md:grid-cols-1 gap-8 max-w-3xl mx-auto">
+            {/* ELIMINADO: El BackButton que estaba aquí (redundante con el flotante global) */}
+            {/* <BackButton onVolver={handleVolver} label="Volver a Inicio" className="mb-8 inline-flex items-center" /> */}
+
+            <div className="grid md:grid-cols-1 gap-8 max-w-3xl mx-auto pt-16"> {/* AÑADIDO: pt-16 para desplazar contenido por el botón flotante */}
               <Card
                 className="group bg-white/80 backdrop-blur-sm border-emerald-200 hover:border-emerald-400 transition-all duration-300 cursor-pointer hover:shadow-xl hover:-translate-y-1"
                 onClick={() => setVistaActual('runas')} // Ir directamente a la selección/lanzamiento de runas
@@ -69,7 +79,7 @@ const RunesPage = () => {
 
       {vistaActual === 'runas' && (
         <RunaSelector
-          onVolver={handleVolver}
+          onVolver={handleVolver} // Se sigue pasando handleVolver para que RunaSelector sepa qué hacer
           onSelectRunaForInterpretation={handleSelectRunaForInterpretation}
         />
       )}
@@ -77,7 +87,7 @@ const RunesPage = () => {
       {vistaActual === 'interpretacionRunas' && selectedRunaForInterpretation && (
         <InterpretacionRunas
           runa={selectedRunaForInterpretation}
-          onVolver={handleVolver}
+          onVolver={handleVolver} // Se sigue pasando handleVolver
         />
       )}
     </div>
