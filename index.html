@@ -3,53 +3,45 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title></title>
-    <meta name="description" content="PWA para interpretación de tiradas de tarot tradicional y de Osho" />
+    <title>guía de oráculos</title> <!-- Updated title -->
+    <!-- Removed "PWA para interpretación de tiradas de tarot tradicional y de Osho" to be more generic -->
+    <meta name="description" content="Aplicación de guía para la consulta de Tarot, I Ching y Runas." /> 
     <meta name="author" content="Lovable" />
     
     <meta name="theme-color" content="#d97706" />
     <meta name="mobile-web-app-capable" content="yes" /> 
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-    <meta name="apple-mobile-web-app-title" content="Guía de Tarot" />
+    <meta name="apple-mobile-web-app-title" content="guía de oráculos" /> <!-- Updated title -->
     
+    <!-- Changed href to be absolute path (starts with /) for correct resolution with Vite's base -->
     <link rel="manifest" href="/lecturas/assets/manifest-CKJWBYvq.json" /> 
     
-    <link rel="icon" type="image/png" sizes="16x16" href="./assets/favicon-16x16.png" />
-    <link rel="icon" type="image/png" sizes="32x32" href="./assets/favicon-32x32.png" />
-    <link rel="apple-touch-icon" href="./assets/icon-192x192.png" /> 
+    <!-- Changed hrefs to be absolute paths -->
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png" />
+    <link rel="apple-touch-icon" href="/lecturas/assets/icon-192x192.png" /> 
     
-    <meta property="og:title" content="Guía de Tarot" />
-    <meta property="og:description" content="PWA para interpretación de tiradas de tarot tradicional y de Osho" />
+    <meta property="og:title" content="guía de oráculos" /> <!-- Updated title -->
+    <meta property="og:description" content="Aplicación de guía para la consulta de Tarot, I Ching y Runas." /> <!-- Updated description -->
     <meta property="og:type" content="website" />
-    <meta property="og:image" content="./assets/icon-512x512.png" />
+    <meta property="og:image" content="/assets/icon-512x512.png" /> <!-- Changed href to be absolute path -->
 
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="oráculos" />
-    <meta name="twitter:description" content="PWA para interpretación de tiradas de tarot tradicional y de Osho" />
-    <meta name="twitter:image" content="./assets/icon-512x512.png" />
+    <meta name="twitter:title" content="guía de oráculos" /> <!-- Updated title -->
+    <meta name="twitter:description" content="Aplicación de guía para la consulta de Tarot, I Ching y Runas." /> <!-- Updated description -->
+    <meta name="twitter:image" content="/assets/icon-512x512.png" /> <!-- Changed href to be absolute path -->
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <script type="module" crossorigin src="/lecturas/assets/index-BJ2fV6c0.js"></script>
-    <link rel="stylesheet" crossorigin href="/lecturas/assets/index-CXQFetAG.css">
-  <link rel="manifest" href="/lecturas/manifest.webmanifest"><script id="vite-plugin-pwa:register-sw" src="/lecturas/registerSW.js"></script></head>  <body>
+    <script type="module" crossorigin src="/lecturas/assets/index-BKUUEOYF.js"></script>
+    <link rel="stylesheet" crossorigin href="/lecturas/assets/index-DvEkZDbP.css">
+  <link rel="manifest" href="/lecturas/manifest.webmanifest"><script id="vite-plugin-pwa:register-sw" src="/lecturas/registerSW.js"></script></head>
+  <body>
     <div id="root"></div>
-    <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
+    <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script> <!-- Ensure this path is correct, usually handled by Vite -->
 
-    <script>
-      if ('serviceWorker' in navigator) {
-        window.addEventListener('load', () => {
-          navigator.serviceWorker.register('./serviceworker.js')
-            .then(registration => {
-              console.log('Service Worker registrado con éxito:', registration);
-            })
-            .catch(error => {
-              console.log('Fallo el registro del Service Worker:', error);
-            });
-        });
-      }
-    </script>
+    <!-- REMOVED: Manual Service Worker Registration Script -->
   </body>
 </html>
