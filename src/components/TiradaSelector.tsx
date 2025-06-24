@@ -1,26 +1,31 @@
+// src/components/TiradaSelector.tsx
+
 import React, { useState, useMemo } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { ChevronLeft, X, Copy } from "lucide-react";
-import { Tirada } from '@/pages/Index'; // Asumo que Tirada se importa desde aquí o un types.ts
-import { tiradas } from '@/data/tiradas';
+import { X, Copy } from "lucide-react"; // Removed ChevronLeft as it's not needed internally
 import { useToast } from "@/hooks/use-toast";
+
+import { Tirada } from '@/types/tarot';
+import { tiradasData } from '@/data/tiradas';
 
 interface TiradaSelectorProps {
   onTiradaSelect: (tirada: Tirada, baraja: 'tradicional' | 'osho') => void;
-  onVolver: () => void; // Este onVolver es para el botón flotante
+  // onVolver ya NO es opcional si el componente no renderiza su propio BackButton fijo.
+  // Pero lo mantendremos para consistencia con la prop que se pasa, aunque no se usará para un botón fijo.
+  onVolver?: () => void;
 }
 
 const TiradaSelector: React.FC<TiradaSelectorProps> = ({
   onTiradaSelect,
-  onVolver
+  onVolver // Aunque se recibe, no se usará para un botón fijo aquí.
 }) => {
   const [barajaSeleccionada, setBarajaSeleccionada] = useState<'tradicional' | 'osho'>('tradicional');
   const [tiradaSeleccionada, setTiradaSeleccionada] = useState<Tirada | null>(null);
   const { toast } = useToast();
 
   const orderedAndGroupedTiradas = useMemo(() => {
-    const sortedTiradas = [...tiradas].sort((a, b) => a.numeroCartas - b.numeroCartas);
+    const sortedTiradas = [...tiradasData].sort((a, b) => a.numeroCartas - b.numeroCartas);
 
     const grouped: { [key: number]: Tirada[] } = {};
     sortedTiradas.forEach(tirada => {
@@ -47,6 +52,20 @@ const TiradaSelector: React.FC<TiradaSelectorProps> = ({
     setTiradaSeleccionada(null);
   };
 
+  // handleInternalBack solo manejará el cierre de la vista previa,
+  // el "volver" a la vista anterior se maneja desde TarotPage.
+  // Esta función puede desaparecer si el botón de cerrar vista previa es suficiente.
+  // Mantenemos la lógica de la vista previa para no romperla.
+  const handleInternalBack = () => {
+     if (tiradaSeleccionada) {
+       handleCerrarVistaPrevia();
+     } else {
+       // Esto ya no se usará para el botón fijo externo, solo si hubiera un botón no-fijo interno.
+       onVolver?.();
+     }
+  };
+
+
   const handleCopiarDetallesTirada = async () => {
     if (tiradaSeleccionada) {
       let textoParaCopiar = `Tirada: ${tiradaSeleccionada.nombre}\n`;
@@ -63,6 +82,7 @@ const TiradaSelector: React.FC<TiradaSelectorProps> = ({
           description: "Los detalles de la tirada se han copiado al portapapeles.",
         });
       } catch (err) {
+        console.error("Error copying to clipboard:", err);
         toast({
           title: "Error al copiar",
           description: "No se pudo copiar los detalles de la tirada. Inténtalo de nuevo.",
@@ -73,7 +93,21 @@ const TiradaSelector: React.FC<TiradaSelectorProps> = ({
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-orange-50 via-amber-50 to-orange-100 pb-20"> {/* Añadir padding-bottom para el botón fijo */}
+    <div className="min-h-screen bg-gradient-to-br from-orange-50 via-amber-50 to-orange-100 pb-20 pt-16"> {/* Add pt-16 to account for fixed BackButton */}
+
+      {/* ELIMINADO: Botón Volver fijo interno. Ahora lo gestiona TarotPage */}
+      {/* {onVolver && (
+        <Button
+          variant="outline"
+          onClick={handleInternalBack}
+          className="fixed top-4 left-4 z-50 p-2 rounded-full shadow-lg bg-white/90 backdrop-blur-sm border-orange-300 hover:bg-orange-50 hover:border-orange-500"
+          size="icon"
+        >
+          <ChevronLeft className="w-6 h-6 text-orange-700" />
+          <span className="sr-only">Volver</span>
+        </Button>
+      )} */}
+
       <div className="container mx-auto px-4 py-8">
         <div className="max-w-4xl mx-auto space-y-6">
           <div className="text-center">
@@ -82,7 +116,6 @@ const TiradaSelector: React.FC<TiradaSelectorProps> = ({
             </h2>
           </div>
 
-          {/* Selección de baraja */}
           <Card className="bg-white/80 backdrop-blur-sm border-orange-200">
             <CardHeader className="pb-4">
               <CardTitle className="text-lg text-orange-900">Tipo de Baraja</CardTitle>
@@ -91,14 +124,14 @@ const TiradaSelector: React.FC<TiradaSelectorProps> = ({
               <div className="grid gap-4 md:grid-cols-2">
                 <Button
                   variant={barajaSeleccionada === 'tradicional' ? "default" : "outline"}
-                  className="h-16 text-lg"
+                  className="h-16 text-lg bg-orange-500 hover:bg-orange-600 text-white"
                   onClick={() => setBarajaSeleccionada('tradicional')}
                 >
                   Tarot Tradicional
                 </Button>
                 <Button
                   variant={barajaSeleccionada === 'osho' ? "default" : "outline"}
-                  className="h-16 text-lg"
+                  className="h-16 text-lg bg-fuchsia-500 hover:bg-fuchsia-600 text-white"
                   onClick={() => setBarajaSeleccionada('osho')}
                 >
                   Tarot de Osho
@@ -107,7 +140,6 @@ const TiradaSelector: React.FC<TiradaSelectorProps> = ({
             </CardContent>
           </Card>
 
-          {/* Lista de tiradas agrupadas y más compactas */}
           {Object.entries(orderedAndGroupedTiradas).map(([numeroCartas, tiradasPorNumero]) => (
             <div key={numeroCartas} className="mb-6">
               <h3 className="text-xl font-serif text-orange-800 mb-3 mt-5">
@@ -133,20 +165,6 @@ const TiradaSelector: React.FC<TiradaSelectorProps> = ({
         </div>
       </div>
 
-      {/* Botón Volver fijo en la parte inferior izquierda */}
-      <div className="fixed bottom-4 left-4 z-50">
-        <Button
-          variant="secondary"
-          size="icon" // Hace el botón redondo
-          className="rounded-full w-12 h-12 shadow-lg"
-          onClick={onVolver}
-        >
-          <ChevronLeft className="w-6 h-6" />
-          <span className="sr-only">Volver</span> {/* Accesibilidad: texto para lectores de pantalla */}
-        </Button>
-      </div>
-
-      {/* Vista previa de la tirada */}
       {tiradaSeleccionada && (
         <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
           <Card className="max-w-2xl w-full max-h-[90vh] flex flex-col bg-white/90 border-orange-200">
@@ -169,20 +187,20 @@ const TiradaSelector: React.FC<TiradaSelectorProps> = ({
                 ))}
               </ul>
             </CardContent>
-            <CardContent className="flex justify-end gap-2 pt-4 shrink-0"> {/* Ajustado a justify-end y gap-2 */}
+            <CardContent className="flex justify-end gap-2 pt-4 shrink-0">
               <Button
-                variant="ghost" // Más discreto
-                size="sm" // Más pequeño
+                variant="ghost"
+                size="sm"
                 className="text-orange-700 hover:bg-orange-50 border-orange-200 border"
                 onClick={handleCopiarDetallesTirada}
               >
-                <Copy className="w-4 h-4 mr-1" /> {/* Icono más pequeño y menos margen */}
+                <Copy className="w-4 h-4 mr-1" />
                 Copiar
               </Button>
-              <Button 
-                onClick={handleConfirmarTirada} 
+              <Button
+                onClick={handleConfirmarTirada}
                 className="bg-orange-600 hover:bg-orange-700"
-                size="sm" // Más pequeño
+                size="sm"
               >
                 Seleccionar
               </Button>

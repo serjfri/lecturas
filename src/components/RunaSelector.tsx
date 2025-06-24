@@ -1,4 +1,3 @@
-// src/components/RunaSelector.tsx
 import React, { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -28,9 +27,10 @@ const RunaSelector: React.FC<RunaSelectorProps> = ({ onVolver, onSelectRunaForIn
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-lime-50 via-emerald-50 to-lime-100 flex flex-col items-center py-8 px-4">
-      <div className="container mx-auto max-w-4xl w-full">
-<BackButton onVolver={onVolver} isRound={true} className="absolute top-4 left-4 z-50" />
+      {/* BackButton ahora con 'fixed' */}
+      <BackButton onVolver={onVolver} isRound={true} className="fixed top-4 left-4 z-50" />
 
+      <div className="container mx-auto max-w-4xl w-full">
         <h2 className="text-3xl font-serif text-lime-900 mb-8 mt-4 text-center">
           Selecciona una Runa para Consultar
         </h2>

@@ -2,170 +2,151 @@
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { RunaMeaning } from '@/data/runaMeanings'; // Asegúrate de que esta sea la importación correcta para tu RunaMeaning expandido
-import BackButton from '@/components/BackButton'; // Asumiendo que usas BackButton aquí
+import { ChevronLeft } from "lucide-react";
+import { RunaMeaning } from '@/data/runaMeanings'; // Make sure this path is correct
 
 interface InterpretacionRunasProps {
-  runa: RunaMeaning | null;
+  runa: RunaMeaning;
   onVolver: () => void;
 }
 
 const InterpretacionRunas: React.FC<InterpretacionRunasProps> = ({ runa, onVolver }) => {
-  if (!runa) {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-50 via-gray-100 to-gray-200 flex flex-col items-center justify-center p-4">
-        <Card className="w-full max-w-lg shadow-xl border-gray-200">
-          <CardHeader>
-            <CardTitle className="text-3xl font-serif text-gray-800 text-center">Runa no seleccionada</CardTitle>
-          </CardHeader>
-          <CardContent className="text-center">
-            <p className="text-gray-600 mb-6">Por favor, selecciona una runa para ver su interpretación.</p>
-            {/* Puedes optar por un botón redondo aquí si lo deseas */}
-            <Button onClick={onVolver} className="bg-gray-700 hover:bg-gray-800 text-white">Volver a Selección de Runas</Button>
-          </CardContent>
-        </Card>
-        {/* Aquí puedes añadir el BackButton redondo en la esquina superior izquierda si quieres */}
-        {/* <BackButton onVolver={onVolver} isRound={true} className="absolute top-4 left-4 z-50" /> */}
-      </div>
-    );
-  }
-
-  // Determine if the runa has an inverted meaning
-  const hasInvertedMeaning = runa.significadoInvertido && runa.significadoInvertido.trim() !== '';
-
   return (
-    <div className="relative min-h-screen bg-gradient-to-br from-green-50 via-emerald-50 to-green-100 p-4 sm:p-8 flex flex-col items-center">
-      {/* Botón de volver en la esquina superior izquierda */}
-      <BackButton onVolver={onVolver} isRound={true} className="absolute top-4 left-4 z-50" />
+    // MODIFIED: Removed px-4 from the outermost div to give more horizontal space
+    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-indigo-50 to-purple-100 py-8">
+      {/* MODIFIED: Changed container class to w-full and added explicit horizontal padding.
+                  Also adjusted max-width for larger screens. */}
+      <div className="mx-auto w-full px-4 sm:px-6 md:max-w-4xl lg:max-w-5xl xl:max-w-6xl space-y-6"> {/* The main content container */}
+        <div className="text-center mb-6">
+          <h2 className="text-3xl font-serif text-purple-900 mb-2">
+            Interpretación de la Runa
+          </h2>
+          <p className="text-purple-700 text-lg">
+            Runa seleccionada: <span className="font-bold">{runa.nombre}</span> (<span className="font-bold text-2xl">{runa.unicode}</span>)
+          </p>
+        </div>
 
-      <div className="container mx-auto max-w-4xl pt-16 pb-8"> {/* Ajusta el pt-16 para dejar espacio al botón de volver */}
-        <Card className="bg-white/90 backdrop-blur-sm border-emerald-200 shadow-xl p-6 sm:p-8">
-          <CardHeader className="text-center mb-6">
-            <CardTitle className="text-4xl font-serif text-emerald-900 mb-2">
-              Interpretación de la Runa: {runa.nombre} {runa.unicode}
+        <Card className="bg-white/80 backdrop-blur-sm border-purple-200 shadow-lg">
+          <CardHeader>
+            <CardTitle className="text-2xl font-serif text-purple-950 flex items-center gap-2">
+                <span className="text-4xl">{runa.unicode}</span> {runa.nombre}
             </CardTitle>
-            <p className="text-emerald-700 text-xl font-semibold">{runa.simbolismo}</p>
           </CardHeader>
-
-          <CardContent className="space-y-6 text-gray-800">
-
-            {/* Significados principales */}
-            <div className="border-b pb-4 mb-4 border-emerald-100">
-              <h3 className="text-2xl font-bold text-emerald-800 mb-2">Significado Derecho</h3>
-              <p className="text-lg">{runa.significadoDerecho}</p>
-              {hasInvertedMeaning && (
-                <>
-                  <h3 className="text-2xl font-bold text-emerald-800 mt-4 mb-2">Significado Invertido</h3>
-                  <p className="text-lg">{runa.significadoInvertido}</p>
-                </>
-              )}
-              <p className="text-base text-gray-600 mt-2">
-                Palabras Clave: <span className="font-semibold">{runa.palabrasClave.join(', ')}</span>
-              </p>
+          <CardContent className="space-y-4">
+            {/* Significado Principal */}
+            <div>
+              <h4 className="text-lg font-semibold text-purple-950 mb-1">Significado:</h4>
+              <p className="text-purple-700 text-base leading-relaxed">{runa.significadoDerecho}</p>
             </div>
 
-            {/* Nuevas Secciones de Interpretación */}
+            {/* Si tiene significado invertido */}
+            {runa.significadoInvertido && (
+              <div>
+                <h4 className="text-lg font-semibold text-purple-950 mb-1 text-red-700">Significado Invertido:</h4>
+                <p className="text-red-600 text-base leading-relaxed">{runa.significadoInvertido}</p>
+              </div>
+            )}
 
-            <h3 className="text-2xl font-bold text-emerald-800 mb-4">Detalles Adicionales</h3>
+            {/* Simbolismo */}
+            {runa.simbolismo && (
+              <div>
+                <h4 className="text-lg font-semibold text-purple-950 mb-1">Simbolismo:</h4>
+                <p className="text-purple-700 text-base leading-relaxed">{runa.simbolismo}</p>
+              </div>
+            )}
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="bg-emerald-50 p-4 rounded-lg border border-emerald-100">
-                <h4 className="font-semibold text-emerald-700">Contexto Histórico:</h4>
-                <p className="text-base">{runa.contextoHistorico}</p>
+            {/* Palabras Clave */}
+            {runa.palabrasClave && runa.palabrasClave.length > 0 && (
+              <div>
+                <h4 className="text-lg font-semibold text-purple-950 mb-1">Palabras Clave:</h4>
+                <p className="text-purple-700 text-base leading-relaxed">{runa.palabrasClave.join(', ')}</p>
               </div>
-              <div className="bg-emerald-50 p-4 rounded-lg border border-emerald-100">
-                <h4 className="font-semibold text-emerald-700">Elemento Asociado:</h4>
-                <p className="text-base">{runa.elementoAsociado}</p>
+            )}
+
+            {/* Contexto Histórico */}
+            {runa.contextoHistorico && (
+              <div>
+                <h4 className="text-lg font-semibold text-purple-950 mb-1">Contexto Histórico:</h4>
+                <p className="text-purple-700 text-base leading-relaxed">{runa.contextoHistorico}</p>
               </div>
-              <div className="bg-emerald-50 p-4 rounded-lg border border-emerald-100">
-                <h4 className="font-semibold text-emerald-700">Dioses Asociados:</h4>
-                <p className="text-base">{runa.dioses.join(', ')}</p>
-              </div>
-              {runa.correspondenciaAstrologica && (
-                <div className="bg-emerald-50 p-4 rounded-lg border border-emerald-100">
-                  <h4 className="font-semibold text-emerald-700">Correspondencia Astrológica:</h4>
-                  <p className="text-base">{runa.correspondenciaAstrologica}</p>
-                </div>
-              )}
-              {runa.piedraAsociada && (
-                <div className="bg-emerald-50 p-4 rounded-lg border border-emerald-100">
-                  <h4 className="font-semibold text-emerald-700">Piedra Asociada:</h4>
-                  <p className="text-base">{runa.piedraAsociada}</p>
-                </div>
-              )}
-              {runa.plantaAsociada && (
-                <div className="bg-emerald-50 p-4 rounded-lg border border-emerald-100">
-                  <h4 className="font-semibold text-emerald-700">Planta Asociada:</h4>
-                  <p className="text-base">{runa.plantaAsociada}</p>
-                </div>
-              )}
-              <div className="bg-emerald-50 p-4 rounded-lg border border-emerald-100">
-                <h4 className="font-semibold text-emerald-700">Color Asociado:</h4>
-                <p className="text-base">{runa.colorAsociado}</p>
-              </div>
-              {runa.numeroSagrado && (
-                <div className="bg-emerald-50 p-4 rounded-lg border border-emerald-100">
-                  <h4 className="font-semibold text-emerald-700">Número Sagrado:</h4>
-                  <p className="text-base">{runa.numeroSagrado}</p>
-                </div>
-              )}
-              {runa.estacion && (
-                <div className="bg-emerald-50 p-4 rounded-lg border border-emerald-100">
-                  <h4 className="font-semibold text-emerald-700">Estación:</h4>
-                  <p className="text-base">{runa.estacion}</p>
-                </div>
-              )}
+            )}
+
+            {/* Interpretaciones Específicas */}
+            <div className="grid gap-2 grid-cols-1 sm:grid-cols-2">
+                {runa.interpretacionAmorosa && (
+                    <Card className="bg-purple-50 border-purple-200 p-3">
+                        <h5 className="font-semibold text-purple-900 text-sm">Amor:</h5>
+                        <p className="text-purple-700 text-sm">{runa.interpretacionAmorosa}</p>
+                    </Card>
+                )}
+                {runa.interpretacionLaboral && (
+                    <Card className="bg-purple-50 border-purple-200 p-3">
+                        <h5 className="font-semibold text-purple-900 text-sm">Laboral:</h5>
+                        <p className="text-purple-700 text-sm">{runa.interpretacionLaboral}</p>
+                    </Card>
+                )}
+                {runa.interpretacionSalud && (
+                    <Card className="bg-purple-50 border-purple-200 p-3">
+                        <h5 className="font-semibold text-purple-900 text-sm">Salud:</h5>
+                        <p className="text-purple-700 text-sm">{runa.interpretacionSalud}</p>
+                    </Card>
+                )}
+                {runa.interpretacionEspiritual && (
+                    <Card className="bg-purple-50 border-purple-200 p-3">
+                        <h5 className="font-semibold text-purple-900 text-sm">Espiritual:</h5>
+                        <p className="text-purple-700 text-sm">{runa.interpretacionEspiritual}</p>
+                    </Card>
+                )}
             </div>
 
-            <div className="space-y-4 pt-4 border-t border-emerald-100 mt-6">
-              <h3 className="text-2xl font-bold text-emerald-800">Interpretaciones Específicas</h3>
-              <div className="bg-emerald-50 p-4 rounded-lg border border-emerald-100">
-                <h4 className="font-semibold text-emerald-700">Interpretación Amorosa:</h4>
-                <p className="text-base">{runa.interpretacionAmorosa}</p>
+            {/* Consejo Práctico */}
+            {runa.consejoPractico && (
+              <div>
+                <h4 className="text-lg font-semibold text-purple-950 mb-1">Consejo Práctico:</h4>
+                <p className="text-purple-700 text-base leading-relaxed">{runa.consejoPractico}</p>
               </div>
-              <div className="bg-emerald-50 p-4 rounded-lg border border-emerald-100">
-                <h4 className="font-semibold text-emerald-700">Interpretación Laboral:</h4>
-                <p className="text-base">{runa.interpretacionLaboral}</p>
-              </div>
-              <div className="bg-emerald-50 p-4 rounded-lg border border-emerald-100">
-                <h4 className="font-semibold text-emerald-700">Interpretación Salud:</h4>
-                <p className="text-base">{runa.interpretacionSalud}</p>
-              </div>
-              <div className="bg-emerald-50 p-4 rounded-lg border border-emerald-100">
-                <h4 className="font-semibold text-emerald-700">Interpretación Espiritual:</h4>
-                <p className="text-base">{runa.interpretacionEspiritual}</p>
-              </div>
-            </div>
+            )}
 
-            <div className="space-y-4 pt-4 border-t border-emerald-100 mt-6">
-              <h3 className="text-2xl font-bold text-emerald-800">Guía y Reflexión</h3>
-              <div className="bg-emerald-50 p-4 rounded-lg border border-emerald-100">
-                <h4 className="font-semibold text-emerald-700">Consejo Práctico:</h4>
-                <p className="text-base">{runa.consejoPractico}</p>
+            {/* Meditación Sugerida */}
+            {runa.meditacionSugerida && (
+              <div>
+                <h4 className="text-lg font-semibold text-purple-950 mb-1">Meditación Sugerida:</h4>
+                <p className="text-purple-700 text-base leading-relaxed">{runa.meditacionSugerida}</p>
               </div>
-              <div className="bg-emerald-50 p-4 rounded-lg border border-emerald-100">
-                <h4 className="font-semibold text-emerald-700">Meditación Sugerida:</h4>
-                <p className="text-base">{runa.meditacionSugerida}</p>
-              </div>
-              {runa.afinidadOtrasRunas && runa.afinidadOtrasRunas.length > 0 && (
-                <div className="bg-emerald-50 p-4 rounded-lg border border-emerald-100">
-                  <h4 className="font-semibold text-emerald-700">Afinidad con otras Runas:</h4>
-                  <p className="text-base">{runa.afinidadOtrasRunas.join(', ')}</p>
+            )}
+
+            {/* Detalles Adicionales */}
+            {(runa.elementoAsociado || runa.dioses?.length > 0 || runa.correspondenciaAstrologica || runa.piedraAsociada || runa.plantaAsociada || runa.colorAsociado || runa.numeroSagrado !== undefined || runa.estacion || runa.afinidadOtrasRunas?.length > 0) && (
+                <div>
+                    <h4 className="text-lg font-semibold text-purple-950 mb-1">Más Detalles:</h4>
+                    <ul className="text-purple-700 text-base space-y-1">
+                        {runa.elementoAsociado && <li><strong>Elemento:</strong> {runa.elementoAsociado}</li>}
+                        {runa.dioses && runa.dioses.length > 0 && <li><strong>Dioses:</strong> {runa.dioses.join(', ')}</li>}
+                        {runa.correspondenciaAstrologica && <li><strong>Astrología:</strong> {runa.correspondenciaAstrologica}</li>}
+                        {runa.piedraAsociada && <li><strong>Piedra:</strong> {runa.piedraAsociada}</li>}
+                        {runa.plantaAsociada && <li><strong>Planta:</strong> {runa.plantaAsociada}</li>}
+                        {runa.colorAsociado && <li><strong>Color:</strong> {runa.colorAsociado}</li>}
+                        {runa.numeroSagrado !== undefined && <li><strong>Número Sagrado:</strong> {runa.numeroSagrado}</li>}
+                        {runa.estacion && <li><strong>Estación:</strong> {runa.estacion}</li>}
+                        {runa.afinidadOtrasRunas && runa.afinidadOtrasRunas.length > 0 && <li><strong>Afinidad con:</strong> {runa.afinidadOtrasRunas.join(', ')}</li>}
+                    </ul>
                 </div>
-              )}
-            </div>
+            )}
 
-            <div className="pt-6 text-center">
-              <Button
-                onClick={onVolver}
-                size="lg"
-                className="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold shadow-lg"
-              >
-                Volver a la Selección de Runas
-              </Button>
-            </div>
           </CardContent>
         </Card>
+
+        {/* Botón volver */}
+        <div className="flex justify-center mt-6">
+          <Button
+            variant="outline"
+            className="text-purple-700 border-purple-300 hover:bg-purple-50"
+            onClick={onVolver}
+          >
+            <ChevronLeft className="w-4 h-4 mr-2" />
+            Volver a Runas
+          </Button>
+        </div>
       </div>
     </div>
   );

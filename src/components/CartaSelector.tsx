@@ -1,11 +1,9 @@
-// src/components/CartaSelector.tsx
-
-import React, { useState, useMemo, useEffect } from 'react';
+import React, { useState, useMemo, useEffect, useCallback } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { ChevronLeft, Copy, Trash, Undo2, CheckCircle } from "lucide-react"; // Importamos CheckCircle
-import { Tirada, CartaSeleccionada } from '@/pages/Index'; // Adjust path if needed
+import { Copy, Trash, Undo2, CheckCircle } from "lucide-react";
+import { Tirada, CartaSeleccionada } from '@/types/tarot';
 import { useToast } from "@/hooks/use-toast";
 
 import { cardNames } from '@/data/cardNames';
@@ -39,7 +37,6 @@ const CartaSelector: React.FC<CartaSelectorProps> = ({
   modoLibre,
   onCambiarBaraja
 }) => {
-  const [posicionActual, setPosicionActual] = useState(1);
   const [categoriaSeleccionada, setCategoriaSeleccionada] = useState<'mayores' | 'menores' | null>(null);
   const [letraSeleccionada, setLetraSeleccionada] = useState<string>('');
   const [paloSeleccionado, setPaloSeleccionado] = useState<string>('');
@@ -51,6 +48,17 @@ const CartaSelector: React.FC<CartaSelectorProps> = ({
     posicion: number;
   } | null>(null);
 
+  // Helper to get a cleaned name for sorting (removes articles and accents)
+  const getCleanedName = useCallback((name: string): string => {
+    return name
+      .replace(/^(El|La|Los|Las)\s+/i, '')
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "") // Remove accents
+      .toLowerCase() // Convert to lower case for consistent comparison
+      .trim();
+  }, []);
+
+  // Memoized lists of cards for efficiency
   const arcanosMayores = useMemo(() =>
     cardNames.filter(c =>
       c.baraja === 'tradicional' &&
@@ -58,16 +66,7 @@ const CartaSelector: React.FC<CartaSelectorProps> = ({
         c.id.startsWith('el-') ||
         c.id.startsWith('la-') ||
         c.id.startsWith('los-') ||
-        c.id === 'el-colgado' ||
-        c.id === 'la-muerte' ||
-        c.id === 'la-templanza' ||
-        c.id === 'el-diablo' ||
-        c.id === 'la-torre' ||
-        c.id === 'la-estrella' ||
-        c.id === 'la-luna' ||
-        c.id === 'el-sol' ||
-        c.id === 'el-juicio' ||
-        c.id === 'el-mundo'
+        ['el-colgado', 'la-muerte', 'la-templanza', 'el-diablo', 'la-torre', 'la-estrella', 'la-luna', 'el-sol', 'el-juicio', 'el-mundo', 'el-loco'].includes(c.id)
       )
     ),
     []
@@ -86,14 +85,22 @@ const CartaSelector: React.FC<CartaSelectorProps> = ({
     []
   );
 
-  const cartasOsho = useMemo(() => cardNames.filter(c => c.baraja === 'osho'), []);
+  // MODIFIED: Osho cards are now sorted by their "cleaned" name globally
+  const cartasOsho = useMemo(() => {
+    return cardNames.filter(c => c.baraja === 'osho').sort((a, b) =>
+      getCleanedName(a.name).localeCompare(getCleanedName(b.name))
+    );
+  }, [getCleanedName]);
 
-  const getFirstLetterForSorting = (name: string): string => {
-    const cleanedName = name
+  // Helper to get first letter for display grouping (uses cleaned name)
+  const getFirstLetterForSorting = useCallback((name: string): string => {
+    // This is primarily for grouping by initial letter, after cleaning for sorting
+    const cleanedNameForLetter = name
       .replace(/^(El|La|Los|Las)\s+/i, '')
+      .normalize("NFD").replace(/[\u0300-\u036f]/g, "") // Remove accents
       .trim();
-    return cleanedName.normalize("NFD").replace(/[\u0300-\u036f]/g, "").charAt(0).toUpperCase();
-  };
+    return cleanedNameForLetter.charAt(0).toUpperCase() || '#';
+  }, []);
 
   const getLetrasArcanosMayores = useMemo(() => {
     const letters = new Set<string>();
@@ -101,62 +108,71 @@ const CartaSelector: React.FC<CartaSelectorProps> = ({
       letters.add(getFirstLetterForSorting(carta.name));
     });
     return Array.from(letters).sort();
-  }, [arcanosMayores]);
+  }, [arcanosMayores, getFirstLetterForSorting]);
 
   const getLetrasOsho = useMemo(() => {
     const letters = new Set<string>();
+    // Iterate over the already sorted cartasOsho
     cartasOsho.forEach(carta => {
       letters.add(getFirstLetterForSorting(carta.name));
     });
     return Array.from(letters).sort();
-  }, [cartasOsho]);
+  }, [cartasOsho, getFirstLetterForSorting]);
 
   const palos = ['Bastos', 'Copas', 'Espadas', 'Oros'];
 
+  // MOVED: getCardNameById definition moved higher to ensure it's initialized before usage
+  const getCardNameById = useCallback((id: string) => {
+    const card = cardNames.find(c => c.id === id);
+    return card ? card.name : id;
+  }, []);
+
+  // Debugging log for memoized data
   useEffect(() => {
     console.log("--- DEBUG CARTASELECTOR DATOS ---");
     console.log("CardNames cargados:", cardNames.length);
-    console.log("Arcanos Mayores filtrados:", arcanosMayores.length, arcanosMayores);
-    console.log("Arcanos Menores filtrados:", arcanosMenores.length, arcanosMenores);
-    console.log("Cartas Osho filtradas:", cartasOsho.length, cartasOsho);
+    console.log("Arcanos Mayores filtrados:", arcanosMayores.length, arcanosMayores.map(c => c.name));
+    console.log("Arcanos Menores filtrados:", arcanosMenores.length, arcanosMenores.map(c => c.name));
+    console.log("Cartas Osho filtradas:", cartasOsho.length, cartasOsho.map(c => c.name));
     console.log("Letras Arcanos Mayores:", getLetrasArcanosMayores);
     console.log("Letras Osho:", getLetrasOsho);
     console.log("--- FIN DEBUG CARTASELECTOR DATOS ---");
   }, [arcanosMayores, arcanosMenores, cartasOsho, getLetrasArcanosMayores, getLetrasOsho]);
 
-  const filtrarCartasPorLetra = (letra: string, barajaActual: 'tradicional' | 'osho', categoria: 'mayores' | null) => {
+  // Filters cards by selected letter or category/suit
+  const filtrarCartasPorLetra = useCallback((letra: string, barajaActual: 'tradicional' | 'osho', categoria: 'mayores' | null) => {
     if (barajaActual === 'osho') {
-      return cartasOsho
-        .filter(carta => getFirstLetterForSorting(carta.name) === letra)
-        .sort((a, b) => a.name.localeCompare(b.name));
+      // For Osho, simply filter the already globally sorted list
+      return cartasOsho.filter(carta => getFirstLetterForSorting(carta.name) === letra);
     } else if (barajaActual === 'tradicional' && categoria === 'mayores') {
       return arcanosMayores
         .filter(carta => getFirstLetterForSorting(carta.name) === letra)
         .sort((a, b) => a.name.localeCompare(b.name));
     }
     return [];
-  };
+  }, [cartasOsho, arcanosMayores, getFirstLetterForSorting]);
 
+  // Helper for displaying minor arcana numbers/figures
   const getCartaMenorDisplay = (name: string): string => {
-    if (name.match(/\bAs\b/i)) return 'As';
-    if (name.match(/\bDos\b/i)) return '2';
-    if (name.match(/\bTres\b/i)) return '3';
-    if (name.match(/\bCuatro\b/i)) return '4';
-    if (name.match(/\bCinco\b/i)) return '5';
-    if (name.match(/\bSeis\b/i)) return '6';
-    if (name.match(/\bSiete\b/i)) return '7';
-    if (name.match(/\bOcho\b/i)) return '8';
-    if (name.match(/\bNueve\b/i)) return '9';
-    if (name.match(/\bDiez\b/i)) return '10';
-    if (name.match(/\bSota\b/i)) return 'Sota';
-    if (name.match(/\bCaballero\b/i)) return 'Caballero';
-    if (name.match(/\bReina\b/i)) return 'Reina';
-    if (name.match(/\bRey\b/i)) return 'Rey';
-
+    if (name.includes('As')) return 'As';
+    if (name.includes('Dos')) return '2';
+    if (name.includes('Tres')) return '3';
+    if (name.includes('Cuatro')) return '4';
+    if (name.includes('Cinco')) return '5';
+    if (name.includes('Seis')) return '6';
+    if (name.includes('Siete')) return '7';
+    if (name.includes('Ocho')) return '8';
+    if (name.includes('Nueve')) return '9';
+    if (name.includes('Diez')) return '10';
+    if (name.includes('Sota')) return 'Sota';
+    if (name.includes('Caballero')) return 'Caballero';
+    if (name.includes('Reina')) return 'Reina';
+    if (name.includes('Rey')) return 'Rey';
     return name;
   };
 
-  const filtrarCartasPorPalo = (palo: string) => {
+  // Filters minor arcana by suit and groups them for display
+  const filtrarCartasPorPalo = useCallback((palo: string) => {
     const paloID = palo.toLowerCase();
     const cartasDelPalo = arcanosMenores
       .filter(carta => carta.id.includes(`-de-${paloID}`))
@@ -181,15 +197,16 @@ const CartaSelector: React.FC<CartaSelectorProps> = ({
         return getSortValue(a.name) - getSortValue(b.name);
       });
 
-    const asToFive = cartasDelPalo.filter(c => ['As', 'Dos', 'Tres', 'Cuatro', 'Cinco'].some(n => c.name.includes(n)));
-    const sixToTen = cartasDelPalo.filter(c => ['Seis', 'Siete', 'Ocho', 'Nueve', 'Diez'].some(n => c.name.includes(n)));
-    const sotaCaballero = cartasDelPalo.filter(c => ['Sota', 'Caballero'].some(n => c.name.includes(n)));
-    const reinaRey = cartasDelPalo.filter(c => ['Reina', 'Rey'].some(n => c.name.includes(n)));
+    return {
+      asToFive: cartasDelPalo.filter(c => ['As', 'Dos', 'Tres', 'Cuatro', 'Cinco'].some(n => c.name.includes(n))),
+      sixToTen: cartasDelPalo.filter(c => ['Seis', 'Siete', 'Ocho', 'Nueve', 'Diez'].some(n => c.name.includes(n))),
+      sotaCaballero: cartasDelPalo.filter(c => ['Sota', 'Caballero'].some(n => c.name.includes(n))),
+      reinaRey: cartasDelPalo.filter(c => ['Reina', 'Rey'].some(n => c.name.includes(n))),
+    };
+  }, [arcanosMenores]);
 
-    return { asToFive, sixToTen, sotaCaballero, reinaRey };
-  };
-
-  const obtenerSiguientePosicion = () => {
+  // Determine the next position to select a card for
+  const obtenerSiguientePosicion = useCallback((): number => {
     if (modoLibre) {
       return cartasSeleccionadas.length + 1;
     } else {
@@ -198,55 +215,51 @@ const CartaSelector: React.FC<CartaSelectorProps> = ({
           return i;
         }
       }
-      return posicionActual;
+      return cartasSeleccionadas.length + 1; // Fallback, though should be covered by `puedeIrAInterpretacion`
     }
-  };
+  }, [modoLibre, cartasSeleccionadas, tirada.numeroCartas]);
 
-  const handleCartaSelect = (idCarta: string) => {
+  // Handles selection of a specific card ID
+  const handleCartaSelect = useCallback((idCarta: string) => {
+    const posicion = obtenerSiguientePosicion();
+    const nombreCarta = getCardNameById(idCarta);
+
     if (baraja === 'tradicional') {
-      const nombreCarta = getCardNameById(idCarta);
-      const posicion = obtenerSiguientePosicion();
-
+      // For traditional, prompt for upright/reversed
       setCartaPendiente({
         id: idCarta,
         nombre: nombreCarta,
         posicion: posicion
       });
     } else {
-      const posicion = obtenerSiguientePosicion();
+      // Osho cards are always upright
       const nuevaCarta: CartaSeleccionada = {
         posicion: posicion,
         carta: idCarta,
         invertida: false,
         baraja: baraja
       };
-
       onCartaAdd(nuevaCarta);
+toast({
+        description: (
+          <span className="text-sm">Carta "{nombreCarta}" añadida.</span> // Quita el div y el icono, y pon text-sm aquí
+        ),
+        duration: 1500, // Duración más corta
+        className: "toast-compact", // ¡AÑADE ESTA LÍNEA!
+      });
 
-      // Notificación más discreta para baraja Osho
-      toast({
-        description: (
-          <div className="flex items-center gap-2">
-            <CheckCircle className="h-4 w-4 text-emerald-600" />
-            <span>Carta añadida.</span>
-          </div>
-        ),
-        duration: 1500, // 1.5 segundos
-      });
-
-      if (!modoLibre && posicion < tirada.numeroCartas) {
-        setPosicionActual(posicion + 1);
+      // Clear filters after selection to prepare for next card
+      if (categoriaSeleccionada === 'menores') {
+        setPaloSeleccionado('');
+      } else {
+        setLetraSeleccionada('');
       }
+      setCategoriaSeleccionada(null);
     }
+  }, [baraja, obtenerSiguientePosicion, onCartaAdd, toast, categoriaSeleccionada, getCardNameById, setLetraSeleccionada]);
 
-    if (categoriaSeleccionada === 'menores') {
-      setPaloSeleccionado('');
-    } else {
-      setLetraSeleccionada('');
-    }
-  };
-
-  const confirmarCartaConPosicion = (invertida: boolean) => {
+  // Confirms the card for traditional deck after upright/reversed choice
+  const confirmarCartaConPosicion = useCallback((invertida: boolean) => {
     if (!cartaPendiente) return;
 
     const nuevaCarta: CartaSeleccionada = {
@@ -258,38 +271,41 @@ const CartaSelector: React.FC<CartaSelectorProps> = ({
 
     onCartaAdd(nuevaCarta);
 
-    // Notificación más discreta para baraja tradicional
-    toast({
-      description: (
-        <div className="flex items-center gap-2">
-          <CheckCircle className="h-4 w-4 text-emerald-600" />
-          <span>Carta añadida.</span>
-        </div>
-      ),
-      duration: 1500, // 1.5 segundos
-    });
+toast({
+      description: (
+        <span className="text-sm">Carta "{cartaPendiente.nombre}" {invertida ? 'invertida' : 'al derecho'} añadida.</span> // Quita el div y el icono, y pon text-sm aquí
+      ),
+      duration: 1500, // Duración más corta
+      className: "toast-compact", // ¡AÑADE ESTA LÍNEA!
+    });
 
-    if (!modoLibre && cartaPendiente.posicion < tirada.numeroCartas) {
-      setPosicionActual(cartaPendiente.posicion + 1);
+    setCartaPendiente(null);
+    // Clear filters after selection to prepare for next card
+    if (categoriaSeleccionada === 'menores') {
+      setPaloSeleccionado('');
+    } else {
+      setLetraSeleccionada('');
     }
+    setCategoriaSeleccionada(null);
+  }, [cartaPendiente, onCartaAdd, toast, baraja, categoriaSeleccionada, setLetraSeleccionada]);
 
+  const cancelarSeleccionCarta = useCallback(() => {
     setCartaPendiente(null);
-  };
+  }, []);
 
-  const cancelarSeleccionCarta = () => {
-    setCartaPendiente(null);
-  };
-
-  const handleDoubleClick = (posicion: number) => {
+  const handleDoubleClick = useCallback((posicion: number) => {
     if (baraja === 'tradicional') {
       onCartaToggle(posicion);
+      toast({
+        description: (
+          <div className="flex items-center gap-2">
+            <span>Posición de carta {posicion} cambiada.</span>
+          </div>
+        ),
+        duration: 1500,
+      });
     }
-  };
-
-  const getCardNameById = (id: string) => {
-    const card = cardNames.find(c => c.id === id);
-    return card ? card.name : id;
-  };
+  }, [baraja, onCartaToggle, toast]);
 
   const copiarListaCartas = async () => {
     const lista = cartasSeleccionadas
@@ -310,472 +326,445 @@ const CartaSelector: React.FC<CartaSelectorProps> = ({
       .join('\n');
 
     try {
-      await navigator.clipboard.writeText(lista);
+      // document.execCommand('copy') is used as navigator.clipboard.writeText()
+      // might not work due to iframe restrictions in some environments.
+      const textarea = document.createElement('textarea');
+      textarea.value = lista;
+      textarea.style.position = 'fixed'; // Avoid scrolling to bottom
+      textarea.style.opacity = '0'; // Hide it
+      document.body.appendChild(textarea);
+      textarea.select();
+      document.execCommand('copy');
+      document.body.removeChild(textarea);
+
       toast({
         title: "Lista copiada",
         description: "La lista de cartas se ha copiado al portapapeles",
+        duration: 2500,
       });
     } catch (error) {
+      console.error("Error al copiar al portapapeles:", error);
       toast({
         title: "Error",
         description: "No se pudo copiar la lista al portapapeles",
         variant: "destructive",
+        duration: 2500,
       });
     }
   };
 
+
+  const posicionActualDisplayNum = obtenerSiguientePosicion();
   const posicionActualData = modoLibre
-    ? { nombre: `Carta ${obtenerSiguientePosicion()}`, descripcion: 'Selecciona una carta' }
-    : tirada.posiciones.find(p => p.numero === obtenerSiguientePosicion());
+    ? { nombre: `Carta ${posicionActualDisplayNum}`, descripcion: 'Selecciona una carta' }
+    : tirada.posiciones.find(p => p.numero === posicionActualDisplayNum);
 
   const cartasPorGruposDePalo = paloSeleccionado ? filtrarCartasPorPalo(paloSeleccionado) : null;
 
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-teal-50 to-emerald-100">
-      <div className="container mx-auto px-4 py-8">
-        <div className="max-w-4xl mx-auto space-y-6">
+    <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-teal-50 to-emerald-100 py-8 px-4">
 
-          {/* Progreso de selección */}
-          {!modoLibre && (
-            <Card className="bg-emerald-50/50 border-emerald-200">
-              <CardContent className="pt-6">
-                <div className="flex justify-between items-center mb-4">
-                  <span className="text-emerald-900 font-medium">
-                    Progreso: {cartasSeleccionadas.length}/{tirada.numeroCartas} cartas
-                  </span>
-                </div>
-                <div className="w-full bg-emerald-200 rounded-full h-2">
-                  <div
-                    className="bg-emerald-600 h-2 rounded-full transition-all duration-300"
-                    style={{ width: `${(cartasSeleccionadas.length / tirada.numeroCartas) * 100}%` }}
-                  />
-                </div>
-              </CardContent>
-            </Card>
-          )}
 
-          {/* Selección de cartas */}
-          <Card className="bg-white/80 backdrop-blur-sm border-emerald-200">
-            <CardHeader className="pb-4">
-              <CardTitle className="text-lg text-emerald-900">Seleccionar Carta</CardTitle>
-              <div className="flex flex-wrap gap-2">
-                {categoriaSeleccionada && (
-                  <Badge variant="outline" className="bg-emerald-100">
-                    {categoriaSeleccionada === 'mayores' ? 'Arcanos Mayores' : 'Arcanos Menores'}
-                  </Badge>
-                )}
-                {letraSeleccionada && (
-                  <Badge variant="outline" className="bg-emerald-100">
-                    Letra {letraSeleccionada}
-                  </Badge>
-                )}
-                {paloSeleccionado && (
-                  <Badge variant="outline" className="bg-emerald-100">
-                    Palo {paloSeleccionado}
-                  </Badge>
-                )}
+      <div className="container mx-auto max-w-4xl space-y-6 pt-16"> {/* Añadido padding-top para el botón fijo */}
+
+        {/* Progreso de selección */}
+        {!modoLibre && (
+          <Card className="bg-emerald-50/50 border-emerald-200">
+            <CardContent className="pt-6">
+              <div className="flex justify-between items-center mb-4">
+                <span className="text-emerald-900 font-medium">
+                  Progreso: {cartasSeleccionadas.length}/{tirada.numeroCartas} cartas
+                </span>
+                <span className="text-sm text-emerald-700">
+                  Siguiente: {posicionActualData?.nombre || `Carta ${posicionActualDisplayNum}`}
+                </span>
               </div>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              {/* Sección de selección para Tarot Tradicional */}
-              {baraja === 'tradicional' && (
-                <div className="space-y-4">
-                  {/* Botones para seleccionar categoría: SOLO se muestran si no hay categoría, letra o palo seleccionado */}
-                  {!categoriaSeleccionada && !letraSeleccionada && !paloSeleccionado && (
-                    <div className="grid gap-2 grid-cols-2">
-                      <Button
-                        variant={categoriaSeleccionada === 'mayores' ? "default" : "outline"}
-                        className="h-10 text-sm"
-                        onClick={() => {
-                          setCategoriaSeleccionada('mayores');
-                          setLetraSeleccionada('');
-                          setPaloSeleccionado('');
-                        }}
-                      >
-                        Arcanos Mayores
-                      </Button>
-                      <Button
-                        variant={categoriaSeleccionada === 'menores' ? "default" : "outline"}
-                        className="h-10 text-sm"
-                        onClick={() => {
-                          setCategoriaSeleccionada('menores');
-                          setLetraSeleccionada('');
-                          setPaloSeleccionado('');
-                        }}
-                      >
-                        Arcanos Menores
-                      </Button>
-                    </div>
-                  )}
-
-                  {/* Selección de Arcanos Mayores por Letra */}
-                  {categoriaSeleccionada === 'mayores' && !letraSeleccionada && (
-                    <>
-                      <label className="block text-sm font-medium text-emerald-900 mb-2">
-                        Primera letra
-                      </label>
-                      <div className="space-y-2 max-w-2xl mx-auto">
-                        <div className="grid grid-cols-6 gap-2">
-                          {getLetrasArcanosMayores.slice(0, 6).map((letra) => (
-                            <Button
-                              key={letra}
-                              variant="outline"
-                              className="h-12 text-center text-base flex items-center justify-center font-medium"
-                              onClick={() => setLetraSeleccionada(letra)}
-                            >
-                              {letra}
-                            </Button>
-                          ))}
-                        </div>
-                        <div className="grid grid-cols-5 gap-2 max-w-lg mx-auto">
-                          {getLetrasArcanosMayores.slice(6).map((letra) => (
-                            <Button
-                              key={letra}
-                              variant="outline"
-                              className="h-12 text-center text-base flex items-center justify-center font-medium"
-                              onClick={() => setLetraSeleccionada(letra)}
-                            >
-                              {letra}
-                            </Button>
-                          ))}
-                        </div>
-                      </div>
-                    </>
-                  )}
-
-                  {/* Selección de Arcanos Menores por Palo: Mostrar si categoría es 'menores' Y no hay palo seleccionado */}
-                  {categoriaSeleccionada === 'menores' && !paloSeleccionado && (
-                    <>
-                      <label className="block text-sm font-medium text-emerald-900 mb-2">
-                        Palo
-                      </label>
-                      <div className="grid gap-1 grid-cols-4">
-                        {palos.map((palo) => (
-                          <Button
-                            key={palo}
-                            variant={paloSeleccionado === palo ? "default" : "outline"}
-                            className="h-9 text-sm p-1"
-                            onClick={() => setPaloSeleccionado(palo)}
-                          >
-                            {palo}
-                          </Button>
-                        ))}
-                      </div>
-                    </>
-                  )}
-                </div>
-              )}
-
-              {/* Sección de selección para Tarot de Osho (con botones de letra) */}
-              {baraja === 'osho' && !letraSeleccionada && (
-                <>
-                  <label className="block text-sm font-medium text-emerald-900 mb-2">
-                    Primera letra
-                  </label>
-                  <div className="space-y-2 max-w-2xl mx-auto">
-                    <div className="grid grid-cols-6 gap-2">
-                      {getLetrasOsho.slice(0, 6).map((letra) => (
-                        <Button
-                          key={letra}
-                          variant="outline"
-                          className="h-12 text-center text-base flex items-center justify-center font-medium"
-                          onClick={() => setLetraSeleccionada(letra)}
-                        >
-                          {letra}
-                        </Button>
-                      ))}
-                    </div>
-                    <div className="grid grid-cols-6 gap-2">
-                      {getLetrasOsho.slice(6, 12).map((letra) => (
-                        <Button
-                          key={letra}
-                          variant="outline"
-                          className="h-12 text-center text-base flex items-center justify-center font-medium"
-                          onClick={() => setLetraSeleccionada(letra)}
-                        >
-                          {letra}
-                        </Button>
-                      ))}
-                    </div>
-                    <div className="grid grid-cols-5 gap-2 max-w-lg mx-auto">
-                      {getLetrasOsho.slice(12).map((letra) => (
-                        <Button
-                          key={letra}
-                          variant="outline"
-                          className="h-12 text-center text-base flex items-center justify-center font-medium"
-                          onClick={() => setLetraSeleccionada(letra)}
-                        >
-                          {letra}
-                        </Button>
-                      ))}
-                    </div>
-                  </div>
-                </>
-              )}
-
-              {/* Cartas filtradas por letra o palo: Mostrar si hay letra O palo seleccionado */}
-              {((baraja === 'tradicional' && (letraSeleccionada || paloSeleccionado)) ||
-                (baraja === 'osho' && letraSeleccionada)) && (
-                  <div>
-                    <label className="block text-sm font-medium text-emerald-900 mb-2">
-                      Cartas disponibles
-                    </label>
-                    {baraja === 'tradicional' && categoriaSeleccionada === 'menores' && paloSeleccionado && cartasPorGruposDePalo ? (
-                      <div className="space-y-2">
-                        {/* Fila: As, 2, 3, 4, 5 */}
-                        {cartasPorGruposDePalo.asToFive.length > 0 && (
-                          <div className="flex flex-wrap gap-1 justify-center">
-                            {cartasPorGruposDePalo.asToFive.map((carta) => (
-                              <Button
-                                key={carta.id}
-                                variant="outline"
-                                className="h-10 w-12 p-0 text-center hover:bg-emerald-50 hover:border-emerald-400 text-sm"
-                                onClick={() => handleCartaSelect(carta.id)}
-                              >
-                                {getCartaMenorDisplay(carta.name)}
-                              </Button>
-                            ))}
-                          </div>
-                        )}
-                        {/* Fila: 6, 7, 8, 9, 10 */}
-                        {cartasPorGruposDePalo.sixToTen.length > 0 && (
-                          <div className="flex flex-wrap gap-1 justify-center">
-                            {cartasPorGruposDePalo.sixToTen.map((carta) => (
-                              <Button
-                                key={carta.id}
-                                variant="outline"
-                                className="h-10 w-12 p-0 text-center hover:bg-emerald-50 hover:border-emerald-400 text-sm"
-                                onClick={() => handleCartaSelect(carta.id)}
-                              >
-                                {getCartaMenorDisplay(carta.name)}
-                              </Button>
-                            ))}
-                          </div>
-                        )}
-
-                        {/* Fila: Sota, Caballero */}
-                        {cartasPorGruposDePalo.sotaCaballero.length > 0 && (
-                          <div className="flex flex-wrap gap-1 justify-center">
-                            {cartasPorGruposDePalo.sotaCaballero.map((carta) => (
-                              <Button
-                                key={carta.id}
-                                variant="outline"
-                                className="h-10 w-16 p-0 text-center hover:bg-emerald-50 hover:border-emerald-400 text-xs"
-                                onClick={() => handleCartaSelect(carta.id)}
-                              >
-                                {getCartaMenorDisplay(carta.name)}
-                              </Button>
-                            ))}
-                          </div>
-                        )}
-
-                        {/* Fila: Reina, Rey */}
-                        {cartasPorGruposDePalo.reinaRey.length > 0 && (
-                          <div className="flex flex-wrap gap-1 justify-center">
-                            {cartasPorGruposDePalo.reinaRey.map((carta) => (
-                              <Button
-                                key={carta.id}
-                                variant="outline"
-                                className="h-10 w-16 p-0 text-center hover:bg-emerald-50 hover:border-emerald-400 text-xs"
-                                onClick={() => handleCartaSelect(carta.id)}
-                              >
-                                {getCartaMenorDisplay(carta.name)}
-                              </Button>
-                            ))}
-                          </div>
-                        )}
-                      </div>
-                    ) : (
-
-                      <div className="flex flex-wrap gap-2 justify-center">
-                        {(baraja === 'tradicional'
-                          ? filtrarCartasPorLetra(letraSeleccionada, baraja, categoriaSeleccionada === 'mayores' ? 'mayores' : null)
-                          : filtrarCartasPorLetra(letraSeleccionada, baraja, null)
-                        ).map((carta) => (
-                          <Button
-                            key={carta.id}
-                            variant="outline"
-                            className="h-12 min-w-32 px-3 text-center hover:bg-emerald-50 hover:border-emerald-400 text-sm"
-                            onClick={() => handleCartaSelect(carta.id)}
-                          >
-                            {carta.name}
-                          </Button>
-                        ))}
-                      </div>)}
-                  </div>
-                )}
-
-              {/* Botón para volver atrás cuando hay selecciones */}
-              {(categoriaSeleccionada || letraSeleccionada || paloSeleccionado) && (
-                <Button
-                  variant="outline"
-                  onClick={() => {
-                    if (paloSeleccionado) {
-                      setPaloSeleccionado('');
-                    } else if (letraSeleccionada) {
-                      setLetraSeleccionada('');
-                    } else if (categoriaSeleccionada) {
-                      setCategoriaSeleccionada(null);
-                    }
-                  }}
-                  className="w-full"
-                >
-                  <ChevronLeft className="w-4 h-4 mr-2" />
-                  Volver
-                </Button>
-              )}
+              <div className="w-full bg-emerald-200 rounded-full h-2">
+                <div
+                  className="bg-emerald-600 h-2 rounded-full transition-all duration-300"
+                  style={{ width: `${(cartasSeleccionadas.length / tirada.numeroCartas) * 100}%` }}
+                />
+              </div>
             </CardContent>
           </Card>
+        )}
 
-          {/* Diálogo de selección de posición */}
-          {cartaPendiente && (
-            <Card className="bg-white/95 backdrop-blur-sm border-amber-200 shadow-lg max-w-xs mx-auto">
-              <CardHeader className="pb-4">
-                <CardTitle className="text-lg text-amber-900 text-center">
-                  Seleccionar Posición
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="text-center">
-                  <p className="font-medium text-amber-900 text-lg">
-                    {cartaPendiente.nombre}
-                  </p>
-                </div>
-
+        {/* Selección de cartas */}
+        <Card className="bg-white/80 backdrop-blur-sm border-emerald-200">
+          <CardHeader className="pb-4">
+            <div className="flex flex-col sm:flex-row justify-between items-center gap-3 mb-2">
+              <CardTitle className="text-xl text-emerald-900">Seleccionar Carta</CardTitle>
+            </div>
+            <div className="flex flex-wrap gap-2">
+              {categoriaSeleccionada && (
+                <Badge variant="outline" className="bg-emerald-100">
+                  {categoriaSeleccionada === 'mayores' ? 'Arcanos Mayores' : 'Arcanos Menores'}
+                </Badge>
+              )}
+              {letraSeleccionada && (
+                <Badge variant="outline" className="bg-emerald-100">
+                  Letra {letraSeleccionada}
+                </Badge>
+              )}
+              {paloSeleccionado && (
+                <Badge variant="outline" className="bg-emerald-100">
+                  Palo {paloSeleccionado}
+                </Badge>
+              )}
+            </div>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            {/* Sección de selección para Tarot Tradicional */}
+            {baraja === 'tradicional' && (
+              <div className="space-y-4">
+                {/* Botones para seleccionar categoría: SIEMPRE se muestran ahora */}
                 <div className="grid gap-2 grid-cols-2">
                   <Button
-                    onClick={() => confirmarCartaConPosicion(false)}
-                    className="h-12 w-full text-sm bg-emerald-600 hover:bg-emerald-700 text-white"
+                    variant={categoriaSeleccionada === 'mayores' ? "default" : "outline"}
+                    className="h-10 text-sm"
+                    onClick={() => {
+                      setCategoriaSeleccionada('mayores');
+                      setLetraSeleccionada('');
+                      setPaloSeleccionado('');
+                    }}
                   >
-                    Al Derecho
+                    Arcanos Mayores
                   </Button>
-
                   <Button
-                    onClick={() => confirmarCartaConPosicion(true)}
-                    variant="destructive"
-                    className="h-12 w-full text-sm"
+                    variant={categoriaSeleccionada === 'menores' ? "default" : "outline"}
+                    className="h-10 text-sm"
+                    onClick={() => {
+                      setCategoriaSeleccionada('menores');
+                      setLetraSeleccionada('');
+                      setPaloSeleccionado('');
+                    }}
                   >
-                    Invertida
+                    Arcanos Menores
                   </Button>
                 </div>
 
-                <Button
-                  variant="outline"
-                  onClick={cancelarSeleccionCarta}
-                  className="w-full"
-                >
-                  Cancelar
-                </Button>
-              </CardContent>
-            </Card>
-          )}
-
-          {/* Cartas seleccionadas */}
-          {cartasSeleccionadas.length > 0 && (
-            <Card className="bg-white/80 backdrop-blur-sm border-emerald-200">
-              <CardHeader className="pb-4">
-                <div className="flex justify-between items-center">
-                  <CardTitle className="text-lg text-emerald-900">
-                    Cartas Seleccionadas ({cartasSeleccionadas.length})
-                  </CardTitle>
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={copiarListaCartas}
-                    className="hover:bg-emerald-50"
-                  >
-                    <Copy className="w-4 h-4 mr-2" />
-                    Copiar Lista
-                  </Button>
-                </div>
-              </CardHeader>
-              <CardContent>
-                <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
-                  {cartasSeleccionadas
-                    .sort((a, b) => a.posicion - b.posicion)
-                    .map((cartaSeleccionada) => {
-                      const posicionData = modoLibre
-                        ? { nombre: `Carta ${cartaSeleccionada.posicion}`, descripcion: '' }
-                        : tirada.posiciones.find(p => p.numero === cartaSeleccionada.posicion);
-
-                      return (
-                        <div
-                          key={cartaSeleccionada.posicion}
-                          className={`p-3 rounded-lg border transition-all cursor-pointer hover:shadow-md ${
-                            cartaSeleccionada.invertida
-                              ? 'bg-red-50 border-red-200'
-                              : 'bg-emerald-50 border-emerald-200'
-                          }`}
-                          onDoubleClick={() => handleDoubleClick(cartaSeleccionada.posicion)}
+                {/* Selección de Arcanos Mayores por Letra */}
+                {categoriaSeleccionada === 'mayores' && !letraSeleccionada && (
+                  <>
+                    <label className="block text-sm font-medium text-emerald-900 mb-2">
+                      Primera letra
+                    </label>
+                    <div className="grid grid-cols-5 sm:grid-cols-6 md:grid-cols-7 lg:grid-cols-8 gap-2">
+                      {getLetrasArcanosMayores.map((letra) => (
+                        <Button
+                          key={letra}
+                          variant="outline"
+                          className="h-12 w-12 text-center text-base flex items-center justify-center font-medium"
+                          onClick={() => setLetraSeleccionada(letra)}
                         >
-                          <div className="flex justify-between items-start mb-1">
-                            <span className="text-xs font-medium text-emerald-900">
-                              {posicionData?.nombre || `Posición ${cartaSeleccionada.posicion}`}
-                            </span>
-                            {cartaSeleccionada.invertida && (
-                              <Badge variant="destructive" className="text-xs">
-                                Invertida
-                              </Badge>
-                            )}
-                          </div>
-                          <p className="text-sm font-medium text-emerald-900">
-                            {getCardNameById(cartaSeleccionada.carta)}
-                          </p>
-                          {baraja === 'tradicional' && (
-                            <p className="text-xs text-emerald-600 mt-1">
-                              Doble clic para {cartaSeleccionada.invertida ? 'enderezar' : 'invertir'}
-                            </p>
-                          )}
-                        </div>
-                      );
-                    })}
-                </div>
-              </CardContent>
-            </Card>
-          )}
+                          {letra}
+                        </Button>
+                      ))}
+                    </div>
+                  </>
+                )}
 
-          {/* Botones de acción */}
-          <div className="flex flex-col sm:flex-row gap-3">
-            <Button
-              variant="outline"
-              onClick={onVolver}
-              className="flex-1"
-            >
-              <ChevronLeft className="w-4 h-4 mr-2" />
-              Volver
-            </Button>
+                {/* Selección de Arcanos Menores por Palo: Mostrar si categoría es 'menores' Y no hay palo seleccionado */}
+                {categoriaSeleccionada === 'menores' && !paloSeleccionado && (
+                  <>
+                    <label className="block text-sm font-medium text-emerald-900 mb-2">
+                      Palo
+                    </label>
+                    <div className="grid gap-2 grid-cols-2 sm:grid-cols-4">
+                      {palos.map((palo) => (
+                        <Button
+                          key={palo}
+                          variant={paloSeleccionado === palo ? "default" : "outline"}
+                          className="h-10 text-sm"
+                          onClick={() => setPaloSeleccionado(palo)}
+                        >
+                          {palo}
+                        </Button>
+                      ))}
+                    </div>
+                  </>
+                )}
+              </div>
+            )}
 
-            {cartasSeleccionadas.length > 0 && (
+            {/* Sección de selección para Tarot de Osho (con botones de letra) */}
+            {baraja === 'osho' && !letraSeleccionada && (
               <>
-                <Button
-                  variant="outline"
-                  onClick={onDeshacerUltimaCarta}
-                  className="flex-1"
-                >
-                  <Undo2 className="w-4 h-4 mr-2" />
-                  Deshacer Última
-                </Button>
-
-                <Button
-                  variant="destructive"
-                  onClick={onLimpiarCartas}
-                  className="flex-1"
-                >
-                  <Trash className="w-4 h-4 mr-2" />
-                  Limpiar Todo
-                </Button>
+                <label className="block text-sm font-medium text-emerald-900 mb-2">
+                  Primera letra
+                </label>
+                {/* MODIFIED: Adjusted grid for Osho letter buttons for better distribution */}
+                <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-7 lg:grid-cols-8 gap-2">
+                  {getLetrasOsho.map((letra) => (
+                    <Button
+                      key={letra}
+                      variant="outline"
+                      className="h-12 w-12 text-center text-base flex items-center justify-center font-medium"
+                      onClick={() => setLetraSeleccionada(letra)}
+                    >
+                      {letra}
+                    </Button>
+                  ))}
+                </div>
               </>
             )}
 
-            {puedeIrAInterpretacion && (
+            {/* Cartas filtradas por letra o palo: Mostrar si hay letra O palo seleccionado */}
+            {((baraja === 'tradicional' && (letraSeleccionada || paloSeleccionado)) ||
+              (baraja === 'osho' && letraSeleccionada)) && (
+                <div>
+                  <label className="block text-sm font-medium text-emerald-900 mb-2">
+                    Cartas disponibles
+                  </label>
+                  {baraja === 'tradicional' && categoriaSeleccionada === 'menores' && paloSeleccionado && cartasPorGruposDePalo ? (
+                    <div className="space-y-2">
+                      {/* Fila: As, 2, 3, 4, 5 */}
+                      {cartasPorGruposDePalo.asToFive.length > 0 && (
+                        <div className="flex flex-wrap gap-1 justify-center">
+                          {cartasPorGruposDePalo.asToFive.map((carta) => (
+                            <Button
+                              key={carta.id}
+                              variant="outline"
+                              // Adjusted size for minor arcana numbers/faces
+                              className="h-9 w-12 p-0 text-center hover:bg-emerald-50 hover:border-emerald-400 text-xs"
+                              onClick={() => handleCartaSelect(carta.id)}
+                            >
+                              {getCartaMenorDisplay(carta.name)}
+                            </Button>
+                          ))}
+                        </div>
+                      )}
+                      {/* Fila: 6, 7, 8, 9, 10 */}
+                      {cartasPorGruposDePalo.sixToTen.length > 0 && (
+                        <div className="flex flex-wrap gap-1 justify-center">
+                          {cartasPorGruposDePalo.sixToTen.map((carta) => (
+                            <Button
+                              key={carta.id}
+                              variant="outline"
+                              // Adjusted size for minor arcana numbers/faces
+                              className="h-9 w-12 p-0 text-center hover:bg-emerald-50 hover:border-emerald-400 text-xs"
+                              onClick={() => handleCartaSelect(carta.id)}
+                            >
+                              {getCartaMenorDisplay(carta.name)}
+                            </Button>
+                          ))}
+                        </div>
+                      )}
+
+                      {/* Fila: Sota, Caballero */}
+                      {cartasPorGruposDePalo.sotaCaballero.length > 0 && (
+                        <div className="flex flex-wrap gap-1 justify-center">
+                          {cartasPorGruposDePalo.sotaCaballero.map((carta) => (
+                            <Button
+                              key={carta.id}
+                              variant="outline"
+                              // Adjusted size for minor arcana numbers/faces
+                              className="h-9 w-16 p-0 text-center hover:bg-emerald-50 hover:border-emerald-400 text-xs"
+                              onClick={() => handleCartaSelect(carta.id)}
+                            >
+                              {getCartaMenorDisplay(carta.name)}
+                            </Button>
+                          ))}
+                        </div>
+                      )}
+
+                      {/* Fila: Reina, Rey */}
+                      {cartasPorGruposDePalo.reinaRey.length > 0 && (
+                        <div className="flex flex-wrap gap-1 justify-center">
+                          {cartasPorGruposDePalo.reinaRey.map((carta) => (
+                            <Button
+                              key={carta.id}
+                              variant="outline"
+                              // Adjusted size for minor arcana numbers/faces
+                              className="h-9 w-16 p-0 text-center hover:bg-emerald-50 hover:border-emerald-400 text-xs"
+                              onClick={() => handleCartaSelect(carta.id)}
+                            >
+                              {getCartaMenorDisplay(carta.name)}
+                            </Button>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  ) : (
+                    <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
+                      {filtrarCartasPorLetra(letraSeleccionada, baraja, categoriaSeleccionada === 'mayores' ? 'mayores' : null)
+                        .map((carta) => (
+                          <Button
+                            key={carta.id}
+                            variant="outline"
+                            // Adjusted size for Osho card name buttons
+                            className="flex flex-col items-center justify-center p-1 text-center font-medium rounded-lg border border-emerald-300 bg-emerald-50 hover:bg-emerald-100 hover:border-emerald-500 transition-all duration-200 cursor-pointer h-10 text-sm sm:h-12 sm:text-base w-full"
+                            onClick={() => handleCartaSelect(carta.id)}
+                          >
+                            <span className="font-semibold text-emerald-900 text-sm sm:text-base">{carta.name}</span>
+                          </Button>
+                        ))}
+                    </div>
+                  )}
+                </div>
+              )}
+
+            {/* Este botón ya no es necesario aquí, el botón fijo lo reemplaza */}
+            {/* {(categoriaSeleccionada || letraSeleccionada || paloSeleccionado) && (
               <Button
-                onClick={onInterpretarCartas}
-                className="flex-1 bg-emerald-600 hover:bg-emerald-700"
+                variant="outline"
+                onClick={() => {
+                  if (paloSeleccionado) {
+                    setPaloSeleccionado('');
+                  } else if (letraSeleccionada) {
+                    setLetraSeleccionada('');
+                  } else if (categoriaSeleccionada) {
+                    setCategoriaSeleccionada(null);
+                  }
+                }}
+                className="w-full mt-4"
               >
-                Interpretar Cartas
+                <ChevronLeft className="w-4 h-4 mr-2" />
+                Volver
               </Button>
-            )}
-          </div>
+            )} */}
+          </CardContent>
+        </Card>
+
+        {/* Diálogo mini de selección de posición */}
+{cartaPendiente && (
+  <div className="bg-white/95 backdrop-blur-sm border border-amber-200 rounded-lg shadow-lg max-w-xs mx-auto fixed inset-x-0 bottom-4 z-50 p-3">
+    <p className="text-center text-xs text-amber-900 mb-2 font-medium">
+      {cartaPendiente.nombre}
+    </p>
+    
+    <div className="flex gap-1">
+      <Button
+        onClick={() => confirmarCartaConPosicion(false)}
+        className="flex-1 h-8 text-xs bg-emerald-600 hover:bg-emerald-700 text-white"
+      >
+        Derecho
+      </Button>
+      <Button
+        onClick={() => confirmarCartaConPosicion(true)}
+        variant="destructive"
+        className="flex-1 h-8 text-xs"
+      >
+        Invertida
+      </Button>
+      <Button
+        variant="outline"
+        onClick={cancelarSeleccionCarta}
+        className="w-8 h-8 text-xs p-0"
+      >
+        ✕
+      </Button>
+    </div>
+  </div>
+)}
+
+        {/* Cartas seleccionadas */}
+        {cartasSeleccionadas.length > 0 && (
+          <Card className="bg-white/80 backdrop-blur-sm border-emerald-200">
+            <CardHeader className="pb-4">
+              <div className="flex justify-between items-center">
+                <CardTitle className="text-lg text-emerald-900">
+                  Cartas Seleccionadas ({cartasSeleccionadas.length})
+                </CardTitle>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={copiarListaCartas}
+                  className="hover:bg-emerald-50"
+                >
+                  <Copy className="w-4 h-4 mr-2" />
+                  Copiar Lista
+                </Button>
+              </div>
+            </CardHeader>
+            <CardContent>
+              <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
+                {cartasSeleccionadas
+                  .sort((a, b) => a.posicion - b.posicion)
+                  .map((cartaSeleccionada) => {
+                    const posicionData = modoLibre
+                      ? { nombre: `Carta ${cartaSeleccionada.posicion}`, descripcion: '' }
+                      : tirada.posiciones.find(p => p.numero === cartaSeleccionada.posicion);
+
+                    return (
+                      <div
+                        key={cartaSeleccionada.posicion}
+                        className={`p-3 rounded-lg border transition-all cursor-pointer hover:shadow-md ${
+                          cartaSeleccionada.invertida
+                            ? 'bg-red-50 border-red-200'
+                            : 'bg-emerald-50 border-emerald-200'
+                        }`}
+                        onDoubleClick={() => handleDoubleClick(cartaSeleccionada.posicion)}
+                      >
+                        <div className="flex justify-between items-start mb-1">
+                          <span className="text-xs font-medium text-emerald-900">
+                            {posicionData?.nombre || `Posición ${cartaSeleccionada.posicion}`}
+                          </span>
+                          {cartaSeleccionada.invertida && baraja === 'tradicional' && (
+                            <Badge variant="destructive" className="text-xs">
+                              Invertida
+                            </Badge>
+                          )}
+                        </div>
+                        <p className="text-sm font-medium text-emerald-900">
+                          {getCardNameById(cartaSeleccionada.carta)}
+                        </p>
+                        {baraja === 'tradicional' && (
+                          <p className="text-xs text-emerald-600 mt-1">
+                            Doble clic para {cartaSeleccionada.invertida ? 'enderezar' : 'invertir'}
+                          </p>
+                        )}
+                      </div>
+                    );
+                  })}
+              </div>
+            </CardContent>
+          </Card>
+        )}
+
+        {/* Botones de acción */}
+        <div className="flex flex-col sm:flex-row gap-3">
+          {/* Este botón ya no es necesario aquí, el botón fijo lo reemplaza */}
+          {/* <Button
+            variant="outline"
+            onClick={onVolver}
+            className="flex-1"
+          >
+            <ChevronLeft className="w-4 h-4 mr-2" />
+            Volver
+          </Button> */}
+
+          {cartasSeleccionadas.length > 0 && (
+            <>
+              <Button
+                variant="outline"
+                onClick={onDeshacerUltimaCarta}
+                className="flex-1"
+              >
+                <Undo2 className="w-4 h-4 mr-2" />
+                Deshacer Última
+              </Button>
+
+              <Button
+                variant="destructive"
+                onClick={onLimpiarCartas}
+                className="flex-1"
+              >
+                <Trash className="w-4 h-4 mr-2" />
+                Limpiar Todo
+              </Button>
+            </>
+          )}
+
+          {puedeIrAInterpretacion && (
+            <Button
+              onClick={onInterpretarCartas}
+              className="flex-1 bg-emerald-600 hover:bg-emerald-700"
+            >
+              Interpretar Cartas
+            </Button>
+          )}
         </div>
       </div>
     </div>

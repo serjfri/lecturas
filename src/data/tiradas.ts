@@ -1,6 +1,10 @@
-import { Tirada } from '@/pages/Index';
+// src/data/tiradas.ts
 
-export const tiradas: Tirada[] = [
+// Ensure Tirada is imported from '@/types/tarot'
+import { Tirada } from '@/types/tarot'; // Corrected import path for Tirada interface
+
+// Change 'tiradas' to 'tiradasData' to match the import in TiradaSelector.tsx
+export const tiradasData: Tirada[] = [
   {
     id: 'cruz-celta',
     nombre: 'Cruz Celta',
