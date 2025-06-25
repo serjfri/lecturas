@@ -82,7 +82,7 @@ const IchingSearchPage: React.FC = () => {
     const normalizedInput = hexagramInput.toLowerCase().trim();
     const hexagram = ichingHexagrams.find(
       h => h.name.toLowerCase() === normalizedInput ||
-           h.numero.toString() === normalizedInput
+             h.numero.toString() === normalizedInput
     );
 
     if (hexagram) {
@@ -106,6 +106,26 @@ const IchingSearchPage: React.FC = () => {
     window.history.back();
   };
 
+  // FUNCIONES PARA LOS BOTONES NUMÉRICOS Y DE CONTROL
+  const handleNumberClick = (num: number) => {
+    setHexagramInput(prev => prev + num.toString());
+  };
+
+  // Esta función ahora corresponde a "Deshacer" (eliminar último dígito)
+  const handleBackspace = () => {
+    setHexagramInput(prev => prev.slice(0, -1));
+  };
+
+  // Esta función ahora corresponde a "Borrar" (vaciar todo el campo)
+  const handleClearInput = () => {
+    setHexagramInput('');
+  };
+
+  // Arrays para las filas de números
+  const firstRowNumbers = [0, 1, 2, 3, 4];
+  const secondRowNumbers = [5, 6, 7, 8, 9];
+
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-indigo-50 to-blue-100 py-4 sm:py-8 flex flex-col items-center">
       {/* BackButton ahora con 'fixed' */}
@@ -128,7 +148,7 @@ const IchingSearchPage: React.FC = () => {
         </div>
 
         <Card className="bg-white/80 backdrop-blur-sm border-indigo-200 shadow-lg p-4 sm:p-6">
-          <div className="flex flex-col sm:flex-row gap-4">
+          <div className="flex flex-col sm:flex-row gap-4 mb-4"> {/* Añadido mb-4 para espaciar del teclado */}
             <Input
               type="text"
               placeholder="Ej: La Paz (11) o El Conflicto (6)"
@@ -149,6 +169,61 @@ const IchingSearchPage: React.FC = () => {
               Consultar
             </Button>
           </div>
+
+          {/* TECLADO NUMÉRICO ACTUALIZADO */}
+          <div className="space-y-2 mt-4">
+            <label className="block text-sm font-medium text-indigo-900 mb-2">
+              O introduce el número:
+            </label>
+            
+            {/* Primera fila de números (0-4) */}
+            <div className="grid grid-cols-5 gap-2">
+              {firstRowNumbers.map((num) => (
+                <Button
+                  key={num}
+                  variant="outline"
+                  className="h-12 w-full text-lg font-bold bg-indigo-50 hover:bg-indigo-100 border-indigo-200"
+                  onClick={() => handleNumberClick(num)}
+                >
+                  {num}
+                </Button>
+              ))}
+            </div>
+
+            {/* Segunda fila de números (5-9) */}
+            <div className="grid grid-cols-5 gap-2 mt-2">
+              {secondRowNumbers.map((num) => (
+                <Button
+                  key={num}
+                  variant="outline"
+                  className="h-12 w-full text-lg font-bold bg-indigo-50 hover:bg-indigo-100 border-indigo-200"
+                  onClick={() => handleNumberClick(num)}
+                >
+                  {num}
+                </Button>
+              ))}
+            </div>
+
+            {/* Fila para Borrar (todo) y Deshacer (último) */}
+            <div className="grid grid-cols-2 gap-2 mt-2">
+              <Button
+                variant="outline"
+                className="h-12 w-full text-sm font-medium bg-gray-50 hover:bg-gray-100 border-gray-200 text-gray-700"
+                onClick={handleClearInput} // Borrar todo el campo
+              >
+                Borrar
+              </Button>
+              <Button
+                variant="outline"
+                className="h-12 w-full text-sm font-medium bg-red-50 hover:bg-red-100 border-red-200 text-red-700"
+                onClick={handleBackspace} // Eliminar el último dígito
+              >
+                Deshacer
+              </Button>
+            </div>
+          </div>
+          {/* FIN DEL TECLADO NUMÉRICO ACTUALIZADO */}
+
         </Card>
 
         {foundHexagram && (

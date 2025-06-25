@@ -240,13 +240,13 @@ const CartaSelector: React.FC<CartaSelectorProps> = ({
         baraja: baraja
       };
       onCartaAdd(nuevaCarta);
-toast({
-        description: (
-          <span className="text-sm">Carta "{nombreCarta}" añadida.</span> // Quita el div y el icono, y pon text-sm aquí
-        ),
-        duration: 1500, // Duración más corta
-        className: "toast-compact", // ¡AÑADE ESTA LÍNEA!
-      });
+      toast({
+        description: (
+          <span className="text-sm">Carta "{nombreCarta}" añadida.</span>
+        ),
+        duration: 1500,
+        className: "toast-compact",
+      });
 
       // Clear filters after selection to prepare for next card
       if (categoriaSeleccionada === 'menores') {
@@ -271,13 +271,13 @@ toast({
 
     onCartaAdd(nuevaCarta);
 
-toast({
-      description: (
-        <span className="text-sm">Carta "{cartaPendiente.nombre}" {invertida ? 'invertida' : 'al derecho'} añadida.</span> // Quita el div y el icono, y pon text-sm aquí
-      ),
-      duration: 1500, // Duración más corta
-      className: "toast-compact", // ¡AÑADE ESTA LÍNEA!
-    });
+    toast({
+      description: (
+        <span className="text-sm">Carta "{cartaPendiente.nombre}" {invertida ? 'invertida' : 'al derecho'} añadida.</span>
+      ),
+      duration: 1500,
+      className: "toast-compact",
+    });
 
     setCartaPendiente(null);
     // Clear filters after selection to prepare for next card
@@ -363,10 +363,11 @@ toast({
 
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-teal-50 to-emerald-100 py-8 px-4">
-
-
-      <div className="container mx-auto max-w-4xl space-y-6 pt-16"> {/* Añadido padding-top para el botón fijo */}
+    // MODIFICADO: Eliminado px-4 de este div para maximizar el ancho disponible
+    <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-teal-50 to-emerald-100 py-8">
+      {/* MODIFICADO: El contenedor principal ahora gestiona su propio padding horizontal */}
+      {/* Añadido padding-top para el botón fijo */}
+      <div className="container mx-auto max-w-4xl space-y-6 pt-16 px-4 sm:px-6"> {/* Añadido px-4 sm:px-6 */}
 
         {/* Progreso de selección */}
         {!modoLibre && (
@@ -450,12 +451,13 @@ toast({
                     <label className="block text-sm font-medium text-emerald-900 mb-2">
                       Primera letra
                     </label>
-                    <div className="grid grid-cols-5 sm:grid-cols-6 md:grid-cols-7 lg:grid-cols-8 gap-2">
+                    {/* MODIFICADO: Ajustado grid para botones de letra Arcanos Mayores (más espacio en móvil) */}
+                    <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-7 lg:grid-cols-8 gap-2">
                       {getLetrasArcanosMayores.map((letra) => (
                         <Button
                           key={letra}
                           variant="outline"
-                          className="h-12 w-12 text-center text-base flex items-center justify-center font-medium"
+                          className="h-12 text-center text-base flex items-center justify-center font-medium"
                           onClick={() => setLetraSeleccionada(letra)}
                         >
                           {letra}
@@ -494,13 +496,13 @@ toast({
                 <label className="block text-sm font-medium text-emerald-900 mb-2">
                   Primera letra
                 </label>
-                {/* MODIFIED: Adjusted grid for Osho letter buttons for better distribution */}
+                {/* MODIFICADO: Ajustado grid para botones de letra Osho (más espacio en móvil) */}
                 <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-7 lg:grid-cols-8 gap-2">
                   {getLetrasOsho.map((letra) => (
                     <Button
                       key={letra}
                       variant="outline"
-                      className="h-12 w-12 text-center text-base flex items-center justify-center font-medium"
+                      className="h-12 text-center text-base flex items-center justify-center font-medium"
                       onClick={() => setLetraSeleccionada(letra)}
                     >
                       {letra}
@@ -510,7 +512,7 @@ toast({
               </>
             )}
 
-{/* Cartas filtradas por letra o palo: Mostrar si hay letra O palo seleccionado */}
+            {/* Cartas filtradas por letra o palo: Mostrar si hay letra O palo seleccionado */}
             {((baraja === 'tradicional' && (letraSeleccionada || paloSeleccionado)) ||
               (baraja === 'osho' && letraSeleccionada)) && (
                 <div>
@@ -528,7 +530,8 @@ toast({
                         
                         {/* Fila: As, 2, 3, 4, 5 */}
                         {cartasPorGruposDePalo.asToFive.length > 0 && (
-                          <div className="grid grid-cols-5 gap-2">
+                          // MODIFICADO: Ajustado grid para números de Arcanos Menores
+                          <div className="grid grid-cols-3 gap-2 sm:grid-cols-5">
                             {cartasPorGruposDePalo.asToFive.map((carta) => (
                               <Button
                                 key={carta.id}
@@ -544,7 +547,8 @@ toast({
                         
                         {/* Fila: 6, 7, 8, 9, 10 */}
                         {cartasPorGruposDePalo.sixToTen.length > 0 && (
-                          <div className="grid grid-cols-5 gap-2">
+                          // MODIFICADO: Ajustado grid para números de Arcanos Menores
+                          <div className="grid grid-cols-3 gap-2 sm:grid-cols-5">
                             {cartasPorGruposDePalo.sixToTen.map((carta) => (
                               <Button
                                 key={carta.id}
@@ -565,7 +569,7 @@ toast({
                         
                         {/* Primera fila: Sota, Caballero */}
                         {cartasPorGruposDePalo.sotaCaballero.length > 0 && (
-                          <div className="grid grid-cols-2 gap-2">
+                          <div className="grid grid-cols-2 gap-2"> {/* Mantenido grid-cols-2 */}
                             {cartasPorGruposDePalo.sotaCaballero.map((carta) => (
                               <Button
                                 key={carta.id}
@@ -581,7 +585,7 @@ toast({
 
                         {/* Segunda fila: Reina, Rey */}
                         {cartasPorGruposDePalo.reinaRey.length > 0 && (
-                          <div className="grid grid-cols-2 gap-2">
+                          <div className="grid grid-cols-2 gap-2"> {/* Mantenido grid-cols-2 */}
                             {cartasPorGruposDePalo.reinaRey.map((carta) => (
                               <Button
                                 key={carta.id}
@@ -597,80 +601,61 @@ toast({
                       </div>
                     </div>
                   ) : (
-// ✅✅✅ CÓDIGO NUEVO PARA ARCANOS MAYORES Y OSHO EN 3 COLUMNAS ✅✅✅
-<div className="grid grid-cols-2 gap-2">
-  {filtrarCartasPorLetra(letraSeleccionada, baraja, categoriaSeleccionada === 'mayores' ? 'mayores' : null)
-    .map((carta) => (
-      <Button
-        key={carta.id}
-        variant="outline"
-        className="w-full h-auto min-h-[3rem] p-3 flex items-center justify-center text-center font-medium rounded-lg border-emerald-300 bg-emerald-50 hover:bg-emerald-100 hover:border-emerald-500 transition-all duration-200 cursor-pointer"
-        onClick={() => handleCartaSelect(carta.id)}
-      >
-        <span className="font-semibold text-emerald-900 leading-tight">
-          {carta.name}
-        </span>
-      </Button>
-    ))}
-</div>
-// ✅✅✅ FIN DEL CÓDIGO NUEVO ✅✅✅
+                    // MODIFICADO: Arcanos Mayores y Osho ahora son grid-cols-1 en móvil para nombres largos
+                    <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 md:gap-4">
+                      {filtrarCartasPorLetra(letraSeleccionada, baraja, categoriaSeleccionada === 'mayores' ? 'mayores' : null)
+                        .map((carta) => (
+                          <Button
+                            key={carta.id}
+                            variant="outline"
+                            className="w-full h-auto min-h-[3rem] p-3 flex items-center justify-center text-center font-medium rounded-lg border-emerald-300 bg-emerald-50 hover:bg-emerald-100 hover:border-emerald-500 transition-all duration-200 cursor-pointer"
+                            onClick={() => handleCartaSelect(carta.id)}
+                          >
+                            <span className="font-semibold text-emerald-900 leading-tight">
+                              {carta.name}
+                            </span>
+                          </Button>
+                        ))}
+                    </div>
                   )}
                 </div>
               )}
 
-            {/* Este botón ya no es necesario aquí, el botón fijo lo reemplaza */}
-            {/* {(categoriaSeleccionada || letraSeleccionada || paloSeleccionado) && (
-              <Button
-                variant="outline"
-                onClick={() => {
-                  if (paloSeleccionado) {
-                    setPaloSeleccionado('');
-                  } else if (letraSeleccionada) {
-                    setLetraSeleccionada('');
-                  } else if (categoriaSeleccionada) {
-                    setCategoriaSeleccionada(null);
-                  }
-                }}
-                className="w-full mt-4"
-              >
-                <ChevronLeft className="w-4 h-4 mr-2" />
-                Volver
-              </Button>
-            )} */}
+            {/* Este botón de "Volver" interno fue eliminado en una iteración anterior, lo mantengo así */}
           </CardContent>
         </Card>
 
         {/* Diálogo mini de selección de posición */}
-{cartaPendiente && (
-  <div className="bg-white/95 backdrop-blur-sm border border-amber-200 rounded-lg shadow-lg max-w-xs mx-auto fixed inset-x-0 bottom-4 z-50 p-3">
-    <p className="text-center text-xs text-amber-900 mb-2 font-medium">
-      {cartaPendiente.nombre}
-    </p>
-    
-    <div className="flex gap-1">
-      <Button
-        onClick={() => confirmarCartaConPosicion(false)}
-        className="flex-1 h-8 text-xs bg-emerald-600 hover:bg-emerald-700 text-white"
-      >
-        Derecho
-      </Button>
-      <Button
-        onClick={() => confirmarCartaConPosicion(true)}
-        variant="destructive"
-        className="flex-1 h-8 text-xs"
-      >
-        Invertida
-      </Button>
-      <Button
-        variant="outline"
-        onClick={cancelarSeleccionCarta}
-        className="w-8 h-8 text-xs p-0"
-      >
-        ✕
-      </Button>
-    </div>
-  </div>
-)}
+        {cartaPendiente && (
+          <div className="bg-white/95 backdrop-blur-sm border border-amber-200 rounded-lg shadow-lg max-w-xs mx-auto fixed inset-x-0 bottom-4 z-50 p-3">
+            <p className="text-center text-xs text-amber-900 mb-2 font-medium">
+              {cartaPendiente.nombre}
+            </p>
+            
+            <div className="flex gap-1">
+              <Button
+                onClick={() => confirmarCartaConPosicion(false)}
+                className="flex-1 h-8 text-xs bg-emerald-600 hover:bg-emerald-700 text-white"
+              >
+                Derecho
+              </Button>
+              <Button
+                onClick={() => confirmarCartaConPosicion(true)}
+                variant="destructive"
+                className="flex-1 h-8 text-xs"
+              >
+                Invertida
+              </Button>
+              <Button
+                variant="outline"
+                onClick={cancelarSeleccionCarta}
+                className="w-8 h-8 text-xs p-0"
+              >
+                ✕
+              </Button>
+            </div>
+          </div>
+        )}
 
         {/* Cartas seleccionadas */}
         {cartasSeleccionadas.length > 0 && (
@@ -738,15 +723,7 @@ toast({
 
         {/* Botones de acción */}
         <div className="flex flex-col sm:flex-row gap-3">
-          {/* Este botón ya no es necesario aquí, el botón fijo lo reemplaza */}
-          {/* <Button
-            variant="outline"
-            onClick={onVolver}
-            className="flex-1"
-          >
-            <ChevronLeft className="w-4 h-4 mr-2" />
-            Volver
-          </Button> */}
+          {/* El botón "Volver" ya se maneja con el botón flotante global */}
 
           {cartasSeleccionadas.length > 0 && (
             <>
