@@ -11,7 +11,7 @@ import { cardNames } from '@/data/cardNames';
 interface CartaSelectorProps {
   tirada: Tirada;
   baraja: 'tradicional' | 'osho';
-  cartasSeleccionadas: CartaSeleccionada[];
+  cartasSeleccionadas: CartaSeleCartaSeleccionada[];
   onCartaAdd: (carta: CartaSeleccionada) => void;
   onCartaToggle: (posicion: number) => void;
   onVolver: () => void;
@@ -48,17 +48,15 @@ const CartaSelector: React.FC<CartaSelectorProps> = ({
     posicion: number;
   } | null>(null);
 
-  // Helper to get a cleaned name for sorting (removes articles and accents)
   const getCleanedName = useCallback((name: string): string => {
     return name
       .replace(/^(El|La|Los|Las)\s+/i, '')
       .normalize("NFD")
-      .replace(/[\u0300-\u036f]/g, "") // Remove accents
-      .toLowerCase() // Convert to lower case for consistent comparison
+      .replace(/[\u0300-\u036f]/g, "")
+      .toLowerCase()
       .trim();
   }, []);
 
-  // Memoized lists of cards for efficiency
   const arcanosMayores = useMemo(() =>
     cardNames.filter(c =>
       c.baraja === 'tradicional' &&
@@ -68,8 +66,8 @@ const CartaSelector: React.FC<CartaSelectorProps> = ({
         c.id.startsWith('los-') ||
         ['el-colgado', 'la-muerte', 'la-templanza', 'el-diablo', 'la-torre', 'la-estrella', 'la-luna', 'el-sol', 'el-juicio', 'el-mundo', 'el-loco'].includes(c.id)
       )
-    ),
-    []
+    ).sort((a, b) => getCleanedName(a.name).localeCompare(getCleanedName(b.name))),
+    [getCleanedName]
   );
 
   const arcanosMenores = useMemo(() =>
@@ -85,19 +83,16 @@ const CartaSelector: React.FC<CartaSelectorProps> = ({
     []
   );
 
-  // MODIFIED: Osho cards are now sorted by their "cleaned" name globally
   const cartasOsho = useMemo(() => {
     return cardNames.filter(c => c.baraja === 'osho').sort((a, b) =>
       getCleanedName(a.name).localeCompare(getCleanedName(b.name))
     );
   }, [getCleanedName]);
 
-  // Helper to get first letter for display grouping (uses cleaned name)
   const getFirstLetterForSorting = useCallback((name: string): string => {
-    // This is primarily for grouping by initial letter, after cleaning for sorting
     const cleanedNameForLetter = name
       .replace(/^(El|La|Los|Las)\s+/i, '')
-      .normalize("NFD").replace(/[\u0300-\u036f]/g, "") // Remove accents
+      .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
       .trim();
     return cleanedNameForLetter.charAt(0).toUpperCase() || '#';
   }, []);
@@ -112,7 +107,6 @@ const CartaSelector: React.FC<CartaSelectorProps> = ({
 
   const getLetrasOsho = useMemo(() => {
     const letters = new Set<string>();
-    // Iterate over the already sorted cartasOsho
     cartasOsho.forEach(carta => {
       letters.add(getFirstLetterForSorting(carta.name));
     });
@@ -121,13 +115,11 @@ const CartaSelector: React.FC<CartaSelectorProps> = ({
 
   const palos = ['Bastos', 'Copas', 'Espadas', 'Oros'];
 
-  // MOVED: getCardNameById definition moved higher to ensure it's initialized before usage
   const getCardNameById = useCallback((id: string) => {
     const card = cardNames.find(c => c.id === id);
     return card ? card.name : id;
   }, []);
 
-  // Debugging log for memoized data
   useEffect(() => {
     console.log("--- DEBUG CARTASELECTOR DATOS ---");
     console.log("CardNames cargados:", cardNames.length);
@@ -139,10 +131,8 @@ const CartaSelector: React.FC<CartaSelectorProps> = ({
     console.log("--- FIN DEBUG CARTASELECTOR DATOS ---");
   }, [arcanosMayores, arcanosMenores, cartasOsho, getLetrasArcanosMayores, getLetrasOsho]);
 
-  // Filters cards by selected letter or category/suit
   const filtrarCartasPorLetra = useCallback((letra: string, barajaActual: 'tradicional' | 'osho', categoria: 'mayores' | null) => {
     if (barajaActual === 'osho') {
-      // For Osho, simply filter the already globally sorted list
       return cartasOsho.filter(carta => getFirstLetterForSorting(carta.name) === letra);
     } else if (barajaActual === 'tradicional' && categoria === 'mayores') {
       return arcanosMayores
@@ -152,7 +142,6 @@ const CartaSelector: React.FC<CartaSelectorProps> = ({
     return [];
   }, [cartasOsho, arcanosMayores, getFirstLetterForSorting]);
 
-  // Helper for displaying minor arcana numbers/figures
   const getCartaMenorDisplay = (name: string): string => {
     if (name.includes('As')) return 'As';
     if (name.includes('Dos')) return '2';
@@ -171,7 +160,6 @@ const CartaSelector: React.FC<CartaSelectorProps> = ({
     return name;
   };
 
-  // Filters minor arcana by suit and groups them for display
   const filtrarCartasPorPalo = useCallback((palo: string) => {
     const paloID = palo.toLowerCase();
     const cartasDelPalo = arcanosMenores
@@ -197,15 +185,16 @@ const CartaSelector: React.FC<CartaSelectorProps> = ({
         return getSortValue(a.name) - getSortValue(b.name);
       });
 
-    return {
-      asToFive: cartasDelPalo.filter(c => ['As', 'Dos', 'Tres', 'Cuatro', 'Cinco'].some(n => c.name.includes(n))),
-      sixToTen: cartasDelPalo.filter(c => ['Seis', 'Siete', 'Ocho', 'Nueve', 'Diez'].some(n => c.name.includes(n))),
-      sotaCaballero: cartasDelPalo.filter(c => ['Sota', 'Caballero'].some(n => c.name.includes(n))),
-      reinaRey: cartasDelPalo.filter(c => ['Reina', 'Rey'].some(n => c.name.includes(n))),
-    };
+    // Dividir en los grupos solicitados
+    const asToFive = cartasDelPalo.filter(c => ['As', 'Dos', 'Tres', 'Cuatro', 'Cinco'].some(n => c.name.includes(n)));
+    const sixToTen = cartasDelPalo.filter(c => ['Seis', 'Siete', 'Ocho', 'Nueve', 'Diez'].some(n => c.name.includes(n)));
+    const sotaCaballero = cartasDelPalo.filter(c => ['Sota', 'Caballero'].some(n => c.name.includes(n)));
+    const reinaRey = cartasDelPalo.filter(c => ['Reina', 'Rey'].some(n => c.name.includes(n)));
+
+    return { asToFive, sixToTen, sotaCaballero, reinaRey };
   }, [arcanosMenores]);
 
-  // Determine the next position to select a card for
+
   const obtenerSiguientePosicion = useCallback((): number => {
     if (modoLibre) {
       return cartasSeleccionadas.length + 1;
@@ -215,24 +204,21 @@ const CartaSelector: React.FC<CartaSelectorProps> = ({
           return i;
         }
       }
-      return cartasSeleccionadas.length + 1; // Fallback, though should be covered by `puedeIrAInterpretacion`
+      return cartasSeleccionadas.length + 1;
     }
   }, [modoLibre, cartasSeleccionadas, tirada.numeroCartas]);
 
-  // Handles selection of a specific card ID
   const handleCartaSelect = useCallback((idCarta: string) => {
     const posicion = obtenerSiguientePosicion();
     const nombreCarta = getCardNameById(idCarta);
 
     if (baraja === 'tradicional') {
-      // For traditional, prompt for upright/reversed
       setCartaPendiente({
         id: idCarta,
         nombre: nombreCarta,
         posicion: posicion
       });
     } else {
-      // Osho cards are always upright
       const nuevaCarta: CartaSeleccionada = {
         posicion: posicion,
         carta: idCarta,
@@ -248,7 +234,6 @@ const CartaSelector: React.FC<CartaSelectorProps> = ({
         className: "toast-compact",
       });
 
-      // Clear filters after selection to prepare for next card
       if (categoriaSeleccionada === 'menores') {
         setPaloSeleccionado('');
       } else {
@@ -258,7 +243,6 @@ const CartaSelector: React.FC<CartaSelectorProps> = ({
     }
   }, [baraja, obtenerSiguientePosicion, onCartaAdd, toast, categoriaSeleccionada, getCardNameById, setLetraSeleccionada]);
 
-  // Confirms the card for traditional deck after upright/reversed choice
   const confirmarCartaConPosicion = useCallback((invertida: boolean) => {
     if (!cartaPendiente) return;
 
@@ -280,7 +264,6 @@ const CartaSelector: React.FC<CartaSelectorProps> = ({
     });
 
     setCartaPendiente(null);
-    // Clear filters after selection to prepare for next card
     if (categoriaSeleccionada === 'menores') {
       setPaloSeleccionado('');
     } else {
@@ -326,12 +309,10 @@ const CartaSelector: React.FC<CartaSelectorProps> = ({
       .join('\n');
 
     try {
-      // document.execCommand('copy') is used as navigator.clipboard.writeText()
-      // might not work due to iframe restrictions in some environments.
       const textarea = document.createElement('textarea');
       textarea.value = lista;
-      textarea.style.position = 'fixed'; // Avoid scrolling to bottom
-      textarea.style.opacity = '0'; // Hide it
+      textarea.style.position = 'fixed';
+      textarea.style.opacity = '0';
       document.body.appendChild(textarea);
       textarea.select();
       document.execCommand('copy');
@@ -353,21 +334,16 @@ const CartaSelector: React.FC<CartaSelectorProps> = ({
     }
   };
 
-
   const posicionActualDisplayNum = obtenerSiguientePosicion();
   const posicionActualData = modoLibre
     ? { nombre: `Carta ${posicionActualDisplayNum}`, descripcion: 'Selecciona una carta' }
     : tirada.posiciones.find(p => p.numero === posicionActualDisplayNum);
 
-  const cartasPorGruposDePalo = paloSeleccionado ? filtrarCartasPorPalo(paloSeleccionado) : null;
-
+  const cartasDelPaloSeleccionado = paloSeleccionado ? filtrarCartasPorPalo(paloSeleccionado) : null;
 
   return (
-    // MODIFICADO: Eliminado px-4 de este div para maximizar el ancho disponible
     <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-teal-50 to-emerald-100 py-8">
-      {/* MODIFICADO: El contenedor principal ahora gestiona su propio padding horizontal */}
-      {/* Añadido padding-top para el botón fijo */}
-      <div className="container mx-auto max-w-4xl space-y-6 pt-16 px-4 sm:px-6"> {/* Añadido px-4 sm:px-6 */}
+      <div className="container mx-auto max-w-4xl space-y-6 pt-16 px-4 sm:px-6">
 
         {/* Progreso de selección */}
         {!modoLibre && (
@@ -420,10 +396,10 @@ const CartaSelector: React.FC<CartaSelectorProps> = ({
             {baraja === 'tradicional' && (
               <div className="space-y-4">
                 {/* Botones para seleccionar categoría: SIEMPRE se muestran ahora */}
-                <div className="grid gap-2 grid-cols-2">
+                <div className="grid gap-2 grid-cols-2 max-w-sm mx-auto">
                   <Button
                     variant={categoriaSeleccionada === 'mayores' ? "default" : "outline"}
-                    className="h-10 text-sm"
+                    className="h-9 text-sm"
                     onClick={() => {
                       setCategoriaSeleccionada('mayores');
                       setLetraSeleccionada('');
@@ -434,7 +410,7 @@ const CartaSelector: React.FC<CartaSelectorProps> = ({
                   </Button>
                   <Button
                     variant={categoriaSeleccionada === 'menores' ? "default" : "outline"}
-                    className="h-10 text-sm"
+                    className="h-9 text-sm"
                     onClick={() => {
                       setCategoriaSeleccionada('menores');
                       setLetraSeleccionada('');
@@ -448,16 +424,16 @@ const CartaSelector: React.FC<CartaSelectorProps> = ({
                 {/* Selección de Arcanos Mayores por Letra */}
                 {categoriaSeleccionada === 'mayores' && !letraSeleccionada && (
                   <>
-                    <label className="block text-sm font-medium text-emerald-900 mb-2">
+                    <label className="block text-sm font-medium text-emerald-900 mb-2 text-center">
                       Primera letra
                     </label>
-                    {/* MODIFICADO: Ajustado grid para botones de letra Arcanos Mayores (más espacio en móvil) */}
-                    <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-7 lg:grid-cols-8 gap-2">
+                    {/* MODIFICADO: Usar flex-wrap y justify-center para centrar los botones */}
+                    <div className="flex flex-wrap justify-center gap-2 max-w-xl mx-auto">
                       {getLetrasArcanosMayores.map((letra) => (
                         <Button
                           key={letra}
                           variant="outline"
-                          className="h-12 text-center text-base flex items-center justify-center font-medium"
+                          className="h-10 w-10 sm:w-12 sm:h-12 text-center text-base flex items-center justify-center font-medium" // Añadida w-10/12 para consistencia
                           onClick={() => setLetraSeleccionada(letra)}
                         >
                           {letra}
@@ -470,10 +446,10 @@ const CartaSelector: React.FC<CartaSelectorProps> = ({
                 {/* Selección de Arcanos Menores por Palo: Mostrar si categoría es 'menores' Y no hay palo seleccionado */}
                 {categoriaSeleccionada === 'menores' && !paloSeleccionado && (
                   <>
-                    <label className="block text-sm font-medium text-emerald-900 mb-2">
+                    <label className="block text-sm font-medium text-emerald-900 mb-2 text-center">
                       Palo
                     </label>
-                    <div className="grid gap-2 grid-cols-2 sm:grid-cols-4">
+                    <div className="grid gap-2 grid-cols-2 sm:grid-cols-4 max-w-md mx-auto">
                       {palos.map((palo) => (
                         <Button
                           key={palo}
@@ -493,16 +469,16 @@ const CartaSelector: React.FC<CartaSelectorProps> = ({
             {/* Sección de selección para Tarot de Osho (con botones de letra) */}
             {baraja === 'osho' && !letraSeleccionada && (
               <>
-                <label className="block text-sm font-medium text-emerald-900 mb-2">
+                <label className="block text-sm font-medium text-emerald-900 mb-2 text-center">
                   Primera letra
                 </label>
-                {/* MODIFICADO: Ajustado grid para botones de letra Osho (más espacio en móvil) */}
-                <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-7 lg:grid-cols-8 gap-2">
+                {/* MODIFICADO: Usar flex-wrap y justify-center para centrar los botones */}
+                <div className="flex flex-wrap justify-center gap-2 max-w-xl mx-auto">
                   {getLetrasOsho.map((letra) => (
                     <Button
                       key={letra}
                       variant="outline"
-                      className="h-12 text-center text-base flex items-center justify-center font-medium"
+                      className="h-10 w-10 sm:w-12 sm:h-12 text-center text-base flex items-center justify-center font-medium" // Añadida w-10/12 para consistencia
                       onClick={() => setLetraSeleccionada(letra)}
                     >
                       {letra}
@@ -516,102 +492,78 @@ const CartaSelector: React.FC<CartaSelectorProps> = ({
             {((baraja === 'tradicional' && (letraSeleccionada || paloSeleccionado)) ||
               (baraja === 'osho' && letraSeleccionada)) && (
                 <div>
-                  <label className="block text-sm font-medium text-emerald-900 mb-3">
+                  <label className="block text-sm font-medium text-emerald-900 mb-3 text-center">
                     Cartas disponibles
                   </label>
-                  
-                  {/* ARCANOS MENORES - Layout por grupos organizados */}
-                  {baraja === 'tradicional' && categoriaSeleccionada === 'menores' && paloSeleccionado && cartasPorGruposDePalo ? (
-                    <div className="space-y-4">
-                      
-                      {/* Números (As - 10) */}
-                      <div className="space-y-2">
-                        <h4 className="text-xs font-semibold text-emerald-800 mb-2">Números</h4>
-                        
-                        {/* Fila: As, 2, 3, 4, 5 */}
-                        {cartasPorGruposDePalo.asToFive.length > 0 && (
-                          // MODIFICADO: Ajustado grid para números de Arcanos Menores
-                          <div className="grid grid-cols-3 gap-2 sm:grid-cols-5">
-                            {cartasPorGruposDePalo.asToFive.map((carta) => (
-                              <Button
-                                key={carta.id}
-                                variant="outline"
-                                className="h-12 flex items-center justify-center hover:bg-emerald-50 hover:border-emerald-400 font-semibold text-emerald-800 border-emerald-200 bg-emerald-25"
-                                onClick={() => handleCartaSelect(carta.id)}
-                              >
-                                {getCartaMenorDisplay(carta.name)}
-                              </Button>
-                            ))}
-                          </div>
-                        )}
-                        
-                        {/* Fila: 6, 7, 8, 9, 10 */}
-                        {cartasPorGruposDePalo.sixToTen.length > 0 && (
-                          // MODIFICADO: Ajustado grid para números de Arcanos Menores
-                          <div className="grid grid-cols-3 gap-2 sm:grid-cols-5">
-                            {cartasPorGruposDePalo.sixToTen.map((carta) => (
-                              <Button
-                                key={carta.id}
-                                variant="outline"
-                                className="h-12 flex items-center justify-center hover:bg-emerald-50 hover:border-emerald-400 font-semibold text-emerald-800 border-emerald-200 bg-emerald-25"
-                                onClick={() => handleCartaSelect(carta.id)}
-                              >
-                                {getCartaMenorDisplay(carta.name)}
-                              </Button>
-                            ))}
-                          </div>
-                        )}
+
+                  {/* Arcanos Menores (Tradicional) - Ahora con la distribución específica */}
+                  {baraja === 'tradicional' && categoriaSeleccionada === 'menores' && paloSeleccionado && cartasDelPaloSeleccionado ? (
+                    <div className="space-y-3 max-w-lg mx-auto"> {/* Contenedor para los grupos de arcanos menores, centrado */}
+                      {/* Grupo As 2 3 4 5 */}
+                      <div className="grid grid-cols-5 gap-2 justify-items-center">
+                        {cartasDelPaloSeleccionado.asToFive.map((carta) => (
+                          <Button
+                            key={carta.id}
+                            variant="outline"
+                            className="w-full h-10 sm:h-12 flex items-center justify-center hover:bg-emerald-50 hover:border-emerald-400 font-semibold text-emerald-800 border-emerald-200 bg-emerald-25 text-xs sm:text-sm"
+                            onClick={() => handleCartaSelect(carta.id)}
+                          >
+                            {getCartaMenorDisplay(carta.name)}
+                          </Button>
+                        ))}
                       </div>
-
-                      {/* Figuras (Sota, Caballero, Reina, Rey) */}
-                      <div className="space-y-2">
-                        <h4 className="text-xs font-semibold text-emerald-800 mb-2">Figuras</h4>
-                        
-                        {/* Primera fila: Sota, Caballero */}
-                        {cartasPorGruposDePalo.sotaCaballero.length > 0 && (
-                          <div className="grid grid-cols-2 gap-2"> {/* Mantenido grid-cols-2 */}
-                            {cartasPorGruposDePalo.sotaCaballero.map((carta) => (
-                              <Button
-                                key={carta.id}
-                                variant="outline"
-                                className="h-12 flex items-center justify-center hover:bg-emerald-50 hover:border-emerald-400 font-medium text-emerald-800 border-emerald-200 bg-emerald-25 text-sm"
-                                onClick={() => handleCartaSelect(carta.id)}
-                              >
-                                {getCartaMenorDisplay(carta.name)}
-                              </Button>
-                            ))}
-                          </div>
-                        )}
-
-                        {/* Segunda fila: Reina, Rey */}
-                        {cartasPorGruposDePalo.reinaRey.length > 0 && (
-                          <div className="grid grid-cols-2 gap-2"> {/* Mantenido grid-cols-2 */}
-                            {cartasPorGruposDePalo.reinaRey.map((carta) => (
-                              <Button
-                                key={carta.id}
-                                variant="outline"
-                                className="h-12 flex items-center justify-center hover:bg-emerald-50 hover:border-emerald-400 font-medium text-emerald-800 border-emerald-200 bg-emerald-25 text-sm"
-                                onClick={() => handleCartaSelect(carta.id)}
-                              >
-                                {getCartaMenorDisplay(carta.name)}
-                              </Button>
-                            ))}
-                          </div>
-                        )}
+                      {/* Grupo 6 7 8 9 10 */}
+                      <div className="grid grid-cols-5 gap-2 justify-items-center">
+                        {cartasDelPaloSeleccionado.sixToTen.map((carta) => (
+                          <Button
+                            key={carta.id}
+                            variant="outline"
+                            className="w-full h-10 sm:h-12 flex items-center justify-center hover:bg-emerald-50 hover:border-emerald-400 font-semibold text-emerald-800 border-emerald-200 bg-emerald-25 text-xs sm:text-sm"
+                            onClick={() => handleCartaSelect(carta.id)}
+                          >
+                            {getCartaMenorDisplay(carta.name)}
+                          </Button>
+                        ))}
+                      </div>
+                      {/* Grupo Sota Caballero */}
+                      <div className="grid grid-cols-2 gap-2 max-w-xs mx-auto"> {/* Centrado para dos botones */}
+                        {cartasDelPaloSeleccionado.sotaCaballero.map((carta) => (
+                          <Button
+                            key={carta.id}
+                            variant="outline"
+                            className="w-full h-10 sm:h-12 flex items-center justify-center hover:bg-emerald-50 hover:border-emerald-400 font-semibold text-emerald-800 border-emerald-200 bg-emerald-25 text-xs sm:text-sm"
+                            onClick={() => handleCartaSelect(carta.id)}
+                          >
+                            {getCartaMenorDisplay(carta.name)}
+                          </Button>
+                        ))}
+                      </div>
+                      {/* Grupo Reina Rey */}
+                      <div className="grid grid-cols-2 gap-2 max-w-xs mx-auto"> {/* Centrado para dos botones */}
+                        {cartasDelPaloSeleccionado.reinaRey.map((carta) => (
+                          <Button
+                            key={carta.id}
+                            variant="outline"
+                            className="w-full h-10 sm:h-12 flex items-center justify-center hover:bg-emerald-50 hover:border-emerald-400 font-semibold text-emerald-800 border-emerald-200 bg-emerald-25 text-xs sm:text-sm"
+                            onClick={() => handleCartaSelect(carta.id)}
+                          >
+                            {getCartaMenorDisplay(carta.name)}
+                          </Button>
+                        ))}
                       </div>
                     </div>
                   ) : (
-                    // MODIFICADO: Arcanos Mayores y Osho ahora son grid-cols-1 en móvil para nombres largos
-                    <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 md:gap-4">
+                    /* Arcanos Mayores y Osho - Ahora en 2 columnas en móvil, con márgenes ampliados y fuente más pequeña para Osho */
+                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 md:gap-4">
                       {filtrarCartasPorLetra(letraSeleccionada, baraja, categoriaSeleccionada === 'mayores' ? 'mayores' : null)
                         .map((carta) => (
                           <Button
                             key={carta.id}
                             variant="outline"
-                            className="w-full h-auto min-h-[3rem] p-3 flex items-center justify-center text-center font-medium rounded-lg border-emerald-300 bg-emerald-50 hover:bg-emerald-100 hover:border-emerald-500 transition-all duration-200 cursor-pointer"
+                            className="w-full h-auto min-h-[2.5rem] p-2 flex items-center justify-center text-center font-medium rounded-lg border-emerald-300 bg-emerald-50 hover:bg-emerald-100 hover:border-emerald-500 transition-all duration-200 cursor-pointer text-sm"
                             onClick={() => handleCartaSelect(carta.id)}
                           >
-                            <span className="font-semibold text-emerald-900 leading-tight">
+                            <span className={`font-semibold text-emerald-900 leading-tight ${baraja === 'osho' ? 'text-xs sm:text-sm' : 'text-sm'}`}>
                               {carta.name}
                             </span>
                           </Button>
@@ -620,8 +572,6 @@ const CartaSelector: React.FC<CartaSelectorProps> = ({
                   )}
                 </div>
               )}
-
-            {/* Este botón de "Volver" interno fue eliminado en una iteración anterior, lo mantengo así */}
           </CardContent>
         </Card>
 
@@ -631,7 +581,7 @@ const CartaSelector: React.FC<CartaSelectorProps> = ({
             <p className="text-center text-xs text-amber-900 mb-2 font-medium">
               {cartaPendiente.nombre}
             </p>
-            
+
             <div className="flex gap-1">
               <Button
                 onClick={() => confirmarCartaConPosicion(false)}
@@ -723,8 +673,6 @@ const CartaSelector: React.FC<CartaSelectorProps> = ({
 
         {/* Botones de acción */}
         <div className="flex flex-col sm:flex-row gap-3">
-          {/* El botón "Volver" ya se maneja con el botón flotante global */}
-
           {cartasSeleccionadas.length > 0 && (
             <>
               <Button

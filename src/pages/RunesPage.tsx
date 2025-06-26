@@ -1,64 +1,67 @@
+// RunesPage.tsx (UPDATED)
+
 import React, { useState } from 'react';
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import BackButton from '@/components/BackButton'; // Asumiendo que tienes este componente
-import { Layers } from "lucide-react"; // Importar Layers para el ícono
+import BackButton from '@/components/BackButton';
+import { Layers } from "lucide-react";
 
 import RunaSelector from '@/components/RunaSelector';
-import InterpretacionRunas from '@/components/InterpretacionRunas';
-import { RunaMeaning } from '@/data/runaMeanings'; // Importa la interfaz RunaMeaning
+import InterpretacionRunas from '@/components/InterpretacionRunas'; // For single rune
+import InterpretacionRunasLista from '@/components/InterpretacionRunasLista'; // Import the new component
+import { RunaMeaning } from '@/data/runaMeanings';
 
 const RunesPage = () => {
-  // Todo el estado relacionado con las Runas vivirá aquí
   const [vistaActual, setVistaActual] = useState<'runesOptions' | 'runas' | 'interpretacionRunas'>('runesOptions');
   const [selectedRunaForInterpretation, setSelectedRunaForInterpretation] = useState<RunaMeaning | null>(null);
+  const [selectedRunasListForInterpretation, setSelectedRunasListForInterpretation] = useState<RunaMeaning[] | null>(null);
 
-  // Función para manejar la selección de una runa desde RunaSelector y pasarla a InterpretacionRunas
-  const handleSelectRunaForInterpretation = (runa: RunaMeaning) => {
+  const handleInterpretIndividualRuna = (runa: RunaMeaning) => {
     setSelectedRunaForInterpretation(runa);
+    setSelectedRunasListForInterpretation(null);
     setVistaActual('interpretacionRunas');
   };
 
-  // Lógica del botón de retroceso para RunesPage
+  const handleInterpretRunasList = (runas: RunaMeaning[]) => {
+    setSelectedRunasListForInterpretation(runas);
+    setSelectedRunaForInterpretation(null);
+    setVistaActual('interpretacionRunas');
+  };
+
   const handleVolver = () => {
     if (vistaActual === 'runas') {
-      setVistaActual('runesOptions'); // Vuelve a las opciones de Runas
-      setSelectedRunaForInterpretation(null); // Limpia la runa seleccionada si vuelves
+      setVistaActual('runesOptions');
+      setSelectedRunaForInterpretation(null);
+      setSelectedRunasListForInterpretation(null);
     } else if (vistaActual === 'interpretacionRunas') {
-      setVistaActual('runas'); // Vuelve a la pantalla de RunaSelector
-      setSelectedRunaForInterpretation(null); // Limpia la runa interpretada al volver
+      setVistaActual('runas'); // Go back to RunaSelector
+      setSelectedRunaForInterpretation(null);
+      setSelectedRunasListForInterpretation(null);
     } else if (vistaActual === 'runesOptions') {
-      // Si estamos en las opciones principales de Runas, volvemos al inicio de la aplicación ('/')
-      // Esto usará react-router-dom para navegar
-      window.history.back(); // O usa el hook `useNavigate()` de react-router-dom
+      window.history.back();
     }
   };
 
   return (
     <div className="relative min-h-screen">
-      {/* AÑADIDO: El BackButton flotante que se muestra en todas las vistas de RunesPage */}
-      {/* Se renderiza siempre, pero su funcionalidad depende de vistaActual */}
       <BackButton
         onVolver={handleVolver}
-        isRound={true} // Para que sea el botón redondo con solo la flecha
-        className="fixed top-4 left-4 z-50" // Posicionamiento fijo y z-index alto
+        isRound={true}
+        className="fixed top-4 left-4 z-50"
       />
 
       {vistaActual === 'runesOptions' && (
         <div className="min-h-screen bg-gradient-to-br from-green-50 via-emerald-50 to-green-100 flex flex-col items-center py-8 px-4">
           <div className="container mx-auto max-w-2xl w-full">
-            {/* ELIMINADO: El BackButton que estaba aquí (redundante con el flotante global) */}
-            {/* <BackButton onVolver={handleVolver} label="Volver a Inicio" className="mb-8 inline-flex items-center" /> */}
-
-            <div className="grid md:grid-cols-1 gap-8 max-w-3xl mx-auto pt-16"> {/* AÑADIDO: pt-16 para desplazar contenido por el botón flotante */}
+            <div className="grid md:grid-cols-1 gap-8 max-w-3xl mx-auto pt-16">
               <Card
                 className="group bg-white/80 backdrop-blur-sm border-emerald-200 hover:border-emerald-400 transition-all duration-300 cursor-pointer hover:shadow-xl hover:-translate-y-1"
-                onClick={() => setVistaActual('runas')} // Ir directamente a la selección/lanzamiento de runas
+                onClick={() => setVistaActual('runas')}
               >
                 <CardContent className="p-8 text-center">
                   <div className="mb-6">
                     <div className="mx-auto w-16 h-16 bg-gradient-to-br from-emerald-400 to-green-500 rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                      <Layers className="w-8 h-8 text-white" /> {/* Ícono para runas */}
+                      <Layers className="w-8 h-8 text-white" />
                     </div>
                     <h3 className="text-2xl font-serif text-emerald-900 mb-3">
                       Lanzar Runas
@@ -79,16 +82,28 @@ const RunesPage = () => {
 
       {vistaActual === 'runas' && (
         <RunaSelector
-          onVolver={handleVolver} // Se sigue pasando handleVolver para que RunaSelector sepa qué hacer
-          onSelectRunaForInterpretation={handleSelectRunaForInterpretation}
+          onVolver={handleVolver}
+          onInterpretIndividualRuna={handleInterpretIndividualRuna}
+          onInterpretRunasList={handleInterpretRunasList}
         />
       )}
 
-      {vistaActual === 'interpretacionRunas' && selectedRunaForInterpretation && (
-        <InterpretacionRunas
-          runa={selectedRunaForInterpretation}
-          onVolver={handleVolver} // Se sigue pasando handleVolver
-        />
+      {vistaActual === 'interpretacionRunas' && (
+        // Conditionally render based on whether it's a single rune or a list
+        selectedRunaForInterpretation ? (
+          <InterpretacionRunas
+            runa={selectedRunaForInterpretation}
+            onVolver={handleVolver}
+          />
+        ) : selectedRunasListForInterpretation && selectedRunasListForInterpretation.length > 0 ? (
+          // Render the new InterpretacionRunasLista component here
+          <InterpretacionRunasLista
+            runas={selectedRunasListForInterpretation}
+            onVolver={handleVolver}
+          />
+        ) : (
+          <p className="text-red-600 text-center mt-20">Error: No se encontró runa o lista para interpretar.</p>
+        )
       )}
     </div>
   );

@@ -2,7 +2,8 @@ import React, { useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { ChevronLeft } from "lucide-react";
+// MODIFIED IMPORT: ChevronLeft is no longer needed as the local back button is removed
+// import { ChevronLeft } from "lucide-react";
 // MODIFIED IMPORT: Interfaces are now imported from '@/types/tarot'
 import { Tirada, CartaSeleccionada } from '@/types/tarot';
 
@@ -111,6 +112,7 @@ const InterpretacionCartas: React.FC<InterpretacionCartasProps> = ({
           planeta: interp.planeta,
           signoAstrologico: interp.signoAstrologico,
           numerologia: interp.numerologia,
+          simbolismo: interp.simbolismo, // Asegúrate de que esto se pase correctamente
         };
       }
     } else { // Baraja Osho
@@ -130,7 +132,7 @@ const InterpretacionCartas: React.FC<InterpretacionCartasProps> = ({
           planeta: undefined,
           signoAstrologico: undefined,
           numerologia: undefined,
-          simbolismo: undefined, // Osho no tiene esta propiedad
+          simbolismo: undefined,
         };
       }
     }
@@ -154,18 +156,15 @@ const InterpretacionCartas: React.FC<InterpretacionCartasProps> = ({
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-indigo-50 to-purple-100 py-8 px-4">
-      {/* Botón "Volver" con posicionamiento fijo */}
-      <Button
-        variant="outline"
-        onClick={onVolver}
-        className="fixed top-4 left-4 z-50 p-2 rounded-full shadow-lg bg-white/90 backdrop-blur-sm border-purple-300 hover:bg-purple-50 hover:border-purple-500"
-        size="icon" // Para que sea un botón redondo con solo el ícono
-      >
-        <ChevronLeft className="w-5 h-5 text-purple-700" />
-      </Button>
+    // Ampliado el padding vertical del contenedor principal a py-12
+    // Ajustado el padding horizontal a px-8 (si aún no es suficiente, se puede subir a px-6 o px-4)
+    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-indigo-50 to-purple-100 py-12 px-8">
+      {/* ELIMINADO: Botón de retroceder local */}
 
-      <div className="container mx-auto max-w-4xl space-y-6 pt-16"> {/* Añadido padding-top para el botón fijo */}
+      {/* MODIFICADO: Ahora usa max-w-full para ocupar todo el ancho disponible del padre,
+          y mx-auto para centrar. El padding horizontal se gestiona en el div exterior.
+          Se ha aumentado el espacio vertical entre secciones a space-y-12 */}
+      <div className="max-w-full mx-auto space-y-12"> {/* max-w-full para que ocupe más ancho */}
         <div className="text-center">
           <h2 className="text-3xl font-serif text-purple-900 mb-2">
             Interpretación de Cartas
@@ -180,51 +179,33 @@ const InterpretacionCartas: React.FC<InterpretacionCartasProps> = ({
           )}
         </div>
 
-        {/* Resumen de la tirada */}
+        {/* Resumen de la tirada - ELIMINADO CardHeader y ajustado CardContent */}
         <Card className="bg-white/80 backdrop-blur-sm border-purple-200">
-          <CardHeader>
-            <CardTitle className="text-xl text-purple-900">
-              Resumen de la Lectura
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          {/* ELIMINADO: CardHeader completo */}
+          <CardContent className="py-4"> {/* Reducido padding vertical para ser más compacto */}
+            {/* Solo se muestra el conteo de cartas, centrado y con texto más pequeño */}
+            <div className="flex justify-center items-center">
               <div className="text-center">
-                <div className="text-2xl font-bold text-purple-700">
+                <div className="text-base font-bold text-purple-700"> {/* Texto del número */}
                   {cartasSeleccionadas.length}
                 </div>
-                <div className="text-purple-600 text-base">
-                  {cartasSeleccionadas.length === 1 ? 'Carta' : 'Cartas'}
+                <div className="text-purple-600 text-xs"> {/* Texto descriptivo */}
+                  {cartasSeleccionadas.length === 1 ? 'Carta seleccionada' : 'Cartas seleccionadas'}
                 </div>
               </div>
-              <div className="text-center">
-                <div className="text-2xl font-bold text-purple-700">
-                  {baraja === 'tradicional' ? 'Tradicional' : 'Osho'}
-                </div>
-                <div className="text-purple-600 text-base">
-                  Tipo de Baraja
-                </div>
-              </div>
-              {baraja === 'tradicional' && (
-                <div className="text-center">
-                  <div className="text-2xl font-bold text-purple-700">
-                    {cartasSeleccionadas.filter(c => c.invertida).length}
-                  </div>
-                  <div className="text-purple-600 text-base">
-                    Cartas Invertidas
-                  </div>
-                </div>
-              )}
             </div>
           </CardContent>
         </Card>
 
-        {/* Interpretación de cada carta */}
-        <div className="space-y-4">
+        {/* Interpretación de cada carta - Se mantiene space-y-6 para las cards individuales */}
+        <div className="space-y-8"> {/* Aumentado el espacio entre las cartas individuales a space-y-8 */}
           {cartasSeleccionadas
             .sort((a, b) => a.posicion - b.posicion)
             .map((carta) => {
-              const posicionData = tirada.posiciones.find(p => p.numero === carta.posicion);
+              const posicionData = modoLibre
+                ? { nombre: `Carta ${carta.posicion}`, descripcion: '' }
+                : tirada.posiciones.find(p => p.numero === carta.posicion);
+
               const interpretacion = getInterpretacionCarta(carta.carta, carta.invertida, baraja);
 
               return (
@@ -261,85 +242,82 @@ const InterpretacionCartas: React.FC<InterpretacionCartasProps> = ({
                       </div>
                     </div>
                   </CardHeader>
-                  <CardContent>
-                    <div className="space-y-4"> {/* Aumentado el espacio entre secciones */}
-                      {/* Nueva sección: Información Básica */}
-                      {baraja === 'tradicional' && (interpretacion.arcano || interpretacion.numero !== undefined || interpretacion.elemento || interpretacion.planeta || interpretacion.signoAstrologico || interpretacion.numerologia) && (
-                        <div>
-                          {/* Epígrafe "Información Básica" - Más grande y oscuro */}
-                          <h4 className="text-lg font-semibold text-purple-950 mb-1">Información Básica:</h4>
-                          <ul className="text-purple-700 text-sm space-y-0.5"> {/* Mantenido en text-sm pero con color más intenso y strong */}
-                            {interpretacion.arcano && <li><strong className="text-purple-800">Arcano:</strong> {interpretacion.arcano}</li>}
-                            {interpretacion.numero !== undefined && <li><strong className="text-purple-800">Número:</strong> {interpretacion.numero}</li>}
-                            {interpretacion.elemento && <li><strong className="text-purple-800">Elemento:</strong> {interpretacion.elemento}</li>}
-                            {interpretacion.planeta && <li><strong className="text-purple-800">Planeta:</strong> {interpretacion.planeta}</li>}
-                            {interpretacion.signoAstrologico && <li><strong className="text-purple-800">Signo Astrológico:</strong> {interpretacion.signoAstrologico}</li>}
-                            {interpretacion.numerologia && <li><strong className="text-purple-800">Numerología:</strong> {interpretacion.numerologia}</li>}
-                          </ul>
-                        </div>
-                      )}
-
-                      {/* Simbolismo */}
-                      {baraja === 'tradicional' && interpretacion.simbolismo && (
-                        <div>
-                          {/* Epígrafe "Simbolismo" - Más grande y oscuro */}
-                          <h4 className="text-lg font-semibold text-purple-950 mb-1">Simbolismo:</h4>
-                          <p className="text-purple-700 text-base leading-relaxed" dangerouslySetInnerHTML={{ __html: interpretacion.simbolismo }}></p>
-                        </div>
-                      )}
-
-                      {/* Significado */}
+                  {/* AUMENTADO: espaciado dentro de CardContent a space-y-6 */}
+                  <CardContent className="space-y-6">
+                    {/* Nueva sección: Información Básica */}
+                    {baraja === 'tradicional' && (interpretacion.arcano || interpretacion.numero !== undefined || interpretacion.elemento || interpretacion.planeta || interpretacion.signoAstrologico || interpretacion.numerologia) && (
                       <div>
-                        {/* Epígrafe "Significado" - Más grande y oscuro */}
-                        <h4 className="text-lg font-semibold text-purple-950 mb-1">Significado:</h4>
-                        <div className="text-purple-700 text-base leading-relaxed prose max-w-none" dangerouslySetInnerHTML={{ __html: interpretacion.significado }}></div>
+                        {/* Epígrafe "Información Básica" - Más grande y oscuro */}
+                        <h4 className="text-lg font-semibold text-purple-950 mb-1">Información Básica:</h4>
+                        <ul className="text-purple-700 text-sm space-y-0.5">
+                          {interpretacion.arcano && <li><strong className="text-purple-800">Arcano:</strong> {interpretacion.arcano}</li>}
+                          {interpretacion.numero !== undefined && <li><strong className="text-purple-800">Número:</strong> {interpretacion.numero}</li>}
+                          {interpretacion.elemento && <li><strong className="text-purple-800">Elemento:</strong> {interpretacion.elemento}</li>}
+                          {interpretacion.planeta && <li><strong className="text-purple-800">Planeta:</strong> {interpretacion.planeta}</li>}
+                          {interpretacion.signoAstrologico && <li><strong className="text-purple-800">Signo Astrológico:</strong> {interpretacion.signoAstrologico}</li>}
+                          {interpretacion.numerologia && <li><strong className="text-purple-800">Numerología:</strong> {interpretacion.numerologia}</li>}
+                        </ul>
                       </div>
+                    )}
 
-                      {/* Comentario */}
+                    {/* Simbolismo */}
+                    {baraja === 'tradicional' && interpretacion.simbolismo && (
                       <div>
-                        {/* Epígrafe "Comentario" - Más grande y oscuro */}
-                        <h4 className="text-lg font-semibold text-purple-950 mb-1">Comentario:</h4>
-                        <div className="text-purple-700 text-base leading-relaxed prose prose-purple max-w-none" dangerouslySetInnerHTML={{ __html: interpretacion.interpretacion }}></div>
+                        {/* Epígrafe "Simbolismo" - Más grande y oscuro */}
+                        <h4 className="text-lg font-semibold text-purple-950 mb-1">Simbolismo:</h4>
+                        <p className="text-purple-700 text-base leading-relaxed" dangerouslySetInnerHTML={{ __html: interpretacion.simbolismo }}></p>
                       </div>
+                    )}
 
-                      {/* Palabras Clave */}
-                      {interpretacion.palabrasClave && interpretacion.palabrasClave.length > 0 && (
-                        <div>
-                          {/* Epígrafe "Palabras Clave" - Más grande y oscuro */}
-                          <h4 className="text-lg font-semibold text-purple-950 mb-1">Palabras Clave:</h4>
-                          <p className="text-purple-700 text-base leading-relaxed">{interpretacion.palabrasClave.join(', ')}</p>
-                        </div>
-                      )}
-
-                      {/* Arquetipo */}
-                      {interpretacion.arquetipo && (
-                        <div>
-                          {/* Epígrafe "Arquetipo" - Más grande y oscuro */}
-                          <h4 className="text-lg font-semibold text-purple-950 mb-1">Arquetipo:</h4>
-                          <p className="text-purple-700 text-base leading-relaxed">{interpretacion.arquetipo}</p>
-                        </div>
-                      )}
-
-                      {/* Sección de Meditación y Reflexión */}
-                      {baraja === 'tradicional' && interpretacion.meditacionReflexion && interpretacion.meditacionReflexion.preguntas.length > 0 && (
-                        <div>
-                          {/* Epígrafe "Meditación y Reflexión" - Más grande y oscuro */}
-                          <h4 className="text-lg font-semibold text-purple-950 mb-1">Meditación y Reflexión:</h4>
-                          <ul className="list-disc list-inside text-purple-700 text-base leading-relaxed space-y-1">
-                            {interpretacion.meditacionReflexion.preguntas.map((pregunta, index) => (
-                              <li key={index}>{pregunta}</li>
-                            ))}
-                          </ul>
-                        </div>
-                      )}
+                    {/* Significado */}
+                    <div>
+                      {/* Epígrafe "Significado" - Más grande y oscuro */}
+                      <h4 className="text-lg font-semibold text-purple-950 mb-1">Significado:</h4>
+                      <div className="text-purple-700 text-base leading-relaxed prose max-w-none" dangerouslySetInnerHTML={{ __html: interpretacion.significado }}></div>
                     </div>
+
+                    {/* Comentario */}
+                    <div>
+                      {/* Epígrafe "Comentario" - Más grande y oscuro */}
+                      <h4 className="text-lg font-semibold text-purple-950 mb-1">Comentario:</h4>
+                      <div className="text-purple-700 text-base leading-relaxed prose prose-purple max-w-none" dangerouslySetInnerHTML={{ __html: interpretacion.interpretacion }}></div>
+                    </div>
+
+                    {/* Palabras Clave */}
+                    {interpretacion.palabrasClave && interpretacion.palabrasClave.length > 0 && (
+                      <div>
+                        {/* Epígrafe "Palabras Clave" - Más grande y oscuro */}
+                        <h4 className="text-lg font-semibold text-purple-950 mb-1">Palabras Clave:</h4>
+                        <p className="text-purple-700 text-base leading-relaxed">{interpretacion.palabrasClave.join(', ')}</p>
+                      </div>
+                    )}
+
+                    {/* Arquetipo */}
+                    {interpretacion.arquetipo && (
+                      <div>
+                        {/* Epígrafe "Arquetipo" - Más grande y oscuro */}
+                        <h4 className="text-lg font-semibold text-purple-950 mb-1">Arquetipo:</h4>
+                        <p className="text-purple-700 text-base leading-relaxed">{interpretacion.arquetipo}</p>
+                      </div>
+                    )}
+
+                    {/* Sección de Meditación y Reflexión */}
+                    {baraja === 'tradicional' && interpretacion.meditacionReflexion && interpretacion.meditacionReflexion.preguntas.length > 0 && (
+                      <div>
+                        {/* Epígrafe "Meditación y Reflexión" - Más grande y oscuro */}
+                        <h4 className="text-lg font-semibold text-purple-950 mb-1">Meditación y Reflexión:</h4>
+                        <ul className="list-disc list-inside text-purple-700 text-base leading-relaxed space-y-1">
+                          {interpretacion.meditacionReflexion.preguntas.map((pregunta, index) => (
+                            <li key={index}>{pregunta}</li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
                   </CardContent>
                 </Card>
               );
             })}
         </div>
-
-        {/* El botón "Volver" redundante al final se ha eliminado */}
       </div>
     </div>
   );

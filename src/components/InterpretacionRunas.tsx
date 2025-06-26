@@ -124,7 +124,7 @@ const InterpretacionRunas: React.FC<InterpretacionRunasProps> = ({ runa, onVolve
             )}
 
             {/* Detalles Adicionales */}
-            {(runa.elementoAsociado || runa.dioses?.length > 0 || runa.correspondenciaAstrologica || runa.piedraAsociada || runa.plantaAsociada || runa.colorAsociado || runa.numeroSagrado !== undefined || runa.estacion || runa.afinidadOtrasRunas?.length > 0) && (
+            {(runa.elementoAsociado || runa.dioses?.length > 0 || runa.correspondenciaAstrologica || runa.piedraAsociada || runa.plantaAsociada || runa.colorAsociado || runa.orden !== undefined || runa.estacion || runa.afinidadOtrasRunas?.length > 0) && (
                 <div>
                     <h4 className="text-lg font-semibold text-purple-950 mb-1">Más Detalles:</h4>
                     <ul className="text-purple-700 text-base space-y-1">
@@ -134,7 +134,7 @@ const InterpretacionRunas: React.FC<InterpretacionRunasProps> = ({ runa, onVolve
                         {runa.piedraAsociada && <li><strong>Piedra:</strong> {runa.piedraAsociada}</li>}
                         {runa.plantaAsociada && <li><strong>Planta:</strong> {runa.plantaAsociada}</li>}
                         {runa.colorAsociado && <li><strong>Color:</strong> {runa.colorAsociado}</li>}
-                        {runa.numeroSagrado !== undefined && <li><strong>Número Sagrado:</strong> {runa.numeroSagrado}</li>}
+                        {runa.orden !== undefined && <li><strong>Número Sagrado:</strong> {runa.orden}</li>}
                         {runa.estacion && <li><strong>Estación:</strong> {runa.estacion}</li>}
                         {runa.afinidadOtrasRunas && runa.afinidadOtrasRunas.length > 0 && <li><strong>Afinidad con:</strong> {runa.afinidadOtrasRunas.join(', ')}</li>}
                     </ul>

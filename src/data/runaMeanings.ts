@@ -22,7 +22,7 @@ export interface RunaMeaning {
   consejoPractico: string;
   meditacionSugerida: string;
   afinidadOtrasRunas: string[];
-  numeroSagrado?: number;
+  orden?: number;
   estacion?: string;
 }
 
@@ -49,7 +49,7 @@ export const runaMeaningsExpanded: RunaMeaning[] = [
     consejoPractico: 'Aprovecha las oportunidades que se presentan, pero recuerda compartir tu abundancia. La riqueza fluye mejor cuando circula.',
     meditacionSugerida: 'Visualiza un flujo dorado de energía que entra y sale de ti, trayendo abundancia mientras compartes generosamente.',
     afinidadOtrasRunas: ['Jera', 'Sowilo', 'Ingwaz'],
-    numeroSagrado: 1,
+    orden: 1,
     estacion: 'Primavera'
   },
   {
@@ -74,7 +74,7 @@ export const runaMeaningsExpanded: RunaMeaning[] = [
     consejoPractico: 'Confía en tu fuerza interior, pero canalízala sabiamente. El poder sin dirección se vuelve destructivo.',
     meditacionSugerida: 'Conecta con la energía telúrica, siente la fuerza de la tierra fluyendo hacia ti, dándote estabilidad y poder.',
     afinidadOtrasRunas: ['Thurisaz', 'Tiwaz', 'Eihwaz'],
-    numeroSagrado: 2
+    orden: 2
   },
   {
     id: 'thurisaz',
@@ -98,7 +98,7 @@ export const runaMeaningsExpanded: RunaMeaning[] = [
     consejoPractico: 'Mantén tus defensas activas pero no te vuelvas agresivo. A veces la destrucción es necesaria para la renovación.',
     meditacionSugerida: 'Visualiza una barrera protectora de luz alrededor tuyo, permeable solo a energías positivas y constructivas.',
     afinidadOtrasRunas: ['Algiz', 'Tiwaz', 'Uruz'],
-    numeroSagrado: 3
+    orden: 3
   },
   {
     id: 'ansuz',
@@ -122,7 +122,7 @@ export const runaMeaningsExpanded: RunaMeaning[] = [
     consejoPractico: 'Habla con verdad y escucha con atención. Las palabras tienen poder creador, úsalas sabiamente.',
     meditacionSugerida: 'Concentra tu atención en el espacio entre pensamientos, donde reside la sabiduría silenciosa que precede a las palabras.',
     afinidadOtrasRunas: ['Kenaz', 'Mannaz', 'Laguz'],
-    numeroSagrado: 4
+    orden: 4
   },
   {
     id: 'raidho',
@@ -146,7 +146,7 @@ export const runaMeaningsExpanded: RunaMeaning[] = [
     consejoPractico: 'Mantén un ritmo constante hacia tus objetivos. El progreso verdadero requiere paciencia y perseverancia.',
     meditacionSugerida: 'Visualiza tu vida como un viaje en el que cada paso te acerca a tu destino más elevado.',
     afinidadOtrasRunas: ['Ehwaz', 'Jera', 'Dagaz'],
-    numeroSagrado: 5
+    orden: 5
   },
   {
     id: 'kenaz',
@@ -170,7 +170,7 @@ export const runaMeaningsExpanded: RunaMeaning[] = [
     consejoPractico: 'Cultiva tu creatividad y comparte tu luz con otros. El conocimiento se multiplica cuando se transmite.',
     meditacionSugerida: 'Enciende una vela y contempla su llama, permitiendo que su luz despierte la sabiduría interior.',
     afinidadOtrasRunas: ['Ansuz', 'Sowilo', 'Dagaz'],
-    numeroSagrado: 6
+    orden: 6
   },
   {
     id: 'gebo',
@@ -193,7 +193,7 @@ export const runaMeaningsExpanded: RunaMeaning[] = [
     consejoPractico: 'Da sin esperar nada a cambio, pero permite que otros también te den. El equilibrio en el intercambio es sagrado.',
     meditacionSugerida: 'Medita sobre la interconexión de todas las cosas, sintiendo cómo das y recibes continuamente energía universal.',
     afinidadOtrasRunas: ['Wunjo', 'Ehwaz', 'Mannaz'],
-    numeroSagrado: 7
+    orden: 7
   },
   {
     id: 'wunjo',
@@ -217,7 +217,7 @@ export const runaMeaningsExpanded: RunaMeaning[] = [
     consejoPractico: 'Celebra tus logros y comparte tu alegría con otros. La felicidad se multiplica cuando se comparte.',
     meditacionSugerida: 'Cultiva una sonrisa interior genuina y permite que esa alegría se irradie hacia todo tu ser y entorno.',
     afinidadOtrasRunas: ['Gebo', 'Sowilo', 'Berkano'],
-    numeroSagrado: 8,
+    orden: 8,
     estacion: 'Verano'
   },
   {
@@ -241,7 +241,7 @@ export const runaMeaningsExpanded: RunaMeaning[] = [
     consejoPractico: 'Acepta los cambios inesperados como oportunidades disfrazadas. Después de la tormenta siempre viene la calma.',
     meditacionSugerida: 'Medita en la impermanencia de todas las cosas, encontrando paz en el centro del cambio constante.',
     afinidadOtrasRunas: ['Thurisaz', 'Isa', 'Perthro'],
-    numeroSagrado: 9
+    orden: 9
   },
   {
     id: 'naudiz',
@@ -265,7 +265,7 @@ export const runaMeaningsExpanded: RunaMeaning[] = [
     consejoPractico: 'Las restricciones actuales están desarrollando tu fortaleza interior. Mantén la disciplina y la paciencia.',
     meditacionSugerida: 'Medita sobre tus limitaciones actuales como maestros que te están enseñando valiosas lecciones de vida.',
     afinidadOtrasRunas: ['Isa', 'Eihwaz', 'Jera'],
-    numeroSagrado: 10
+    orden: 10
   },
   {
     id: 'isa',
@@ -288,7 +288,7 @@ export const runaMeaningsExpanded: RunaMeaning[] = [
     consejoPractico: 'Acepta este período de quietud como necesario. Usa el tiempo para la reflexión y la planificación cuidadosa.',
     meditacionSugerida: 'Siéntate en silencio absoluto, permitiendo que tu mente se vuelva clara y cristalina como el hielo.',
     afinidadOtrasRunas: ['Naudiz', 'Hagalaz', 'Jera'],
-    numeroSagrado: 11,
+    orden: 11,
     estacion: 'Invierno'
   },
   {
@@ -312,7 +312,7 @@ export const runaMeaningsExpanded: RunaMeaning[] = [
     consejoPractico: 'Ten paciencia, tu esfuerzo será recompensado. Respeta los tiempos naturales de maduración.',
     meditacionSugerida: 'Medita sobre los ciclos de la naturaleza y cómo tu vida refleja estos ritmos eternos de siembra y cosecha.',
     afinidadOtrasRunas: ['Fehu', 'Berkano', 'Ingwaz'],
-    numeroSagrado: 12
+    orden: 12
   },
   {
     id: 'eihwaz',
@@ -335,7 +335,7 @@ export const runaMeaningsExpanded: RunaMeaning[] = [
     consejoPractico: 'Mantente firme ante las adversidades. Tu resistencia interior es tu mayor fortaleza.',
     meditacionSugerida: 'Visualízate como un árbol milenario, con raíces profundas y ramas que tocan el cielo, resistiendo todas las tormentas.',
     afinidadOtrasRunas: ['Naudiz', 'Algiz', 'Isa'],
-    numeroSagrado: 13
+    orden: 13
   },
   {
     id: 'perthro',
@@ -359,7 +359,7 @@ export const runaMeaningsExpanded: RunaMeaning[] = [
     consejoPractico: 'Confía en tu intuición y mantente abierto a lo inesperado. El destino está trabajando a tu favor de maneras misteriosas.',
     meditacionSugerida: 'Medita sobre los misterios de tu vida, permitiendo que las respuestas emerjan desde tu sabiduría interior.',
     afinidadOtrasRunas: ['Laguz', 'Hagalaz', 'Blank'],
-    numeroSagrado: 14
+    orden: 14
   },
   {
     id: 'algiz',
@@ -383,7 +383,7 @@ export const runaMeaningsExpanded: RunaMeaning[] = [
     consejoPractico: 'Confía en tu intuición para protegerte. Mantén conexiones con personas que te apoyen espiritualmente.',
     meditacionSugerida: 'Visualiza una luz dorada que te rodea completamente, proporcionándote protección y conexión divina.',
     afinidadOtrasRunas: ['Thurisaz', 'Eihwaz', 'Ansuz'],
-    numeroSagrado: 15
+    orden: 15
   },
   {
     id: 'sowilo',
@@ -406,7 +406,7 @@ export const runaMeaningsExpanded: RunaMeaning[] = [
     consejoPractico: 'Brilla con tu luz propia y permite que otros se beneficien de tu energía positiva.',
     meditacionSugerida: 'Medita bajo la luz del sol, absorbiendo su energía dorada y permitiendo que ilumine todo tu ser.',
     afinidadOtrasRunas: ['Kenaz', 'Wunjo', 'Dagaz'],
-    numeroSagrado: 16
+    orden: 16
   },
   {
     id: 'tiwaz',
@@ -430,7 +430,7 @@ export const runaMeaningsExpanded: RunaMeaning[] = [
     consejoPractico: 'Mantén tu honor intacto y lucha por la justicia, incluso si requiere sacrificios personales.',
     meditacionSugerida: 'Medita sobre tus principios más profundos y el coraje necesario para vivir según ellos.',
     afinidadOtrasRunas: ['Uruz', 'Thurisaz', 'Sowilo'],
-    numeroSagrado: 17
+    orden: 17
   },
   {
     id: 'berkano',
@@ -454,7 +454,7 @@ export const runaMeaningsExpanded: RunaMeaning[] = [
     consejoPractico: 'Nutre tus proyectos con paciencia y amor. Todo crecimiento genuino requiere tiempo y cuidado.',
     meditacionSugerida: 'Visualiza una semilla en tu corazón que crece lentamente, convirtiéndose en un árbol fuerte y hermoso.',
     afinidadOtrasRunas: ['Jera', 'Ingwaz', 'Laguz'],
-    numeroSagrado: 18,
+    orden: 18,
     estacion: 'Primavera'
   },
   {
@@ -479,7 +479,7 @@ export const runaMeaningsExpanded: RunaMeaning[] = [
     consejoPractico: 'Cultiva relaciones de confianza mutua. El progreso más sólido se logra en compañía de otros.',
     meditacionSugerida: 'Medita sobre la armonía entre jinete y caballo, simbolizando la perfecta cooperación entre mente y espíritu.',
     afinidadOtrasRunas: ['Raidho', 'Gebo', 'Mannaz'],
-    numeroSagrado: 19
+    orden: 19
   },
   {
     id: 'mannaz',
@@ -503,7 +503,7 @@ export const runaMeaningsExpanded: RunaMeaning[] = [
     consejoPractico: 'Recuerda que eres parte de un todo mayor. Tu bienestar está conectado con el de toda la humanidad.',
     meditacionSugerida: 'Medita sobre tu conexión con toda la humanidad, sintiendo el hilo invisible que te une a todos los seres.',
     afinidadOtrasRunas: ['Ansuz', 'Gebo', 'Ehwaz'],
-    numeroSagrado: 20
+    orden: 20
   },
   {
     id: 'laguz',
@@ -527,7 +527,7 @@ export const runaMeaningsExpanded: RunaMeaning[] = [
     consejoPractico: 'Confía en tu intuición y permite que las emociones fluyan naturalmente sin resistencia.',
     meditacionSugerida: 'Medita cerca del agua o visualiza un lago tranquilo que refleja la sabiduría de tu alma.',
     afinidadOtrasRunas: ['Perthro', 'Berkano', 'Ansuz'],
-    numeroSagrado: 21
+    orden: 21
   },
   {
     id: 'ingwaz',
@@ -550,7 +550,7 @@ export const runaMeaningsExpanded: RunaMeaning[] = [
     consejoPractico: 'Celebra tus logros y prepárate para el siguiente nivel. Los finales exitosos son nuevos comienzos.',
     meditacionSugerida: 'Medita sobre la semilla que contiene el potencial del árbol completo, sintiendo tu propio potencial latente.',
     afinidadOtrasRunas: ['Jera', 'Berkano', 'Fehu'],
-    numeroSagrado: 22
+    orden: 22
   },
   {
     id: 'othala',
@@ -574,7 +574,7 @@ export const runaMeaningsExpanded: RunaMeaning[] = [
     consejoPractico: 'Honra tus raíces y tradiciones familiares, pero no te limites por ellas. Crea un legado positivo.',
     meditacionSugerida: 'Medita sobre el linaje de sabiduría que viene de tus ancestros y cómo puedes enriquecerlo.',
     afinidadOtrasRunas: ['Fehu', 'Berkano', 'Mannaz'],
-    numeroSagrado: 23
+    orden: 23
   },
   {
     id: 'dagaz',
@@ -597,7 +597,7 @@ export const runaMeaningsExpanded: RunaMeaning[] = [
     consejoPractico: 'Este es tu momento de breakthrough. Actúa con claridad y confianza.',
     meditacionSugerida: 'Medita al amanecer, sintiendo cómo la luz del nuevo día transforma todo lo que toca.',
     afinidadOtrasRunas: ['Sowilo', 'Kenaz', 'Raidho'],
-    numeroSagrado: 24
+    orden: 24
   },
   {
     id: 'blank',
@@ -620,7 +620,7 @@ export const runaMeaningsExpanded: RunaMeaning[] = [
     consejoPractico: 'Mantente abierto a todas las posibilidades. El universo está preparando algo especial para ti.',
     meditacionSugerida: 'Medita en el vacío creativo, el espacio de potencial puro antes de que se manifieste cualquier forma.',
     afinidadOtrasRunas: ['Perthro', 'Hagalaz', 'Dagaz'],
-    numeroSagrado: 0
+    orden: 0
   }
 ];
 

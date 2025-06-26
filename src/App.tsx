@@ -1,4 +1,4 @@
-// src/App.tsx
+// src/App.tsx (MODIFICADO)
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -8,14 +8,13 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import IchingSearchPage from "./pages/IchingSearchPage";
+import IchingInterpretationPage from "./pages/IchingInterpretationPage"; // Importa el nuevo componente
 
 // IMPORTA AQUÍ TU COMPONENTE PARA LA SECCIÓN DE TAROT
 import TarotPage from "./pages/TarotPage";
 
 // IMPORTA AQUÍ TU COMPONENTE PARA LA SECCIÓN DE RUNAS
-// Asegúrate de que el nombre aquí coincida exactamente con el nombre de tu archivo.
-// Si tu archivo es 'RunesPage.tsx', la importación debe ser 'RunesPage'.
-import RunesPage from "./pages/RunesPage"; // <--- ¡CORREGIDO PARA RunesPage.tsx!
+import RunesPage from "./pages/RunesPage";
 
 const queryClient = new QueryClient();
 
@@ -27,13 +26,13 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/iching" element={<IchingSearchPage />} />
+          <Route path="/iching/interpretation" element={<IchingInterpretationPage />} /> {/* NUEVA RUTA */}
 
           {/* Ruta para la sección de Tarot */}
           <Route path="/tarot" element={<TarotPage />} />
 
           {/* Ruta para la sección de Runas */}
-          {/* Aquí también el elemento debe ser RunesPage para coincidir con la importación */}
-          <Route path="/runas" element={<RunesPage />} /> {/* <--- ¡CORREGIDO PARA RunesPage! */}
+          <Route path="/runas" element={<RunesPage />} />
 
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
